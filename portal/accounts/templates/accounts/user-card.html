@@ -1,0 +1,21 @@
+{% if not user_list.is_superuser %}
+<tbody>
+    <tr>
+        <th scope="row">{{ user_list.id }}</th> 
+        {% if user_list.imagem %}
+        <th scope="row"><img src="{{ user_list.imagem.thumb.url }}" class="img-fluid" alt="{{ user_list.first_name }}"></th>
+        {% else %}
+        <th scope="row">None</th>
+        {% endif %}
+        <th scope="row">{{ user_list.first_name }} {{ user_list.last_name }}</th>
+        <th scope="row">{{ user_list.username }}</th>
+        <th scope="row">{{ user_list.get_type_user_display }}</th>
+        <th scope="row">{{ user_list.date_joined }}</th>
+        <th scope="row">
+            <a class="btn shadow-sm" href="{% url 'user-change' user_list.pk %}"><i class="fas fa-eye"></i></a>
+            <a class="ml-2 btn shadow-sm" href="{% url 'user-change' user_list.pk %}"><i class="far fa-file"></i></a>
+            <a class="ml-3 btn shadow-sm" href="{% url 'user-delete' user_list.pk %}"><i class="fas fa-trash"></i></a>
+        </th>
+    </tr>
+</tbody>
+{% endif %}

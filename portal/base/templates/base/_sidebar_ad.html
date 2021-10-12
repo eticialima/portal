@@ -1,0 +1,27 @@
+<a href="#" class="list-group-item list-group-item-action list-group-item-light p-3"><i class="fas fa-tachometer-alt me-2"></i>Painel</a> 
+<a href="" class="list-group-item list-group-item-action list-group-item-light list-group-item-danger p-3"><i class="far fa-file-alt me-2"></i>Relatorios</a> 
+<a href="" class="list-group-item list-group-item-action list-group-item-light list-group-item-danger p-3"><i class="far fa-file-pdf me-2"></i>Gerenciar Postagens</a>      
+<a href="{% url 'users' %}" class="list-group-item list-group-item-action list-group-item-light list-group-item-danger p-3"><i class="fas fa-users me-2"></i>Usuários do Sistema</a>  
+<a class="list-group-item list-group-item-action list-group-item-danger text-danger fw-bold p-3 "
+    data-bs-toggle="modal" href="#exampleModal"
+    ><i class="fas fa-power-off me-2"></i>Logout</a>
+
+  
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+    <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Atenção Usuario ! <i class="fas fa-exclamation-triangle me-2"></i></h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+    </div>
+    <div class="modal-body">
+        Tem certeza que deseja sair do sistema ? <br>
+        Após clicar em "Sair" você será deslogado.
+    </div>
+    <div class="modal-footer"> 
+        <button class="btn-default"  onclick="location.href='{% url 'logout' %}'"><a>Sair</a></button>   
+    </div>
+    </div>
+</div>
+</div>

@@ -1,0 +1,37 @@
+{% load static %}
+<div class="container-fluid" style="padding-left: 0;">
+    <div class="row h-100">
+        <div class="col-8">
+            <div class="login100-more bg">
+            </div>
+        </div>
+        <div id="size" class="col-4 col">
+            <!-- Card da tela de inicio -->
+            <div class="box container lead">
+                <div class=" mt-5  ">
+                    <div class="h2">Portal Diário de um Editor</div>
+                    <h5>Sistema ainda em desenvolvimento.</h5>
+                    <p>Seja bem vindo(a) ao Diario de um Editor.<br> Com muitas <b>chuva de ideias </b> e <b>criatividade</b> aqui você pode compartilhar com o mundo. Clique em Entrar.</p>
+                    {% if user.is_authenticated %}
+                    <p class="lead card-text">Usuário: <a href="{% url 'index-manager' %}"> {{ user.first_name }}</a> já
+                        está
+                        logado no sistema</p>
+                    <a href="{% url 'logout' %}">Click aqui para Sair</a>
+                    {% else %}
+                    <button class="btn-default"  onclick="location.href='{% url 'index-manager' %}'"><a></a>Entrar</button> 
+                    <!-- <a class="btn btn-outline-secondary shadow-sm" href="{% url 'index-manager' %}">Entrar</a> -->
+                    {% endif %}
+                    <div class="text-muted font-italic py-3">
+                        <p>Diario de um Editor © 2021<br>www.666editor.com.br</p>
+                    </div>
+                </div>
+            </div>
+            <!-- Card da tela de inicio --> 
+        </div>
+    </div>
+</div>
+<script>
+    $(window).on('resize', function () {
+        $('.col').toggleClass('col-4', $(window).width() > 768);
+    }).trigger('resize')
+</script>
