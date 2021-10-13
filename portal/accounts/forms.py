@@ -23,12 +23,12 @@ class CustomUserChangeForm(UserChangeForm):
 		model = CustomUser
 		fields = ('first_name', 'last_name', 'username', 'type_user', 'is_active', 'imagem')
 		labels = {'username': 'Username/Email'}
-
+ 
 	def save(self, commit=True):
-		user = super().save(commit=False) 
-
+		user = super().save(commit=False)  
 		#user.email = self.cleaned_data["username"]
 		print("update")
 		if commit:
 			user.save() 
 		return user
+ 

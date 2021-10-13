@@ -72,6 +72,7 @@ INSTALLED_APPS = [
     # --- My Apps ---#
     'base',
     'core',
+    'painel',
     'administrador',
     'colaborador',
     'usuarios',

@@ -2,7 +2,7 @@ from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
-from base.base_admin_permissions import BaseAdminUsersAd
+from base.base_admin_permissions import BaseAdminUsersAd, BaseAdminUsersall
 from accounts.forms import CustomUserCreateForm, CustomUserChangeForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
@@ -11,6 +11,7 @@ from django.views.generic import ListView
 from django.contrib.auth.views import (
     LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView)
 
+import painel.urls
 
 class UserLogin(SuccessMessageMixin, LoginView):
     template_name = 'accounts/login.html'
@@ -50,7 +51,7 @@ class UserChange(BaseAdminUsersAd, UpdateView):
     form_class = CustomUserChangeForm
     template_name = 'accounts/user-change.html'
     success_url = reverse_lazy('users')
-    success_message = 'Sua mudança de perfil foi bem-sucedida'
+    success_message = 'Sua mudança de perfil foi bem-sucedida' 
 
     # def get(self, request, *args, **kwargs):
     #     self.object = None
@@ -116,3 +117,17 @@ class UserListView(BaseAdminUsersAd, ListView):
 
 class TimeOutView(TemplateView):
     template_name = 'timeout/timeout.html'
+
+
+class UserProfileUpdateView(BaseAdminUsersall ,UpdateView):
+    model = CustomUser
+    form_class = CustomUserChangeForm
+    template_name = 'accounts/user-profile.html'
+    success_url = reverse_lazy('painel')
+    success_message = 'Seus dados foram alterados com sucesso'
+
+    def get_context_data(self, *args, **kwargs):
+        context = super(UserProfileUpdateView, self).get_context_data(*args, **kwargs)
+        return context
+
+ 

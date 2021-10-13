@@ -49,7 +49,7 @@ class CustomUser(AbstractUser):
         slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
  
         USERNAME_FIELD = 'email'
-        REQUIRED_FIELDS = ['first_name', 'last_name', 'type_user', 'is_active', 'imagem']
+        REQUIRED_FIELDS = ['first_name', 'last_name']
 
         class Meta:
                 verbose_name = 'Usuário'
