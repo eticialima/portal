@@ -3,6 +3,7 @@
 {% block body_title %}Alterar Usuário{% endblock %}
 {% block main_content %}
 {% load widget_tweaks %}
+{% load static %}
 <div class="text-center">
     <div class="form-signup"> 
         <h4 class="mb-3">Ver/Alterar Usuário</h4>  
@@ -11,9 +12,16 @@
             <div class="row">
                 <div class="col-sm-6"> 
                     <div class="form-group mt-3">   
+                        {% if object.imagem %}
                         <div class="circle">
                             <img id="preview" src="{{ object.imagem.url }}" class="img-fluid" alt="{{ object.first_name }}"/> 
-                        </div><br>
+                        </div>
+                        {% else %}
+                        <div class="circle">
+                            <img id="preview" src="{% static 'images/default.png' %}" class="img-fluid" alt="default" /> 
+                        </div> 
+                        {% endif %}  
+                        <br>
                         <div class="custom-file">
                             <label class="label-input custom-file-label" for="imagem">Atualizar Avatar...</label>
                             {% render_field form.imagem type="file" class="custom-file-input form-control" id="imagem" name="imagem" aria-describedby="imagemadd" %}

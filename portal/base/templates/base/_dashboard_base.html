@@ -10,12 +10,14 @@
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-header text-center py-4">
                 <div class="sidebar-image">
-                    {% if user.imagem == None %}
-                        <img src="https://i.ibb.co/qkJSWXQ/photo.png" class="img-fluid" alt="default" /> 
-                    {% else %}
+                    {% if user.imagem %}
                     <div class="circle">
                         <img src="{{ user.imagem.url }}" class="img-fluid" alt="{{ user.first_name }}"/> 
                     </div>
+                    {% else %}
+                    <div class="circle">
+                        <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" /> 
+                    </div> 
                     {% endif %} 
                 </div>
                 <br> 

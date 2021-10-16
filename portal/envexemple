@@ -1,0 +1,10 @@
+SECRET_KEY=)ezt#(iy%ffaiz%jmrfbtij^ca+u($y350f%gbrlo=^q^o8azd
+DEBUG=True
+SUPER_USER=ADMIN
+EMAIL= br.leticia@hotmail.com
+
+NAME_DB=db.sqlite3
+USER_DB=root
+PASSWORD_DB=
+HOST_DB=localhost
+PORT_DB=3306

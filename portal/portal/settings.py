@@ -67,7 +67,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     
     'corsheaders',
-    'widget_tweaks',
+    'widget_tweaks', 
     
     # --- My Apps ---#
     'base',
