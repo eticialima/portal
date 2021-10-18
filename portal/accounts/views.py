@@ -9,8 +9,7 @@ from django.views.generic.base import TemplateView
 from accounts.models import CustomUser
 from django.views.generic import ListView
 from django.contrib.auth.views import (
-    LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView)
-
+    LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView) 
 import painel.urls
 
 class UserLogin(SuccessMessageMixin, LoginView):

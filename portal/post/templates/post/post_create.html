@@ -1,0 +1,86 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Post{% endblock %}
+{% block body_title %}Post{% endblock %}
+{% load widget_tweaks %}
+{% load static %} 
+{% block main_content %} 
+<div class="box text-center">
+    <main class="form-signup">
+        <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1> 
+        <form method="POST" class="form" action="{% url 'post-create' %}" 
+              autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-6"> 
+                    <div class="custom-file mt-3"> 
+                        <div class="post-thumb">
+                            <img id="preview" class="img-thumbnail" src="{% static 'images/default.png' %}" alt="logo"> 
+                        </div> 
+                        <br>
+                        <div class="custom-file">
+                            <label class="label-input custom-file-label" for="image">Selecionar thumbnail...</label> 
+                            <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="imageadd" autofocus>
+                        </div>   
+                    </div>   
+                    <br>
+                    <label for="file">Arquivos até 500M</label> 
+                    {% render_field form.download_file class="form-control-input form-control" type="file" id="download_file" name="download_file" accept=".rar, .zip, .jpg, .png, .doc, .docx, .pdf, .txt" %}
+                        <p class="text-muted fst-italic" style="font-size:12px;">
+                            Formato suportado | Winrar | Zip | JPG | PNG | arquivos unicos.
+                            <br><b>Para multiplos arquivos e +500M utilize link externo.</b>
+                        </p> 
+                    <br>  
+                    {% render_field form.download_link class="form-control" type="text" placeholder="Link externo download..." %} 
+                </div>  
+
+                <div class="col-sm-6"> 
+                    {% comment %} <br>
+                    <label>Autor da postagem</label>
+                    {% render_field form.author class="form-control" type="text" %} {% endcomment %}
+                    <br>
+                    <label>Titulo:</label>
+                    {% render_field form.title class="form-control" type="text" %}
+                    <br>
+                    <label>Descrição</label>
+                    {% render_field form.desc class="form-control" type="text" %}
+                    <br>   
+
+                    {% comment %} deixar data de criação desabled {% endcomment %}
+                    <label>Data de Criação</label>
+                    {% render_field form.created_date class="form-control" type="text" %} 
+                    <br>  
+                    <label>Data de Publicação</label>
+                    {% render_field form.published_date class="form-control" type="date" %}
+                </div>  
+            </div>  
+            <br> 
+            <button type="submit" class="btn-default" name="btn_adicionar">Salvar</button> 
+            <button class="btn-default"  onclick="location.href='{% url 'post' %}'"><a></a>Voltar</button>  
+
+        
+        </form>
+    </main>
+</div>   
+<script> 
+    $("#image").change(function (event) {
+       
+      readURL(this);
+    });
+  
+    function readURL(input) {
+      if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var filename = $("#image").val();
+        filename = filename.substring(filename.lastIndexOf('\\') + 1);
+        reader.onload = function (e) {
+          debugger;
+          $('#preview').attr('src', e.target.result);
+          $('#preview').hide();
+          $('#preview').fadeIn(500);
+          $('.custom-file-label').text(filename);
+        }
+        reader.readAsDataURL(input.files[0]);
+      } 
+    } 
+  </script>
+{% endblock %}

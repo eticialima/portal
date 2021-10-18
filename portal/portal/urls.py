@@ -24,6 +24,7 @@ urlpatterns = [
     path('accounts/', include('accounts.urls')),
     path('portal/', include('core.urls')),  
     path('painel/', include('painel.urls')),
+    path('post/', include('post.urls')),
     path('administrador/', include('administrador.urls')),
     path('colaborador/', include('colaborador.urls')),
     path('usuarios/', include('usuarios.urls')),

@@ -116,7 +116,13 @@ body html{
   box-sizing: border-box;
 }
 
-input[type="file"] {
+.post-thumb img{ 
+  max-height: 250px;
+  width: auto;
+  height: auto;
+}
+
+.custom-file input[type="file"] {
   display: none;
 }
 .label-input {
