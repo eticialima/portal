@@ -18,10 +18,10 @@ class IndexPostView(BaseAdminUsersall, TemplateView):
  
 class PostView(BaseAdminUsersall, TemplateView):
 	model = Post
-	template_name = 'post/post.html' 
+	template_name = 'post/post.html'  
 
-	def get_queryset(self, request):
-		post_list = Post.objects.filter(author=request.user)
+	def get_queryset(self, request): 
+		post_list = Post.objects.get(author=request.user)
 		query = self.request.GET.get('search') 
 		if query:
 		    post_list = self.model.objects.filter(title__icontains=query)
@@ -33,6 +33,7 @@ class PostView(BaseAdminUsersall, TemplateView):
 		context = super().get_context_data(**kwargs)
 		context['post_list'] = self.model.objects.all()
 		return context 
+  
 
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post

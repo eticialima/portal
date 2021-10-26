@@ -1,0 +1,17 @@
+{% extends 'base/_base_home.html' %}
+{% block title %}Home{% endblock %}
+{% block body_title %}Home{% endblock %}
+{% block body_home %}
+{% include 'base/_navbar.html' %}
+<div class="container py-5">  
+    <div class="p-5 mb-4 bg-light rounded-3">
+        <div class="container-fluid py-5">
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar" aria-label="Search">
+                <button class="btn-default" type="submit">Pesquisar</button>
+            </form>
+        </div>
+    </div> 
+{% include 'home/posts.html' %}
+</div>
+{% endblock %}

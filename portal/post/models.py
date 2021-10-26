@@ -22,3 +22,9 @@ class Post(models.Model):
         return self.title
 
 
+    @property
+    def get_photo_url(self):
+        if self.author.imagem and hasattr(self.author.imagem, 'url'):
+            return self.author.imagem.url
+        else:
+            return "/static/images/default.png"

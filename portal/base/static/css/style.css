@@ -135,6 +135,7 @@ body html{
   cursor: pointer;
 }
 
+
 .label-input:hover{
   background-color: #212529;
 }
@@ -150,12 +151,34 @@ body html{
   color: rgb(255, 255, 255);
 }
  
-a .card {
+.img-responsive {
+  display: block;
+  width: 100%; 
+  max-width: 100%; 
+  border-radius: 5px; 
+  height: 200px;
+} 
+
+.card-box {
+  box-shadow: 0px 0px 3px 2px rgb(163 8 8)!important;
+  transition: 0.5s;
+  width: auto;
+  margin-right: auto;
+  background-color: rgb(255, 255, 255);
+  border-radius: 10px;
+}
+
+.card-box:hover {
+  box-shadow: 0px 0px 7px 4px rgba(236, 236, 236, 0.9)!important;
+}
+
+ 
+a .carde {
  text-decoration: none;
  color: #571d1d;
 }
 
-.card:hover {
+.carde:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   transform: scale(1.01);
 }
