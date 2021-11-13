@@ -1,0 +1,74 @@
+{% extends 'base/_base_home.html' %}
+{% load static %}
+{% block body_home %}
+{% include 'base/_navbar.html' %}
+
+<div class="container py-5">
+    <div class="row">
+       
+        <div class="col-md-8">
+            <div class="container-post"> 
+                <h3>{{post.title}}</h3> 
+                <p class="text-muted">{{post.published_date}}</p> 
+
+                <img src="{{post.image.url}}" class="img-fluid py-3" alt="{{post.title}}">
+                
+                <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+                    <table>
+                        <tr>  
+                            <th> 
+                                {% if post.author.imagem %} 
+                                    <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;"> 
+                                {% else %} 
+                                    <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>  
+                                {% endif %}
+                            </th> 
+                            <th>
+                                <span class="text-break text-truncate">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+                            </th>
+                        </tr>
+                    </table>
+                </a>
+                <hr>
+                <p>{{post.desc}}</p> 
+                <div class="text-center bg-light"> 
+                    <div>
+                        <h4>Download Opção 1</h4>
+                        {% if post.download_file %}
+                        <th scope="row">
+                           <a class="btn-default link-success" href="{{ post.download_file.url }}" target="_blank">Download</a> 
+                        </th>
+                        {% else %}
+                        <th scope="row">None</th>
+                        {% endif %}  
+                    </div>
+                    
+                    <div>
+                        <h4>Download Opção 1</h4>
+                     {% if post.download_link %}
+                     <th scope="row">
+                        <a class="btn-default  link-success" href="{{ post.download_link }}" target="_blank">Download</a> 
+                     </th>
+                     {% else %}
+                     <th scope="row">None</th>
+                     {% endif %}  
+                    </div>
+
+                </div> 
+            </div>
+        </div>
+
+        <div class="col-md-4">
+            <div class="container-post">
+                <h6>test menu</h6>
+                <input type="search" class="form-control" placeholder="Pesquisar...">
+            </div>
+            
+
+        </div>
+
+    </div>
+</div>
+
+
+{% endblock %}

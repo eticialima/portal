@@ -9,7 +9,7 @@
                 <th scope="row">None</th>
                 {% endif %}
             <div class="card-body text-center">
-                <h6> <a href="#" class="text-dark">{{post.title}}</a></h6> 
+                <h6> <a href="{% url 'post-detail' post.pk %}" class="text-dark">{{post.title}}</a></h6> 
                 <hr>
                 <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
                     <table>
