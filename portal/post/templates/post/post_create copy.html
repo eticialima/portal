@@ -43,12 +43,14 @@
                     <br>
                     <label>Descrição</label>
                     {% render_field form.desc class="form-control" type="text" %}
-                    <br>    
+                    <br>   
+
+                    {% comment %} deixar data de criação desabled {% endcomment %}
                     <label>Data de Criação</label>
                     {% render_field form.created_date class="form-control" type="text" %} 
                     <br>  
                     <label>Data de Publicação</label>
-                    {% render_field form.published_date class="form-control" type="text" %}
+                    {% render_field form.published_date class="form-control" type="date" %}
                 </div>  
             </div>  
             <br> 

@@ -6,16 +6,21 @@
 {% block main_content %} 
 <div class="box text-center">
     <main class="form-signup">
-        <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1> 
-        <form method="POST" class="form" action="{% url 'post-create' %}" 
-              autocomplete="off" enctype="multipart/form-data">
+        <h1 class="h3 mb-3 fw-normal">Update Postagem</h1> 
+        <form id="mainform" method="post" class="form" action="" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
-            <div class="row">
+            <div class="row">  
                 <div class="col-sm-6"> 
-                    <div class="custom-file mt-3"> 
+                    <div class="custom-file mt-3">  
+                        {% if object.image %}
                         <div class="post-thumb">
-                            <img id="preview" class="img-thumbnail" src="{% static 'images/default.png' %}" alt="logo"> 
+                            <img id="preview" src="{{ object.image.url }}" class="img-thumbnail" alt="logo"/> 
+                        </div>
+                        {% else %}
+                        <div class="post-thumb">
+                            <img id="preview" src="{% static 'images/default.png' %}" class="img-thumbnail" alt="default" /> 
                         </div> 
+                        {% endif %}   
                         <br>
                         <div class="custom-file">
                             <label class="label-input custom-file-label" for="image">Selecionar thumbnail...</label> 
@@ -34,9 +39,9 @@
                 </div>  
 
                 <div class="col-sm-6"> 
-                    {% comment %} <br>
+                    <br>
                     <label>Autor da postagem</label>
-                    {% render_field form.author class="form-control" type="text" %} {% endcomment %}
+                    {% render_field form.author class="form-control" type="text" disabled="disabled" %} 
                     <br>
                     <label>Titulo:</label>
                     {% render_field form.title class="form-control" type="text" %}
@@ -45,17 +50,15 @@
                     {% render_field form.desc class="form-control" type="text" %}
                     <br>    
                     <label>Data de Criação</label>
-                    {% render_field form.created_date class="form-control" type="text" %} 
+                    {% render_field form.created_date class="form-control" type="text" disabled="disabled" %} 
                     <br>  
                     <label>Data de Publicação</label>
                     {% render_field form.published_date class="form-control" type="text" %}
                 </div>  
             </div>  
             <br> 
-            <button type="submit" class="btn-default" name="btn_adicionar">Salvar</button> 
-            <button class="btn-default"  onclick="location.href='{% url 'post' %}'">Voltar</button>  
-
-        
+            <button type="submit" class="btn-default">Salvar</button>  
+            <button class="btn-default"  onclick="location.href='{% url 'post' %}'">Voltar</button>   
         </form>
     </main>
 </div>   
@@ -80,5 +83,13 @@
         reader.readAsDataURL(input.files[0]);
       } 
     } 
+
+    // Formulario não envia campos desabilitados
+$('#mainform').submit(function(e) {
+    $(':disabled').each(function(e) {
+        $(this).removeAttr('disabled');
+    })
+});
+
   </script>
 {% endblock %}

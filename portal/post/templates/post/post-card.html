@@ -60,9 +60,9 @@
                      {% else %}
                      <th scope="row">None</th>
                      {% endif %}    
-                     <td scope="row">{{ objects.publish }}</td> 
+                     <td scope="row">{{ objects.publish }}</td>  
 
-                     <td><a href="#"><i class="fas fa-file-invoice fa-1x link-primary" aria-hidden="true"></i></a></td>
+                     <td><a href="{% url 'post-update' objects.pk %}"><i class="fas fa-file-invoice fa-1x link-primary" aria-hidden="true"></i></a></td>
 
 
                   </tr>

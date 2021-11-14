@@ -56,10 +56,14 @@ class PostCreate(BaseAdminUsersall, CreateView):
                 return self.form_valid(form) 
             else:
                 return self.form_invalid(form)
-
-    # mensagem de sucesso se o manual foi cadastrado.
+ 
     def get_success_url(self) -> str:
         messages.success(self.request, 'O post foi Cadastrado com sucesso') 
         return reverse_lazy('post')
     
-	
+class PostUpdate(BaseAdminUsersall, UpdateView):
+    model = Post
+    form_class = PostForm
+    template_name = 'post/post_update.html'
+    success_url = reverse_lazy('post')
+    success_message = 'O post foi Atualizado com sucesso'    

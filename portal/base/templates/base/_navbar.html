@@ -1,15 +1,15 @@
 {% load static %}
-<nav class="navbar navbar-expand-lg">
+<nav class="navbar navbar-expand-lg shadow">
     <div class="container-fluid bellow">
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="logo" href="#">
+        <a class="logo" href="{% url 'home' %}">
             <h3>Diario de um Editor</h3>
         </a>
         <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item"><a href="#">Home</a></li>
+            <li class="nav-item"><a href="{% url 'home' %}">Home</a></li>
             <li class="nav-item"><a href="#">AE Assets</a></li>
             <li class="nav-item"><a href="#">PR Assets</a></li>
             <li class="nav-item"><a href="#">3D Assets</a></li>
@@ -34,7 +34,7 @@
                         <a href="#">Meu Perfil</a>
                     </li>
                     <li>
-                        <a href="#">Configurações</a>
+                        <a href="{% url 'index-painel' %}">Configurações</a>
                     </li>
                     <li>
                         <button class=" btn-default d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>

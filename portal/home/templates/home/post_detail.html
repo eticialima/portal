@@ -9,10 +9,13 @@
         <div class="col-md-8">
             <div class="container-post"> 
                 <h3>{{post.title}}</h3> 
-                <p class="text-muted">{{post.published_date}}</p> 
-
-                <img src="{{post.image.url}}" class="img-fluid py-3" alt="{{post.title}}">
-                
+                <p class="text-muted">{{post.published_date}}</p>  
+                {% if post.image %} 
+                <img src="{{post.image.url}}" class="img-fluid py-3 text-center" alt="{{post.title}}" style="height: 500px;"> 
+                {% else %}
+                <th scope="row">None</th>
+                {% endif %}
+               
                 <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
                     <table>
                         <tr>  
@@ -31,40 +34,70 @@
                 </a>
                 <hr>
                 <p>{{post.desc}}</p> 
-                <div class="text-center bg-light"> 
+                <div class="p-4 text-center bg-light shadow-sm rounded"> 
                     <div>
-                        <h4>Download Opção 1</h4>
+                       
                         {% if post.download_file %}
+                        <h4>Download Opção 1</h4>
                         <th scope="row">
-                           <a class="btn-default link-success" href="{{ post.download_file.url }}" target="_blank">Download</a> 
-                        </th>
-                        {% else %}
-                        <th scope="row">None</th>
+                            <button class="btn-default  link-success" ><a class="link-success" href="{{ post.download_file.url }}" target="_blank" style="color: beige;">Download</a></button> 
+                        </th> 
                         {% endif %}  
                     </div>
-                    
-                    <div>
-                        <h4>Download Opção 1</h4>
+                    <br>
+                    <div> 
                      {% if post.download_link %}
+                     <h4>Download Opção 1</h4>
                      <th scope="row">
-                        <a class="btn-default  link-success" href="{{ post.download_link }}" target="_blank">Download</a> 
-                     </th>
-                     {% else %}
-                     <th scope="row">None</th>
+                        <button  class="btn-default  link-success" ><a class="link-success" href="{{ post.download_link }}" target="_blank" style="color: beige;">Download</a> </button>
+                     </th> 
                      {% endif %}  
-                    </div>
-
+                    </div> 
                 </div> 
+                <br>
+                <div class="py-3">
+                    <h6>tags do post</h6> 
+                <span class="badge bg-warning text-dark">Warning1</span> 
+                <span class="badge bg-warning text-dark">Warning2</span> 
+                <span class="badge bg-warning text-dark">Warning3</span>  
+                </div>
+
+
             </div>
         </div>
 
         <div class="col-md-4">
             <div class="container-post">
-                <h6>test menu</h6>
+                <h6>Pesquisar</h6>
                 <input type="search" class="form-control" placeholder="Pesquisar...">
             </div>
-            
+            <br>
+            <div class="container-post">
+                <h6>tags</h6> 
+                <span class="badge bg-warning text-dark">Warning1</span> 
+                <span class="badge bg-warning text-dark">Warning2</span> 
+                <span class="badge bg-warning text-dark">Warning3</span> 
+                <span class="badge bg-warning text-dark">Warning4</span> 
+                <span class="badge bg-warning text-dark">Warning5</span> 
+                <span class="badge bg-warning text-dark">Warning6</span> 
+                <span class="badge bg-warning text-dark">Warning7</span> 
+                <span class="badge bg-warning text-dark">Warning8</span> 
+                <span class="badge bg-warning text-dark">Warning9</span> 
+                <span class="badge bg-warning text-dark">Warning10</span>  
+            </div>
+            <br>
+            <div class="container-post">
+                <h6>Outras Postagens</h6> 
+                {% for post in post_list %} 
+                <a href="{% url 'post-detail' post.pk %}" class="post-text">{{post.title}}</a> 
+                <br>
+                {% endfor %} 
+            </div>
+            <br>
+            <div class="container-post">
+                <h6>test menu</h6> 
 
+            </div>
         </div>
 
     </div>
