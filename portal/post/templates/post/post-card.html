@@ -5,15 +5,12 @@
 <hr>  
 <!-- pesquisar -->
 <div class="row d-flex">
-      <div class="col-6 form-inline">  
-         <form class="form-inline" action="{% url 'post' %}" method="get">  
-               <input type="text" id="search" name="search" class="form-control" placeholder="Pesquisar Post..."> 
+      <div class="col-6 form-inline">    
+        <form method="GET" id="search-form" action="">    
+               <input class="form-control me-2" type="text" id="search" name="search" placeholder="Pesquisar Post...">  
                <spam class="form-text text-muted">Exemplo: pesquise por "postagem"</spam>
-         </form>  
-      </div>  
-      <div class="col-6 form-inline"> 
-         <button class="btn-default"  onclick="location.href='#'"><a></a>Filtro Avançado</button>  
-      </div>  
+         </form> 
+      </div>   
 </div>  
 <!-- table -->
 <div class="table-responsive">
@@ -25,13 +22,13 @@
                   <th scope="col">Usuario</th> 
                   <th scope="col">Titulo</th>
                   <th scope="col">File</th>
-                   <th scope="col">Link</th>
+                  <th scope="col">Link</th>
                   <th scope="col">Public ?</th>
                   <th scope="col">Ações</th>
                </tr>
          </thead>  
          {{request.user}} 
-         {% for objects in post_list %} 
+         {% for objects in post_list %}  
             {% if request.user == objects.author %} 
             <tbody>
                   <tr> 
@@ -51,8 +48,7 @@
                      </th>
                      {% else %}
                      <th scope="row">None</th>
-                     {% endif %}  
-
+                     {% endif %}   
                      {% if objects.download_link %}
                      <th scope="row">
                         <a class="link-success" href="{{ objects.download_link }}" target="_blank"><i class="fas fa-file-code"></i></a> 
@@ -60,14 +56,11 @@
                      {% else %}
                      <th scope="row">None</th>
                      {% endif %}    
-                     <td scope="row">{{ objects.publish }}</td>  
-
-                     <td><a href="{% url 'post-update' objects.pk %}"><i class="fas fa-file-invoice fa-1x link-primary" aria-hidden="true"></i></a></td>
-
-
+                     <td scope="row">{{ objects.publish }}</td>   
+                     <td><a href="{% url 'post-update' objects.pk %}"><i class="fas fa-file-invoice fa-1x link-primary" aria-hidden="true"></i></a></td> 
                   </tr>
             </tbody>
             {% endif %}
             {% endfor %}
     </table>
-</div>
+</div> 

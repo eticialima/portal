@@ -1,6 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager 
-from stdimage.models import StdImageField
+from stdimage.models import StdImageField  
+from django.core import validators
+from django.utils.translation import ugettext_lazy as _
+import re
 
 class UserManager(BaseUserManager):
         use_in_migrations = True
@@ -36,8 +39,14 @@ class UserManager(BaseUserManager):
                 return self._create_user(email, password, **extra_fields)
 
 
-class CustomUser(AbstractUser):
+class CustomUser(AbstractUser): 
+
         TYPE_USER_CHOICES = [('ad', 'Administrador'),('co', 'Colaborador'),('us', 'Usuario Padrão')] 
+        
+        user_name = models.CharField(_('user_name'), max_length=15, unique=True,
+                                help_text=_('Required. 15 characters or fewer. Letters, numbers and @/./+/-/_ characters'), 
+                                validators=[ validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), _('invalid'))])
+
         email = models.EmailField('Email', unique=True) 
         type_user = models.CharField('type_user',max_length=2,choices=TYPE_USER_CHOICES) 
         
@@ -49,7 +58,7 @@ class CustomUser(AbstractUser):
         slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
  
         USERNAME_FIELD = 'email'
-        REQUIRED_FIELDS = ['first_name', 'last_name', 'type_user', 'is_active']
+        REQUIRED_FIELDS = ['user_name','first_name', 'last_name', 'type_user', 'is_active']
 
         class Meta:
                 verbose_name = 'Usuário'

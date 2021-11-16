@@ -17,22 +17,13 @@ class IndexPostView(BaseAdminUsersall, TemplateView):
     template_name = 'post/index-post.html'
 
 
-class PostView(BaseAdminUsersall, TemplateView):
+class PostView(BaseAdminUsersall, ListView):
     model = Post
-    template_name = 'post/post.html'
-
-    def get_queryset(self, request):
-        post_list = Post.objects.get(author=request.user)
-        query = self.request.GET.get('search')
-        if query:
-            post_list = self.model.objects.filter(title__icontains=query)
-        else:
-            post_list = self.model.objects.all()
-        return render('tela.html', {'post_list': post_list})
-
+    template_name = 'post/post.html'   
+    
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context['post_list'] = self.model.objects.all()
+        context['post_list'] = self.model.objects.all()  
         return context
 
 
@@ -63,10 +54,10 @@ class PostCreate(BaseAdminUsersall, CreateView):
         return reverse_lazy('post')
 
 
-# class TagView(TemplateView): 
+# class TagView(TemplateView):
 #     def get_queryset(self):
 #         t = get_object_or_404(Tag, pk=self.kwargs.get("pk"))
-#         return super().get_queryset().filter(tags=t) 
+#         return super().get_queryset().filter(tags=t)
 
 # class CategoryView(TemplateView):
 #     def get_queryset(self):

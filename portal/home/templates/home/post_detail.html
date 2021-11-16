@@ -1,12 +1,16 @@
 {% extends 'base/_base_home.html' %}
 {% load static %}
 {% block body_home %}
-{% include 'base/_navbar.html' %}
-
+{% include 'base/_navbar.html' %} 
 <div class="container py-5">
-    <div class="row">
+    <div class="row">  
         <div class="col-md-8">
-            <div class="container-post">    
+            <div class="container-post"> 
+            {% if has_filter %}
+           
+            {% include 'home/posts.html' %}
+           
+            {% else %} 
                 <h3>{{post.title}}</h3>  
                 <p class="text-muted">{{post.published_date}}</p>  
                 <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);"><span class="badge bg-success"> Categoria: {{post.category.name}} </span></a>
@@ -26,7 +30,7 @@
                                 {% endif %}
                             </th> 
                             <th>
-                                <span class="text-break text-truncate">{{ post.author.first_name }} {{ post.author.last_name }}</span>
+                                <span class="text-break text-truncate">{{ post.author.user_name }}</span>
                             </th>
                         </tr>
                     </table>
@@ -66,8 +70,11 @@
                     </a> 
                     {% endfor %}
                 </div>  
+            {% endif %}
             </div>
         </div>
+       
+
 
         <div class="col-md-4">
             <div class="container-post">
@@ -77,11 +84,17 @@
             <br>
             <div class="container-post">
                 <h6>todas as tags</h6>  
-                {% for tag in tag_list %} 
-                <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
-                <span class="badge bg-warning text-dark">{{tag.name}}</span>   
-                </a> 
-                {% endfor %}
+                <form class="d-flex" method="get" action="">
+                    <div class="form-group col">
+                    {% for tag in filter.form.tags %} 
+                    <label class="checkbox-inline">
+                         <button type="submit" id="tag_filter" class="btn btn-outline-dark">
+                            {{tag}}
+                        </button>
+                    </label> 
+                    {% endfor %}
+                    </div>
+                </form>
             </div>
             <br>
             <div class="container-post">
@@ -161,5 +174,5 @@
             </div>
         </div> 
     </div>
-</div> 
+</div>  
 {% endblock %}
