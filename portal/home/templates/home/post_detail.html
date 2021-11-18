@@ -7,9 +7,8 @@
         <div class="col-md-8">
             <div class="container-post"> 
             {% if has_filter %}
-           
-            {% include 'home/posts.html' %}
-           
+                <h4>Pesquisa Ativa:</h4>    
+                {% include 'home/posts.html' %} 
             {% else %} 
                 <h3>{{post.title}}</h3>  
                 <p class="text-muted">{{post.published_date}}</p>  

@@ -28,7 +28,7 @@ class Post(models.Model):
     author = models.ForeignKey(get_user_model(), verbose_name='author', on_delete=models.CASCADE , null=True, blank=True)
     title = models.CharField('Titulo',max_length=200)
     desc = models.TextField('Descrição', null=True, blank=True)
-    image = StdImageField('Imagem', upload_to='post/imagem', variations={'thumb': (250, 250, True)}, delete_orphans = True, blank=True)
+    image = StdImageField('Imagem', upload_to='post/imagem', variations={'thumb': (420, 280, True)}, delete_orphans = True, blank=True)
     download_file = models.FileField(upload_to='post/file', null=True, blank=True) 
     download_link = models.CharField('Link Download',max_length=200, null=True, blank=True) 
     created_date = models.DateTimeField(default=timezone.now)
