@@ -52,19 +52,7 @@ class PostCreate(BaseAdminUsersall, CreateView):
     def get_success_url(self) -> str:
         messages.success(self.request, 'O post foi Cadastrado com sucesso')
         return reverse_lazy('post')
-
-
-# class TagView(TemplateView):
-#     def get_queryset(self):
-#         t = get_object_or_404(Tag, pk=self.kwargs.get("pk"))
-#         return super().get_queryset().filter(tags=t)
-
-# class CategoryView(TemplateView):
-#     def get_queryset(self):
-#         cate = get_object_or_404(Category, pk=self.kwargs.get("pk"))
-#         return super().get_queryset().filter(category=cate)
-
-
+ 
 class PostUpdate(BaseAdminUsersall, UpdateView):
     model = Post
     form_class = PostForm

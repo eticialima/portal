@@ -3,14 +3,14 @@
     <div class="col py-3"> 
         <div class="card-box ">  
             {% if post.image %} 
-            <a href="{% url 'post-detail' post.pk %}">
+            <a href="{% url 'home:post-detail' post.pk %}">
                 <img class="img-responsive" src="{{ post.image.thumb.url }}" alt="Card image cap">
             </a>
             {% else %}
             <th scope="row">None</th>
             {% endif %}
             <div class="card-body text-center"> 
-                <h6> <a href="{% url 'post-detail' post.pk %}" class="text-dark">{{post.title}}</a></h6> 
+                <h6> <a href="{% url 'home:post-detail' post.pk %}" class="text-dark">{{post.title}}</a></h6> 
                 <hr> 
                     <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
                     <table>
