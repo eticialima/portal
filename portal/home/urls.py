@@ -12,14 +12,14 @@ from home.views import (
     CommentReplyView,
     AddCommentDislike, 
     AddCommentLike,
-    SharedPostView
+    SharedPostView 
     )
 
 app_name="home"
 urlpatterns = [
 	path('', HomeView.as_view(), name='home'),
 	path('index-home/', IndexHomelView.as_view(), name='index-home'), 
-	path('post-detail/<int:pk>/', DetailView.as_view(), name='post-detail'),
+	path('post-detail/<int:pk>/', DetailView.as_view(), name='post-detail'), 
 	
 	path('post/<int:pk>/like', AddLike.as_view(), name='like'),
 	path('post/<int:pk>/dislike', AddDislike.as_view(), name='dislike'),

@@ -1,0 +1,172 @@
+<div class="container-post">
+    {% if request.user == post.author %}
+    <table>
+        <tr>  
+            <th> 
+                <span>{{post.likes.all.count}} Likes</span>
+                <i class="fas fa-heart"></i>  
+            </th>  
+            <th>
+                <span>{{post.dislikes.all.count}} Dislikes</span>
+                <i class="fas fa-heart-broken"></i>  
+            </th>
+            <th>
+                <div @click="open = true">
+                    <span>Comment</span>
+                    <i class='fa fa-comment'></i>    
+                </div> 
+            </th>
+        </tr>
+    </table>  
+    <table>
+        <tr>  
+            <th>       
+                <form method="POST" action="{% url 'home:like' post.pk %}" class="mt-2 px-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{request.path}}">
+                    <button type="submit" class="btn btn-outline-dark">
+                    <i class="fas fa-heart"><span>Like</span></i>  
+                    </button> 
+                </form>  
+            </th>  
+            <th>
+                <form method="POST" action="{% url 'home:dislike' post.pk %}" class="mt-2 px-2">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{request.path}}">
+                    <button type="submit" class="btn btn-outline-dark">
+                        <i class="fas fa-heart-broken"><span>Dislike</span></i>  
+                    </button> 
+                </form> 
+            </th>
+        </tr>
+    </table> 
+    <div class="text-center">
+        <h3>Comentar Alguma coisa >></h3>
+        <div class="mt-2">
+            <p>Compartilhe alguma coisa sobre o post!</p>
+        </div>
+    </div> 
+    <div class="mt-5">  
+        <form method="POST">
+            {% csrf_token %} 
+            {{form.comment}} 
+            <br>
+            <button type="submit" class="btn-default">Post</button> 
+        </form> 
+    </div> 
+    {% else %}
+    <div class="p-2 text-center bg-light shadow-sm rounded"> 
+        <div class="h4">Olá,</div>
+        <p>Você precisa fazer login no sistema para comentar.</p>  
+        <button class="btn-default"  
+                onclick="location.href='{% url 'index-manager' %}'">
+                <i class="fas fa-sign-in-alt"></i> Registrar/Login
+        </button>  
+    </div> 
+    {% endif %} 
+     
+    <div class="py-2 px-4"> 
+    <h4>Comentarios</h4> 
+    {% for comment in comments %}
+        {% if comment.is_parent %} 
+            <div class="p-2 rounded"> 
+                <a href=""><p>{{comment.author}}</p></a> 
+                <span>{{comment.comment}}</span>
+                <span>{{comment.created_on}}</span>
+            </div>
+            
+            {% if request.user == comment.author %}
+                <a href="{% url 'home:comment-edit' post.pk comment.pk %}">Edit</a> 
+                <a href="{% url 'home:comment-delete' post.pk comment.pk %}">Delete</a> 
+            {% endif %}
+
+            <form method="POST" action="{% url 'home:comment-like' post.pk comment.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{request.path}}">
+                <button type="submit" class="btn-outline-dark">
+                <i class='fas fa-heart'></i><span>{{comment.likes.all.count}}</span> 
+                </button> 
+            </form>
+
+            <form method="POST" action="{% url 'home:comment-dislike' post.pk comment.pk %}">
+                {% csrf_token %}
+                <input type="hidden" name="next" value="{{request.path}}">
+                <button type="submit" class="btn-outline-dark">
+                <i class='fas fa-heart-broken'></i><span>{{comment.dislikes.all.count}}</span> 
+                </button> 
+            </form>  
+
+            <button class="btn-default p-2 rounded-lg" type="button" 
+                    data-bs-toggle="collapse"
+                    data-bs-target="#collapse_{{comment.id}}"
+                    aria-expanded="false" 
+                    aria-controls="collapseExample">
+                    Responder
+            </button> 
+            
+            <div class="collapse" id="collapse_{{comment.id}}"> 
+                
+                <div class="mt-5">  
+                    <h3 id="modal-title">Responder Comentario</h3> 
+                    <div class="mt-2">
+                        <p>Escreva para responder um comentario e click em Postar.</p>
+                    </div> 
+                    <div class="py-2"> 
+                        <form method="POST" action="{% url 'home:comment-reply' post.pk comment.pk %}">
+                            {% csrf_token %}
+                            {{form.comment}}
+                            <div class="py-2">
+                                <button type="submit" class="btn-default">Enviar</button>
+                            </div>
+                        </form> 
+                    </div> 
+                </div> 
+                <button class="p-2 btn-default" type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#collapse_{{comment.id}}" 
+                        aria-expanded="false" 
+                        aria-controls="collapseExample">
+                        <i class="fas fa-arrow-left"></i>
+                </button>    
+            </div>
+
+
+
+            <!-- REPLY COMMENT -->
+            {% for child_comment in comment.children %} 
+                <div class="p-2 rounded-lg">
+                    <span>{{child_comment.author}}</span>
+                    <span>{{child_comment.comment}}</span>
+                    <span>{{child_comment.created_on}}</span>
+                </div>
+
+            
+                {% if request.user == child_comment.author %}
+                <a href="{% url 'home:comment-edit' post.pk child_comment.pk %}">Edit</a> 
+                <a href="{% url 'home:comment-delete' post.pk child_comment.pk %}">Delete</a> 
+                {% endif %}
+
+                <form method="POST" action="{% url 'home:comment-like' post.pk child_comment.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{request.path}}">
+                    <button type="submit" class="btn-outline-dark">
+                    <i class='fas fa-heart'></i><span>{{child_comment.likes.all.count}}</span> 
+                    </button> 
+                </form>
+
+                <form method="POST" action="{% url 'home:comment-dislike' post.pk child_comment.pk %}">
+                    {% csrf_token %}
+                    <input type="hidden" name="next" value="{{request.path}}">
+                    <button type="submit" class="btn-outline-dark">
+                    <i class='fas fa-heart-broken'></i><span>{{child_comment.dislikes.all.count}}</span> 
+                    </button> 
+                </form>  
+            {% endfor %}  
+        </div> 
+        {% endif %}
+    {% endfor %} 
+</div>
+	
+
+ 
+	 

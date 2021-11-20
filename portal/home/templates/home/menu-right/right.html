@@ -1,0 +1,101 @@
+{% load static %}
+<div class="container-post">
+    <h6>Pesquisar</h6>
+    <input type="search" class="form-control" placeholder="Pesquisar...">
+</div>
+<br>
+<div class="container-post">
+    <h6>todas as tags</h6>
+    <form class="d-flex" method="get" action="">
+        <div class="form-group col">
+            {% for tag in filter.form.tags %}
+            <label class="checkbox-inline">
+                <button type="submit" id="tag_filter" class="btn btn-outline-dark">
+                    {{tag}}
+                </button>
+            </label>
+            {% endfor %}
+        </div>
+    </form>
+</div>
+<br>
+<div class="container-post">
+    <h6>Outras Postagens</h6>
+    {% for post in post_list %}
+    <a href="{% url 'home:post-detail' post.pk %}" class="post-text">{{post.title}}</a>
+    <br>
+    {% endfor %}
+</div>
+<br>
+<div class="container-post">
+    <h6>Filtrar por Software</h6>
+    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+        <table>
+            <tr>
+                <th>
+                    <img src="{% static 'images/aftereffects.png' %}" alt="" class="img-fluid"
+                        style="height: 60px; width: 60px;margin-right: 10px;">
+                </th>
+                <th>
+                    <span class="text-break text-truncate">After Effects</span>
+                </th>
+            </tr>
+        </table>
+    </a>
+    <hr>
+    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+        <table>
+            <tr>
+                <th>
+                    <img src="{% static 'images/premiere.png' %}" alt="" class="img-fluid"
+                        style="height: 60px; width: 60px;margin-right: 10px;">
+                </th>
+                <th>
+                    <span class="text-break text-truncate">Adobe Premiere</span>
+                </th>
+            </tr>
+        </table>
+    </a>
+    <hr>
+    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+        <table>
+            <tr>
+                <th>
+                    <img src="{% static 'images/davinci.png' %}" alt="" class="img-fluid"
+                        style="height: 60px; width: 60px;margin-right: 10px;">
+                </th>
+                <th>
+                    <span class="text-break text-truncate">Davinci Resolve</span>
+                </th>
+            </tr>
+        </table>
+    </a>
+    <hr>
+    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+        <table>
+            <tr>
+                <th>
+                    <img src="{% static 'images/blender.png' %}" alt="" class="img-fluid"
+                        style="height: 60px; width: 60px;margin-right: 10px;">
+                </th>
+                <th>
+                    <span class="text-break text-truncate">Blender 3D</span>
+                </th>
+            </tr>
+        </table>
+    </a>
+    <hr>
+    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+        <table>
+            <tr>
+                <th>
+                    <img src="{% static 'images/vegas.png' %}" alt="" class="img-fluid"
+                        style="height: 60px; width: 60px;margin-right: 10px;">
+                </th>
+                <th>
+                    <span class="text-break text-truncate">Vegas Pro</span>
+                </th>
+            </tr>
+        </table>
+    </a>
+</div>

@@ -18,36 +18,37 @@ class IndexHomelView(TemplateView):
 class HomeView(ListView):
     model = Post 
     template_name = 'home/home.html'
-
+ 
     def get_context_data(self, **kwargs):
         f = PostFilter(self.request.GET, queryset=Post.objects.all()) 
-        context = super().get_context_data(**kwargs)  
+        context = super().get_context_data(**kwargs) 
+        context['post_list'] = self.model.objects.all()[:5]
+        context['tag_list'] = Tag.objects.all() 
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset()) 
         context['has_filter'] = any(field in self.request.GET for field in set(f.get_fields()))
         return context
-     
-
+  
 class DetailView(DetailView):
     model = Post 
-    template_name = 'home/post_detail.html'
-
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset())
-        context['post_list'] = self.model.objects.all()[:5]
-        context['tag_list'] = Tag.objects.all() 
-        context['has_filter'] = any(field in self.request.GET for field in set(context['filter'].get_fields()))
-        return context
-
+    template_name = 'home/post_detail.html' 
+    
     def get(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         form = SocialCommentForm() 
         comments = SocialComment.objects.filter(post=post).order_by('-created_on')
+        filter = PostFilter(self.request.GET, queryset=self.get_queryset())
+        tag_list = Tag.objects.all()
+        post_list = self.model.objects.all()[:5] 
         context = {
             'post': post,
             'form': form,
-            'comments':comments
-        }
+            'comments':comments,
+            'filter': filter,
+            'tag_list': tag_list,
+            'post_list': post_list,
+            'has_filter': any(field in self.request.GET for field in set(filter.get_fields())) 
+
+        }  
         return render(request, 'home/post_detail.html', context)
 
     def post(self, request, pk, *args, **kwargs):
@@ -70,9 +71,7 @@ class DetailView(DetailView):
 
         return render(request, 'home/post_detail.html', context)
 
-   
- 
- 
+    
 class SharedPostView(View):
     def post(self, request, pk, *args, **kwargs):
         original_post = Post.objects.get(pk=pk)
@@ -232,7 +231,7 @@ class CommentReplyView(LoginRequiredMixin, View):
 
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model=SocialComment
-    template_name="home/comment_delete.html"
+    template_name="home/comments/comment_delete.html"
 
     def get_success_url(self):
         pk = self.kwargs['post_pk']
@@ -246,7 +245,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 class CommentEditView(UpdateView):
     model = SocialComment
     fields = ['comment']
-    template_name = 'home/comment_edit.html'
+    template_name = 'home/comments/comment_edit.html'
 
     def get_success_url(self):
         pk = self.kwargs['post_pk']

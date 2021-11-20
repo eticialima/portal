@@ -24,24 +24,24 @@ class Tag(models.Model):
         verbose_name_plural = "tags"
  
 class Post(models.Model):
-    slug = models.SlugField('Slug', max_length=100, editable=False)
-    author = models.ForeignKey(get_user_model(), verbose_name='author', on_delete=models.CASCADE)
+    slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
+    author = models.ForeignKey(get_user_model(), verbose_name='author', on_delete=models.CASCADE , null=True, blank=True)
     title = models.CharField('Titulo',max_length=200)
-    desc = models.TextField('Descrição')
-    image = StdImageField('Imagem', upload_to='post/imagem', variations={'thumb': (420, 280, True)}, delete_orphans=True, blank=True)
-    download_file = models.FileField(upload_to='post/file',blank=True) 
-    download_link = models.CharField('Link Download',max_length=200,blank=True) 
+    desc = models.TextField('Descrição', null=True, blank=True)
+    image = StdImageField('Imagem', upload_to='post/imagem', variations={'thumb': (420, 280, True)}, delete_orphans = True, blank=True)
+    download_file = models.FileField(upload_to='post/file', null=True, blank=True) 
+    download_link = models.CharField('Link Download',max_length=200, null=True, blank=True) 
     created_date = models.DateTimeField(default=timezone.now)
-    published_date = models.DateTimeField() 
-    category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE)
-    tags = models.ManyToManyField(Tag, verbose_name="Tag")
+    published_date = models.DateTimeField(blank=True, null=True) 
+    category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE, null=True, blank=True)
+    tags = models.ManyToManyField(Tag, verbose_name="Tag", null=True, blank=True)
     views = models.PositiveIntegerField(default=0, editable=False) 
-    body=models.TextField(blank=True)
-    shared_body = models.TextField(blank=True)
-    shared_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, related_name='shared_user', blank=True)
-    shared_on = models.DateTimeField(blank=True) 
-    likes = models.ManyToManyField(get_user_model(), related_name='likes', blank=True)
-    dislikes = models.ManyToManyField(get_user_model(), related_name='dislikes', blank=True)
+    body=models.TextField(null=True, blank=True)
+    shared_body = models.TextField(blank=True, null=True)
+    shared_user = models.ForeignKey(get_user_model(), on_delete=models.CASCADE, null=True, blank=True, related_name='+')
+    shared_on = models.DateTimeField(blank=True, null=True) 
+    likes = models.ManyToManyField(get_user_model(), blank=True, related_name='likes')
+    dislikes = models.ManyToManyField(get_user_model(), blank=True, related_name='dislikes')
  
     def publish(self):
         self.published_date = timezone.now()
@@ -64,7 +64,7 @@ class SocialComment(models.Model):
     post = models.ForeignKey(Post, on_delete=models.CASCADE) 
     likes = models.ManyToManyField(get_user_model(), blank=True, related_name='comment_likes')
     dislikes = models.ManyToManyField(get_user_model(), blank=True, related_name='comment_dislikes')
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='self')
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, blank=True, null=True, related_name='+')
 
     @property
     def children(self):
