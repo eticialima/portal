@@ -1,4 +1,4 @@
-body html{
+body html {
   overflow-x: hidden;
   text-decoration: none;
 }
@@ -54,7 +54,7 @@ body html{
   padding: 0.875rem 1.25rem;
   font-size: 1.2rem;
 }
-  
+
 #sidebar-wrapper .list-group {
   width: 15rem;
 }
@@ -82,7 +82,7 @@ body html{
   font-weight: bold;
   border: none;
 }
-  
+
 /* .bg1{ 
   background-image: url( '/static/images/bg1.png' );
   height: 100%;
@@ -93,7 +93,7 @@ body html{
   z-index: 1;  
 } */
 
-.fundo{ 
+.fundo {
   background-color: #e6e6e6;
   box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 19%);
 }
@@ -108,15 +108,15 @@ body html{
   margin-inline: auto;
 }
 
-.circle img { 
-  width: 100%; 
+.circle img {
+  width: 100%;
   height: 100%;
   object-fit: cover;
-  border-radius: 50%; 
+  border-radius: 50%;
   box-sizing: border-box;
 }
 
-.post-thumb img{ 
+.post-thumb img {
   max-height: 250px;
   width: auto;
   height: auto;
@@ -126,41 +126,40 @@ body html{
   display: none;
 }
 .label-input {
-  padding: 20px 10px; 
+  padding: 20px 10px;
   background-color: #a30808;
-  color: #FFF; 
+  color: #fff;
   text-align: center;
   display: block;
   margin-top: 10px;
   cursor: pointer;
 }
 
-
-.label-input:hover{
+.label-input:hover {
   background-color: #212529;
 }
-.menu-item{ 
+.menu-item {
   background-color: #ffffff;
   color: rgb(29, 29, 29);
 }
-.menu-item a{ 
+.menu-item a {
   text-decoration: none;
 }
-.menu-item:hover{
-  background-color: #a30808; 
+.menu-item:hover {
+  background-color: #a30808;
   color: rgb(255, 255, 255);
 }
- 
+
 .img-responsive {
   display: block;
-  width: 100%; 
-  max-width: 100%; 
+  width: 100%;
+  max-width: 100%;
   border-radius: 25px;
   /* height: 200px; */
-} 
+}
 
 .card-box {
-  box-shadow: 0px 0px 3px 2px rgb(163 8 8)!important;
+  box-shadow: 0px 0px 3px 2px rgb(163 8 8) !important;
   transition: 0.5s;
   width: auto;
   margin-right: auto;
@@ -169,21 +168,30 @@ body html{
 }
 
 .card-box:hover {
-  box-shadow: 0px 0px 7px 4px rgba(236, 236, 236, 0.9)!important;
+  box-shadow: 0px 0px 7px 4px rgba(236, 236, 236, 0.9) !important;
 }
 
- 
 a .carde {
- text-decoration: none;
- color: #571d1d;
+  text-decoration: none;
+  color: #571d1d;
 }
 
 .carde:hover {
   box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
   transform: scale(1.01);
 }
- 
- 
+
+hr {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0;
+  border-top: 1px solid #ffffff;
+}
+a {
+  color: #82b440;
+  text-decoration: none;
+} 
+
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
@@ -198,4 +206,3 @@ a .carde {
     margin-left: -16rem;
   }
 }
- 

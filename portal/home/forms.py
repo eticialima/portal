@@ -5,8 +5,8 @@ from post.models import Post, SocialComment
 class SocialPostForm(forms.ModelForm):
     body = forms.CharField(widget=forms.Textarea(attrs={
             'class': 'form-control',
-            'rows': '3',
-            'placeholder': 'Say Something...'
+            'rows': '4',
+            'placeholder': 'Comentar alguma coisa...'
             }),
         required=True) 
 	
@@ -19,8 +19,8 @@ class SocialCommentForm(forms.ModelForm):
     comment = forms.CharField(
         widget=forms.Textarea(attrs={
             'class': 'form-control',
-            'rows': '1',
-            'placeholder': 'Comment Something...'
+            'rows': '2',
+            'placeholder': 'Responder comentário...'
             }),
         required=True
         )
@@ -35,7 +35,7 @@ class ShareForm(forms.Form):
         label='',
         widget=forms.Textarea(attrs={
             'class': 'form-control',
-            'rows': '3',
-            'placeholder': 'Say Something...'
+            'rows': '2',
+            'placeholder': 'Comentar alguma coisa...'
             }),
         )

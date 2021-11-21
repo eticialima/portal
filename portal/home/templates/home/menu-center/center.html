@@ -1,5 +1,5 @@
 {% load static %}
-<div class="container-post"> 
+<div class="container-post">  
     <h3>{{post.title}}</h3>
     <p class="text-muted">{{post.published_date}}</p>
     <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);"><span class="badge bg-success">Categoria: {{post.category.name}} </span></a>
@@ -8,22 +8,46 @@
     {% else %}
     <th scope="row">None</th>
     {% endif %}
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
-        <table>
-            <tr>
-                <th>
+    <div class="d-flex justify-content-between align-items-center"> 
+        <div class="d-flex flex-row align-items-center mt-2 px-4">    
+            <small class="text-dark px-2"> 
+                    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
                     {% if post.author.imagem %}
                     <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">
                     {% else %}
-                    <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;" />
+                    <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>
                     {% endif %}
-                </th>
-                <th>
-                    <span class="text-break text-truncate">{{ post.author.user_name }}</span>
-                </th>
-            </tr>
-        </table>
-    </a>
+                    </a> 
+                    <span class="text-break text-truncate">{{ post.author.user_name }}</span> 
+            </small> 
+        </div>
+        <small> 
+            <table>
+                <tr>  
+                    <th>       
+                        <form method="POST" action="{% url 'home:like' post.pk %}" class="mt-2 px-2">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{request.path}}">
+                            <button type="submit" class="btn btn-light link-danger">
+                            <i class='fas fa-heart'></i><span> {{post.likes.all.count}}</span> 
+                            </button> 
+                        </form> 
+                    </th>  
+                    <th> 
+                        <form method="POST" action="{% url 'home:dislike' post.pk %}" class="mt-2 px-2">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{request.path}}">
+                            <button type="submit" class="btn btn-light link-danger">
+                            <i class='fas fa-heart-broken'></i><span> {{post.dislikes.all.count}}</span> 
+                            </button> 
+                        </form>    
+                    </th> 
+                </tr>
+            </table>
+        </small> 
+    </div> 
+
+    
     <br>
     <hr>
     <p>{{post.desc}}</p>

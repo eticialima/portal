@@ -13,21 +13,19 @@ from home.forms import *
 from .filters import PostFilter
 
 class IndexHomelView(TemplateView):
-    template_name = 'home/index-home.html'
+    template_name = 'home/index-home.html' 
  
 class HomeView(ListView):
     model = Post 
     template_name = 'home/home.html'
- 
+    
     def get_context_data(self, **kwargs):
         f = PostFilter(self.request.GET, queryset=Post.objects.all()) 
-        context = super().get_context_data(**kwargs) 
-        context['post_list'] = self.model.objects.all()[:5]
-        context['tag_list'] = Tag.objects.all() 
+        context = super().get_context_data(**kwargs)  
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset()) 
-        context['has_filter'] = any(field in self.request.GET for field in set(f.get_fields()))
+        context['has_filter'] = any(field in self.request.GET for field in set(context['filter'].get_fields()))
         return context
-  
+        
 class DetailView(DetailView):
     model = Post 
     template_name = 'home/post_detail.html' 
@@ -46,8 +44,7 @@ class DetailView(DetailView):
             'filter': filter,
             'tag_list': tag_list,
             'post_list': post_list,
-            'has_filter': any(field in self.request.GET for field in set(filter.get_fields())) 
-
+            'has_filter': any(field in self.request.GET for field in set(filter.get_fields()))  
         }  
         return render(request, 'home/post_detail.html', context)
 
@@ -96,7 +93,7 @@ class SharedPostView(View):
         return redirect('home')
 
 
-class AddLike(View):
+class AddLike(LoginRequiredMixin,View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
 
@@ -123,10 +120,10 @@ class AddLike(View):
             post.likes.remove(request.user)
 
         next = request.POST.get('next', '/')
-        return HttpResponseRedirect(next)
+        return HttpResponseRedirect(next) 
 
 
-class AddDislike(View):
+class AddDislike(LoginRequiredMixin,View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
 

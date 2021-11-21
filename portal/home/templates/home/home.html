@@ -16,11 +16,11 @@
                 <div class="form-group col px-5">
                     <span><b>Usuario: </b></span><br>
                     {% render_field filter.form.author class="form-control" %}
-                </div>
+                </div> 
                 <div class="form-group col">
                     <span><b>Categorias: </b></span><br>
-                    {% for cat in filter.form.category %}
-                    <label class="checkbox-inline">
+                    {% for cat in filter.form.category %}  
+                     <label class="checkbox-inline form-check-label">
                         {{cat.tag}} {{cat.choice_label}}
                     </label>
                     {% endfor %}
@@ -32,7 +32,9 @@
                         </a>
                     {% endif %} 
                 </div>
-                <button type="submit" class="btn-default"><span class="fa fa-search"></span> Pesquisar</button>
+                <div class="form-group col">
+                    <button type="submit" class="btn-default"><span class="fa fa-search"></span> Pesquisar</button> 
+                </div>
             </form>
         </div>
     </div>
