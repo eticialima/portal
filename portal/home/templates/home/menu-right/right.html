@@ -10,7 +10,7 @@
         <div class="form-group col">
             {% for tag in filter.form.tags %}
             <label class="checkbox-inline">
-                <button type="submit" id="tag_filter" class="btn btn-outline-dark">
+               <button type="submit" id="tag_filter" class="btn">
                     {{tag}}
                 </button>
             </label>
@@ -28,13 +28,12 @@
 </div>
 <br>
 <div class="container-post">
-    <h6>Filtrar por Software</h6>
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <h6>Filtrar por Software</h6> 
+    <a href="{% url 'home:post-detail' post.pk %}?category=2#" style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
-                    <img src="{% static 'images/aftereffects.png' %}" alt="" class="img-fluid"
-                        style="height: 60px; width: 60px;margin-right: 10px;">
+                    <img src="{% static 'images/aftereffects.png' %}" alt="" class="img-fluid" style="height: 60px; width: 60px;margin-right: 10px;">
                 </th>
                 <th>
                     <span class="text-break text-truncate">After Effects</span>
@@ -43,7 +42,7 @@
         </table>
     </a>
     <hr>
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a href="{% url 'home:post-detail' post.pk %}?category=3#" style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
@@ -85,7 +84,7 @@
         </table>
     </a>
     <hr>
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a href="{% url 'home:post-detail' post.pk %}?category=4#" style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
