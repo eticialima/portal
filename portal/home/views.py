@@ -1,12 +1,10 @@
-from django.shortcuts import render, get_object_or_404,redirect
+from django.shortcuts import render, redirect
 from django.urls.base import reverse_lazy
-from django.http import HttpResponseRedirect, HttpResponse
-from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-
+from django.http import HttpResponseRedirect 
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin 
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.base import TemplateView,View 
-from django.views.generic import DetailView, ListView
-from base.base_admin_permissions import BaseAdminUsersall
+from django.views.generic import DetailView, ListView 
 from post.models import *
 from post.forms import *
 from home.forms import *
@@ -67,32 +65,7 @@ class DetailView(DetailView):
         }
 
         return render(request, 'home/post_detail.html', context)
-
-    
-class SharedPostView(View):
-    def post(self, request, pk, *args, **kwargs):
-        original_post = Post.objects.get(pk=pk)
-        form = ShareForm(request.POST)
-
-        if form.is_valid():
-            new_post = Post(
-                shared_body=self.request.POST.get('body'),
-                body=original_post.body,
-                author=original_post.author,
-                created_on=original_post.created_on,
-                shared_user=request.user,
-                shared_on=timezone.now(),
-            )
-            new_post.save()
-
-            # for img in original_post.image.all():
-            #     new_post.image.add(img)
-
-            # new_post.save()
-
-        return redirect('home')
-
-
+  
 class AddLike(LoginRequiredMixin,View):
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)

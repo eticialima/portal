@@ -27,15 +27,4 @@ class SocialCommentForm(forms.ModelForm):
 
     class Meta:
         model=SocialComment
-        fields=['comment']
-
-
-class ShareForm(forms.Form):
-    body = forms.CharField(
-        label='',
-        widget=forms.Textarea(attrs={
-            'class': 'form-control',
-            'rows': '2',
-            'placeholder': 'Comentar alguma coisa...'
-            }),
-        )
+        fields=['comment'] 

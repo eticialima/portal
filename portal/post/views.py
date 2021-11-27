@@ -1,22 +1,16 @@
-from django.shortcuts import redirect, reverse
 from django.urls import reverse_lazy
-from django.contrib import messages
-from django.contrib.messages.views import SuccessMessageMixin
-from base.base_admin_permissions import BaseAdminUsersAd, BaseAdminUsersall
-from accounts.forms import CustomUserCreateForm, CustomUserChangeForm
+from django.contrib import messages 
+from base.base_admin_permissions import BaseAdminUsersall 
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
-from django.views.generic import ListView
-from django.shortcuts import render, get_object_or_404
+from django.views.generic import ListView 
 from post.models import *
 from post.forms import PostForm
-from accounts.models import CustomUser
-
+from accounts.models import CustomUser 
 
 class IndexPostView(BaseAdminUsersall, TemplateView):
     template_name = 'post/index-post.html'
-
-
+ 
 class PostView(BaseAdminUsersall, ListView):
     model = Post
     template_name = 'post/post.html'   
@@ -25,21 +19,16 @@ class PostView(BaseAdminUsersall, ListView):
         context = super().get_context_data(**kwargs)
         context['post_list'] = self.model.objects.all()  
         return context
-
-
+ 
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post
     form_class = PostForm
-    template_name = 'post/post_create.html'
-    # success_url = reverse_lazy('post')
-
-    # cadastra post para user selecionado
+    template_name = 'post/post_create.html' 
+ 
     def post(self, request, *args, **kwargs):
         user_pk = request.user
-        user = CustomUser.objects.filter(username=user_pk)
-        # form = self.get_form()
-        form = PostForm(request.POST, request.FILES)
-        # no formulario tem propriedade "btn_adicionar" quando adiciona o formulario roda if abaixo.
+        user = CustomUser.objects.filter(username=user_pk) 
+        form = PostForm(request.POST, request.FILES) 
         if 'btn_adicionar':
             if form.is_valid():
                 form_model = form.save(commit=False)

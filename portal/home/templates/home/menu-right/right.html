@@ -1,7 +1,10 @@
+{% load widget_tweaks %}
 {% load static %}
 <div class="container-post">
-    <h6>Pesquisar</h6>
-    <input type="search" class="form-control" placeholder="Pesquisar...">
+    <h6>Pesquisar</h6> 
+    <form class="d-flex" method="get" action="">
+        {% render_field filter.form.title class="form-control" %}
+    </form> 
 </div>
 <br>
 <div class="container-post">
@@ -28,7 +31,7 @@
 </div>
 <br>
 <div class="container-post">
-    <h6>Filtrar por Software</h6> 
+    <h6>Filtrar por Software</h6>  
     <a href="{% url 'home:post-detail' post.pk %}?category=2#" style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
