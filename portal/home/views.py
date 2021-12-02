@@ -9,19 +9,24 @@ from post.models import *
 from post.forms import *
 from home.forms import *
 from .filters import PostFilter
-
+  
 class IndexHomelView(TemplateView):
     template_name = 'home/index-home.html' 
  
 class HomeView(ListView):
     model = Post 
-    template_name = 'home/home.html'
-    
-    def get_context_data(self, **kwargs):
+    template_name = 'home/home.html' 
+  
+    def get_context_data(self, **kwargs):  
+        if self.request.GET:
+            querystring = self.request.GET.copy()
+            if self.request.GET.get('page'):
+                del querystring['page'] 
         f = PostFilter(self.request.GET, queryset=Post.objects.all()) 
         context = super().get_context_data(**kwargs)  
         context['filter'] = PostFilter(self.request.GET, queryset=self.get_queryset()) 
         context['has_filter'] = any(field in self.request.GET for field in set(context['filter'].get_fields()))
+        context['querystring'] = querystring.urlencode()
         return context
         
 class DetailView(DetailView):
@@ -220,3 +225,5 @@ class CommentEditView(UpdateView):
     def get_success_url(self):
         pk = self.kwargs['post_pk']
         return reverse_lazy('home:post-detail', kwargs={'pk':pk})
+
+

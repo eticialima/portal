@@ -1,52 +1,48 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg shadow">
-    <div class="container-fluid bellow">
+    <div class="container bellow">
         <input type="checkbox" id="check" />
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
         <a class="logo" href="{% url 'home:home' %}">
-            <h3>Diario de um Editor</h3>
+            <h3>EditorYZ</h3>
         </a>
         <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"><a href="{% url 'home:home' %}">Home</a></li>
             <li class="nav-item"><a href="#">AE Assets</a></li>
             <li class="nav-item"><a href="#">PR Assets</a></li>
             <li class="nav-item"><a href="#">3D Assets</a></li>
-            <li class="nav-item"><a href="#">Plugins</a></li>
-        </ul>
-        {% if user.is_authenticated %}
-        <div class="action">
-            <div class="profile" onclick="menuToggle();">
-                {% if user.imagem %}
-                <div class="circle-home">
-                    <img src="{{ user.imagem.url }}" class="img-fluid" alt="{{ user.first_name }}" />
+            <li class="nav-item"><a href="#">Plugins</a></li> 
+            <li class="nav__perfil nav__item dropdown">
+                {% if user.is_authenticated %}
+                <div class="action">
+                    <div class="profile" onclick="menuToggle();">
+                        {% if user.imagem %}
+                        <div class="circle-home">
+                            <img src="{{ user.imagem.url }}" class="img-fluid" alt="{{ user.first_name }}" />
+                        </div>
+                        {% else %}
+                        <div class="circle-home">
+                            <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" />
+                        </div>
+                        {% endif %}
+                    </div>
+                    <div class="menu text-start lh-lg">
+                        <div>
+                            <a href="#" class="nav__link">Meu Perfil</a>
+                            <a href="{% url 'index-painel' %}" class="nav__link">Configurações</a>
+                            <button class=" btn-default d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
+                        </d>
+                    </div>
                 </div>
                 {% else %}
-                <div class="circle-home">
-                    <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" />
+                <div class="action">
+                    <button class=" btn-default d-flex" onclick="location.href='{% url 'index-manager' %}'">Login</button>
                 </div>
                 {% endif %}
-            </div>
-            <div class="menu">
-                <ul>
-                    <li>
-                        <a href="#">Meu Perfil</a>
-                    </li>
-                    <li>
-                        <a href="{% url 'index-painel' %}">Configurações</a>
-                    </li>
-                    <li>
-                        <button class=" btn-default d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
-                    </li>
-                </ul>
-            </div>
-        </div>
-        {% else %}
-        <div class="action">
-            <button class=" btn-default d-flex" onclick="location.href='{% url 'index-manager' %}'">Login</button>
-        </div>
-        {% endif %}
+            </li> 
+        </ul> 
     </div>
 </nav>
 <!-- Fim Navbar -->
@@ -56,13 +52,14 @@
         toggleMenu.classList.toggle('active')
     }
 </script>
-<style>
-    nav {
-        background: #242424;
+<style>  
+    nav { 
+        background: #FBFBFB;
         height: 80px;
-        width: 100%;
-        position: fixed;
-        z-index: 100;
+        width: 100%; 
+        z-index: 100;  
+        display: flex; 
+        align-items: center; 
     }
 
     .navbar {
@@ -73,6 +70,7 @@
     }
 
     .nav-menu {
+        background: #FBFBFB;
         display: grid;
         width: 60vw;
         grid-template-columns: repeat(5, auto);
@@ -91,7 +89,7 @@
     }
 
     nav ul li a {
-        color: white;
+        color: #393939;
         font-size: 17px;
         padding: 7px 13px;
         border-radius: 3px;
@@ -100,6 +98,7 @@
 
     nav ul li a:hover {
         color: #a30808;
+        background-color: #faf5f0;
         text-decoration: none;
     }
 
@@ -113,7 +112,7 @@
     }
 
     .logo {
-        color: #fff;
+        color: #393939;
         justify-self: start;
         margin-left: 20px;
         cursor: pointer;
@@ -163,7 +162,7 @@
 
     .action .menu {
         background-color: #FFF;
-        box-sizing: 0 5px 25px rgba(0, 0, 0, 0.1);
+        box-shadow: rgb(0 0 0 / 20%) 0px 0px 8px 0px; 
         border-radius: 15px;
         padding: 10px 20px;
         position: absolute;
@@ -191,45 +190,19 @@
         top: -5px;
         width: 20px;
     }
-  
-    .action .menu ul li {
-        align-items: center; 
-        display: flex;
-        justify-content: left;
-        list-style: none;
-        padding: 10px 0px;
+
+    .nav__link {
+    color: #242424;
     }
 
-    .action .menu ul li img {
-        max-width: 20px;
-        margin-right: 10px;
-        opacity: 0.5;
-        transition: 0.5s
+    .nav__link:hover {
+    color: #c01212;
     }
-
-    .action .menu ul li a {
-        display: inline-block;
-        color: #555;
-        font-size: 14px;
-        font-weight: 600;
-        padding-left: 15px;
-        text-decoration: none;
-        text-transform: uppercase;
-        transition: 0.5s;
-    }
-
-    .action .menu ul li:hover img {
-        opacity: 1;
-    }
-
-    .action .menu ul li:hover a {
-        color: #a30808;
-    }
-
+ 
     /* Icone menu @media*/
     .checkbtn {
         font-size: 50px;
-        color: white;
+        color: 393939;
         float: left;
         padding-left: 25px;
         line-height: 80px;
@@ -237,30 +210,29 @@
         cursor: pointer;
         display: none;
     }
-
     #check {
         display: none;
     }
-
     @media (max-width: 375px) {
         .circle-home {
             display: none;
-        }
-
-        .logo {
-            display: none;
-        }
+        } 
     }
+
+    @media (max-width: 425px) {}
+
+    @media (max-width: 768px) {}
+
 
     /* @media 858px */
     @media (max-width: 858px) {
-        .logo img {
+       .logo img {
             font-size: 30px;
             padding-left: 50px;
             position: fixed;
             contain: size;
         }
-
+ 
         .checkbtn {
             display: block;
         }
@@ -268,12 +240,12 @@
         .bellow {
             margin: 0px;
         }
-
+ 
         .nav-menu {
             display: none;
         }
-
-        ul {
+ 
+       ul {
             position: fixed;
             width: 100%;
             height: 100vh;
@@ -283,21 +255,16 @@
             text-align: center;
             transition: all 0.5s;
         }
-
+       
         nav ul li {
             display: block;
             margin: 50px 0;
             line-height: 30px;
         }
-
+        
         nav ul li a {
             font-size: 20px;
-        }
-
-        .action {
-            display: none;
-        }
-
+        } 
         a:hover,
         a.active {
             text-decoration: none;
@@ -314,24 +281,28 @@
 
         .logoimg {
             max-width: 100%;
-        }
+        } 
     }
 
     /* @media 952px */
     @media (max-width: 952px) {
-        nav ul li a {
-            font-size: 16px;
-        }
+        .logo {
+            display: none;
+        } 
 
-        .nav-menu {
-            width: 40vw;
+        .nav-menu { 
             display: grid;
             grid-template-columns: repeat(5, auto);
             grid-gap: 10px;
             list-style: none;
             text-align: center;
             justify-content: right;
-        }
+        } 
+    } 
 
+    @media (max-width: 1024px) {
+        .logo {
+            display: none;
+        }
     }
 </style>

@@ -5,11 +5,14 @@
 <div class="container">
     <div class="row g-5">
         <div class="col-md-8"> 
-            <div class="position-relative" style="top: 2rem;">
+            <div class="position-relative">
+                <div class="py-4"> 
                 {% if has_filter %} 
                 <div class="container-post">
                 <h4>Pesquisa Ativa:</h4>
+                <div class="row row-cols-lg-2 g-3"> 
                 {% include 'home/posts.html' %}
+                </div>
                 </div>
                 {% else %}
                 <article class="blog-post">
@@ -20,11 +23,12 @@
                     {% include 'home/comments/comments.html' %} 
                 </article>  
                 {% endif %}
+                </div>
             </div> 
         </div> 
         <div class="col-md-4">
-            <div class="position-sticky" style="top: 2rem;"> 
-                <div class="p-4">
+            <div class="position-sticky"> 
+                <div class="py-4">
                     {% include 'home/menu-right/right.html' %} 
                 </div>
             </div>

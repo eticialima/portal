@@ -6,8 +6,7 @@
         <th scope="row"><img src="{{ user_list.imagem.thumb.url }}" class="img-fluid" alt="{{ user_list.first_name }}"></th>
         {% else %}
         <th scope="row">None</th>
-        {% endif %}
-        <th scope="row">{{ user_list.user_name }}</th>
+        {% endif %} 
         <th scope="row">{{ user_list.first_name }} {{ user_list.last_name }}</th>
         <th scope="row">{{ user_list.username }}</th>
         <th scope="row">{{ user_list.get_type_user_display }}</th>

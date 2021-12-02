@@ -1,33 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 body html {
   overflow-x: hidden;
-  text-decoration: none;
-}
-:root {
-  --main-bg-color: #1d3057;
-  --main-text-color: #a30808;
-  --second-text-color: #bcbbc5;
-  --second-bg-color: #1d3057;
-}
+  text-decoration: none; 
+  font-family: 'Open Sans', sans-serif;
 
-.primary-text {
-  color: var(--main-text-color);
-}
-
-.second-text {
-  color: var(--second-text-color);
-}
-
-.primary-bg {
-  background-color: var(--main-bg-color);
-}
-
-.secondary-bg {
-  background-color: var(--second-bg-color);
-}
-
-.rounded-full {
-  border-radius: 100%;
-}
+}  
 
 #wrapper {
   overflow-x: hidden;
@@ -51,8 +29,7 @@ body html {
 }
 
 #sidebar-wrapper .sidebar-heading {
-  padding: 0.875rem 1.25rem;
-  font-size: 1.2rem;
+  padding: 0.875rem 1.25rem; 
 }
 
 #sidebar-wrapper .list-group {
@@ -78,21 +55,10 @@ body html {
 
 .list-group-item.active {
   background-color: transparent;
-  color: var(--main-text-color);
-  font-weight: bold;
+  color: #393939;
   border: none;
 }
-
-/* .bg1{ 
-  background-image: url( '/static/images/bg1.png' );
-  height: 100%;
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center;
-  position: relative;
-  z-index: 1;  
-} */
-
+  
 .fundo {
   background-color: #e6e6e6;
   box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 19%);
@@ -154,21 +120,27 @@ body html {
   display: block;
   width: 100%;
   max-width: 100%;
-  border-radius: 25px;
+  border-radius: 20px;
   /* height: 200px; */
 }
 
+.image{
+  height: 60px; 
+  width: 60px;
+  margin-right: 10px;
+}
+
 .card-box {
-  box-shadow: 0px 0px 3px 2px rgb(163 8 8) !important;
+  box-shadow: 0px 0px 0px 1px #41464b !important;
   transition: 0.5s;
   width: auto;
   margin-right: auto;
   background-color: rgb(255, 255, 255);
-  border-radius: 25px;
+  border-radius: 20px;
 }
 
 .card-box:hover {
-  box-shadow: 0px 0px 7px 4px rgba(236, 236, 236, 0.9) !important;
+  box-shadow: 0px 0px 0px 4px rgba(236, 236, 236, 0.9) !important;
 }
 
 a .carde {
@@ -188,7 +160,7 @@ hr {
   border-top: 1px solid #ffffff;
 }
 a {
-  color: #82b440;
+  color: #393939;
   text-decoration: none;
 } 
 
@@ -204,5 +176,19 @@ a {
 
   #wrapper.toggled #sidebar-wrapper {
     margin-left: -16rem;
+  }  
+}
+
+@media(max-width: 1024px) {
+
+  .container-post { 
+    max-width: none;
+    padding: 30px;  
   }
+
+  .image{
+    height: 20px; 
+    width: 20px;
+    margin-right: 10px;
+  } 
 }

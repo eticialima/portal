@@ -3,43 +3,44 @@
 {% block title %}Home{% endblock %}
 {% block body_title %}Home{% endblock %}
 {% block body_home %}
-{% include 'base/_navbar.html' %}
-
+{% include 'base/_navbar.html' %} 
 <div class="container py-5">
-    <div class="p-5 mb-4 bg-light rounded-3">
-        <div class="container-fluid py-5">
-            <form class="d-flex" method="get" action="">
-                <div class="form-group col px-5">
-                    <span><b>Titulo: </b></span><br>
+    <div class="bg-light rounded-3 p-5 mb-4 ">
+        <form class="" method="get" action="">
+            <div class="row">
+                <div class="form-group col-md-5 mb-2">
+                    <span class="fw-bold py-3">Titulo: </span> 
                     {% render_field filter.form.title class="form-control" %}
                 </div>
-                <div class="form-group col px-5">
-                    <span><b>Usuario: </b></span><br>
+                <div class="form-group col-md-5 mb-2">
+                    <span class="fw-bold py-3">Usuario: </span> 
                     {% render_field filter.form.author class="form-control" %}
-                </div> 
-                <div class="form-group col">
-                    <span><b>Categorias: </b></span><br>
-                    {% for cat in filter.form.category %}  
-                     <label class="checkbox-inline form-check-label">
+                </div>
+                <div class="form-group col mb-2 py-3 text-center"> 
+                    <button type="submit" class="btn-default"><span class="fa fa-search"></span> Pesquisar</button>
+                </div>
+                <div class="col mb-2">
+                    <span class="fw-bold py-3">Categorias: </span>
+                    {% if has_filter %}
+                    <a href="{%  url 'home:home' %}">
+                        <button class="btn-default" type="button">Reset</button>
+                    </a>
+                    {% endif %}
+                    <br>
+                    {% for cat in filter.form.category %}
+                    <label class="form-check-label btn">
                         {{cat.tag}} {{cat.choice_label}}
-                    </label>
+                    </label> 
                     {% endfor %}
                 </div>
-                <div class="form-group col">
-                    {% if has_filter %}
-                        <a href="{%  url 'home:home' %}">
-                            <button class="btn-default" type="button">Reset</button>
-                        </a>
-                    {% endif %} 
-                </div>
-                <div class="form-group col">
-                    <button type="submit" class="btn-default"><span class="fa fa-search"></span> Pesquisar</button> 
-                </div>
-            </form>
-        </div>
-    </div> 
+            </div>
+        </form>
+    </div>
     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
         {% include 'home/posts.html' %}
-    </div> 
+         <!-- Inclui a paginação  -->
+        {% include 'home/paginacao.html' %}
+    </div>
+   
 </div>
 {% endblock %}

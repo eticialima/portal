@@ -1,75 +1,39 @@
 {% load static %} 
-    {% for post in filter.qs %}
-    <div class="card-group">
-        <div class="card">
-
-            {% if post.image %} 
-            <a href="{% url 'home:post-detail' post.pk %}">
-                <img class="card-img-top" src="{{ post.image.thumb.url }}" alt="Card image cap">
-            </a>
-            {% else %}
-            <th scope="row">None</th>
-            {% endif %}
-
-          <div class="card-body">
-            <h5 class="card-title"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text">{{post.title}}</a></h5>
-            <p class="card-text">
-                <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
-                    <table>
-                        <tr>  
-                            <th> 
-                                {% if post.author.imagem %}  
-                                    <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
-                                {% else %}  
-                                    <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
-                                {% endif %}
-                            </th> 
-                            <th>
-                                <span class="card-text text-break text-truncate px-3">{{ post.author.user_name}}</span>
-                            </th>  
-                        </tr> 
-                    </table> 
-                </a>   
-            </p>
-            <p class="card-text"><small class="text-muted badge bg-danger">{{post.category.name}}</small></p>
-          </div>
-        </div> 
-    </div>
-    
-    <!-- <div class="col py-3"> 
-        <div class="card-group">
-        <div class="card">  
-            {% if post.image %} 
-            <a href="{% url 'home:post-detail' post.pk %}">
-                <img class="card-img-top" src="{{ post.image.thumb.url }}" alt="Card image cap">
-            </a>
-            {% else %}
-            <th scope="row">None</th>
-            {% endif %}
-            <div class="card-body text-center"> 
-                <h6> <a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text">{{post.title}}</a></h6> 
-                <hr> 
-                    <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
-                    <table>
-                        <tr>  
-                            <th> 
-                                {% if post.author.imagem %}  
-                                    <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
-                                {% else %}  
-                                    <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
-                                {% endif %}
-                            </th> 
-                            <th>
-                                <span class="card-text text-break text-truncate px-3">{{ post.author.user_name}}</span>
-                            </th> 
-                            <th>
-                                <span class="card-text badge bg-danger"> {{post.category.name}}</span> 
-                            </th> 
-                        </tr> 
-                    </table> 
-                </a>  
-            </div>
-        </div> 
-    </div>
-    </div>   -->
-    {% endfor %} 
+{% for post in filter.qs %}
+<div class="card-group">
+    <div class="card-box"> 
+        {% if post.image %} 
+        <a href="{% url 'home:post-detail' post.pk %}">
+            <img class="img-responsive" src="{{ post.image.thumb.url }}" alt="card-img-top">
+        </a>
+        {% else %}
+        <th scope="row">None</th>
+        {% endif %} 
+        <div class="card-body">
+        <h6 class="card-title"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text text-center">{{post.title}}</a></h6> 
+        <p class=" ">
+            <a href="#" style="font-size:9px; text-decoration: none; color: rgb(155, 8, 8);">
+                <table>
+                    <tr>  
+                        <th> 
+                            {% if post.author.imagem %}  
+                                <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
+                            {% else %}  
+                                <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
+                            {% endif %}
+                        </th> 
+                        <th>
+                            <span class="fw-light">{{ post.author.user_name}}</span>
+                        </th>   
+                    </tr> 
+                </table> 
+            </a>   
+        </p> 
+        </div>
+        <div class="card-footer bg-transparent">
+            
+        <p class="card-text"><small class="badge bg-danger">{{post.category.name}}</small></p>
+        </div>
+    </div> 
+</div> 
+{% endfor %} 

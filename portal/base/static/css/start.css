@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+
 body, html {
     width: 100%;
     height: 100%; 
     overflow-x: hidden;
     text-decoration: none;
+    font-family: 'Open Sans', sans-serif;
 } 
 
 .bg{ 
@@ -44,19 +47,14 @@ a {
     color: #6c757d;
 }
   
-.btn-default { 
-    display: -moz-box; 
-    display: -ms-flexbox; 
+.btn-default {  
     border: none;
     justify-content: center;
     align-items: center;
-    padding: 0 20px; 
-    height: 40px;
+    padding: 10px;  
     border-radius: 10px;
     background: #a30808;
-    color: #fff;  
-    -o-transition: all 0.4s;
-    -moz-transition: all 0.4s;
+    color: #fff;   
     transition: all 0.4s;
 }
 .btn-default a { 

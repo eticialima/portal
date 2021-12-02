@@ -13,7 +13,8 @@ class IndexPostView(BaseAdminUsersall, TemplateView):
  
 class PostView(BaseAdminUsersall, ListView):
     model = Post
-    template_name = 'post/post.html'   
+    template_name = 'post/post.html'
+    paginate_by = 2   
     
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
