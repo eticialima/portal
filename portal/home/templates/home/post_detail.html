@@ -6,9 +6,13 @@
     <div class="row g-5">
         <div class="col-md-8"> 
             <div class="position-relative">
-                <div class="py-4"> 
+                <div class="py-4">  
                 {% if has_filter %} 
                 <div class="container-post">
+                <a href="{%  url 'home:post-detail' post.pk %}">
+                    <button class="btn-default" type="button">Reset</button>
+                </a>
+                <br>
                 <h4>Pesquisa Ativa:</h4>
                 <div class="row row-cols-lg-2 g-3"> 
                 {% include 'home/posts.html' %}

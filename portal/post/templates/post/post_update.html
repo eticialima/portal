@@ -54,6 +54,9 @@
                     <br>  
                     <label>Data de Publicação</label>
                     {% render_field form.published_date class="form-control" type="text" %}
+                    <br>
+                    <label><code>Publicação Ativa ?</code></label> 
+                    {% render_field form.is_activate class="form-check-input" id="is_activate" name="is_activate" %}    
                 </div>  
             </div>  
             <br> 

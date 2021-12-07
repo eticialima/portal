@@ -33,7 +33,7 @@ class Post(models.Model):
     download_link = models.CharField('Link Download',max_length=200, null=True, blank=True) 
     created_date = models.DateTimeField(default=timezone.now)
     published_date = models.DateTimeField(blank=True, null=True) 
-    is_activate = models.BooleanField(default=False) 
+    is_activate = models.BooleanField('activate',default=False) 
     category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE, null=True, blank=True)
     tags = models.ManyToManyField(Tag, verbose_name="Tag", null=True, blank=True)
     views = models.PositiveIntegerField(default=0, editable=False)  

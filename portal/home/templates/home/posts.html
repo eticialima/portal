@@ -1,5 +1,6 @@
-{% load static %} 
+{% load static %}  
 {% for post in filter.qs %}
+{% if post.is_activate == True %}
 <div class="card-group">
     <div class="card-box"> 
         {% if post.image %} 
@@ -36,4 +37,5 @@
         </div>
     </div> 
 </div> 
+{% endif %}
 {% endfor %} 
