@@ -2,12 +2,13 @@ from django.urls import path
 from home.views import (IndexHomelView, HomeView, DetailView)  
 from django.urls import path
 from home.views import (AddDislike,AddLike,CommentDeleteView,CommentEditView,CommentReplyView,AddCommentDislike,AddCommentLike)
+from post.views import TagCreate
 
 app_name="home"
 
 urlpatterns = [
 	path('', HomeView.as_view(), name='home'),
-	path('index-home/', IndexHomelView.as_view(), name='index-home'), 
+	path('index-home/', IndexHomelView.as_view(), name='index-home'),   
 	path('post-detail/<int:pk>/', DetailView.as_view(), name='post-detail'),  
 	path('post/<int:pk>/like', AddLike.as_view(), name='like'),
 	path('post/<int:pk>/dislike', AddDislike.as_view(), name='dislike'),   

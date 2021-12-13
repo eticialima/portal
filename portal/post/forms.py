@@ -1,5 +1,4 @@
-from django import forms
-from django.forms.widgets import NumberInput
+from django import forms 
 from post.models import Post, Category   
 from django.conf import settings 
 
@@ -17,3 +16,4 @@ class CategoryForm(forms.ModelForm):
     class Meta:
         model = Category
         fields = '__all__' 
+

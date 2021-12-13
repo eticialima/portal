@@ -68,10 +68,10 @@ class PostUpdate(BaseAdminUsersall, UpdateView):
        
         
 class TagCreate(BaseAdminUsersall, TemplateView): 
-    template_name = 'post/post_create.html' 
+    template_name = 'home/home.html' 
   
-    def get_context_data(self,request, slug): 
-        tag = get_object_or_404(Tag, slug=slug)
+    def get_context_data(self, pk): 
+        tag = get_object_or_404(Tag, pk=pk)
         common_tags = Post.tags.most_common()[:4]
         posts = Post.objects.filter(tags=tag)
         context = {
@@ -79,6 +79,6 @@ class TagCreate(BaseAdminUsersall, TemplateView):
             'common_tags':common_tags,
             'posts':posts,
         }
-        return render(request, 'post/post_create.html', context) 
+        return context 
  
  

@@ -8,6 +8,6 @@ urlpatterns = [
 	path('post/', PostView.as_view(), name='post'), 
 	path('post-create/', PostCreate.as_view(), name='post-create'),  
 	# path('tags/', TagCreate.as_view(), name='tags'), 
-	path('tag/<slug:slug>/', TagCreate.as_view(), name="tagged"),
+	path('tag/<int:pk>/', TagCreate.as_view(), name="tagged"),
 	path('<int:pk>/post-update/', PostUpdate.as_view(), name='post-update'),  
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
