@@ -9,8 +9,8 @@
         <form method="POST" class="form" name="form_canal">
             {% csrf_token %}
             <div class="form-group">
-                <button type="submit" class="btn btn-dark shadow-sm" name="btn_cadastro_canal">Sim</button>
-                <a class="btn btn-dark shadow-sm" role="button" href="{% url 'users'%}">Cancelar</a>
+                <button type="submit" class="btn-default btn-red" name="btn_cadastro_canal">Sim</button>   
+                <a class="btn-default btn-red" role="button" href="{% url 'users'%}">Cancelar</a>
             </div>
         </form>
     </div>

@@ -6,12 +6,15 @@ from base.base_admin_permissions import BaseAdminUsersAd, BaseAdminUsersall
 from accounts.forms import CustomUserCreateForm, CustomUserChangeForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
 from django.views.generic.base import TemplateView
+from django.shortcuts import render, redirect
+from django.views.generic.base import TemplateView as TemplateView
 from accounts.models import CustomUser
 from django.views.generic import ListView
 from django.contrib.auth.views import (
     LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView) 
 import painel.urls
 
+  
 class UserLogin(SuccessMessageMixin, LoginView):
     template_name = 'accounts/login.html'
 
@@ -20,6 +23,8 @@ class UserLogin(SuccessMessageMixin, LoginView):
             return redirect('index-administrador')
         else:
             return self.render_to_response(self.get_context_data())
+
+
 
 
 class UserCreate(SuccessMessageMixin, CreateView):
@@ -88,7 +93,7 @@ class UserDelete(BaseAdminUsersAd, DeleteView):
 
 class PasswordChange(SuccessMessageMixin, PasswordChangeView):
     template_name = 'accounts/password-change.html'
-    success_url = reverse_lazy('index')
+    success_url = reverse_lazy('login')
     success_message = 'Sua mudança de senha foi bem sucedida'
 
 

@@ -1,0 +1,8 @@
+ 
+<form method="POST" class="form" action="{% url 'tags' %}" autocomplete="off" enctype="multipart/form-data">
+    {% csrf_token %} 
+    {{ form }}   
+    <button type="submit" class="btn-default btn-yellow" name="btn_tags">Criar</button>
+</form>  
+ 
+    

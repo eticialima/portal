@@ -4,6 +4,7 @@ body html {
   overflow-x: hidden;
   text-decoration: none; 
   font-family: 'Open Sans', sans-serif;
+  font-size: 10pt;
 
 }  
 
@@ -82,8 +83,7 @@ body html {
   box-sizing: border-box;
 }
 
-.post-thumb img {
-  max-height: 250px;
+.post-thumb img { 
   width: auto;
   height: auto;
 }
@@ -163,6 +163,7 @@ a {
   color: #393939;
   text-decoration: none;
 } 
+
 
 @media (min-width: 768px) {
   #sidebar-wrapper {

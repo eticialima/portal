@@ -22,13 +22,13 @@
                 </div>
                 <br> 
                 {% if user.type_user == 'us' %}
-                <h5>Usuário Padrão</h5>  
+                <h5>Usuário: Padrão</h5>  
                 {% elif user.type_user == 'ad' %}
-                <h5>Usuario Administrador</h5>  
+                <h5>Usuário: Administrador</h5>  
                 {% elif user.type_user == 'co' %}
-                <h5>Usuario Colaborador</h5>  
+                <h5>Usuário: Colaborador</h5>  
                 {% endif %} 
-                <h5>Usuario: {{ user.first_name}} {{ user.last_name }}</h5>
+                <h5>{{ user.first_name}} {{ user.last_name }}</h5>
             </div>
             <div class="list-group list-group-flush my-3">
                 {% include 'base/_sidebar_'|add:user.type_user|add:'.html' %}
@@ -48,6 +48,7 @@
                 </div>
             </nav>
             <div class="row p-3">
+                {% include 'base/_messages.html' %}
                 {% block main_content %}
                 <h3>Sistema ainda em desenvolvimento.</h3>
                 {% endblock %}

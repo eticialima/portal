@@ -32,14 +32,14 @@ class DetailView(DetailView):
         form = SocialCommentForm() 
         comments = SocialComment.objects.filter(post=post).order_by('-created_on')
         filter = PostFilter(self.request.GET, queryset=self.get_queryset())
-        tag_list = Tag.objects.all()
+  
         post_list = self.model.objects.all()[:5] 
         context = {
             'post': post,
             'form': form,
             'comments':comments,
             'filter': filter,
-            'tag_list': tag_list,
+           
             'post_list': post_list,
             'has_filter': any(field in self.request.GET for field in set(filter.get_fields()))  
         }  

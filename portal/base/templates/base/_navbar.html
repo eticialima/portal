@@ -32,13 +32,13 @@
                         <div>
                             <a href="#" class="nav__link">Meu Perfil</a>
                             <a href="{% url 'index-painel' %}" class="nav__link">Configurações</a>
-                            <button class=" btn-default d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
+                            <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
                         </d>
                     </div>
                 </div>
                 {% else %}
                 <div class="action">
-                    <button class=" btn-default d-flex" onclick="location.href='{% url 'index-manager' %}'">Login</button>
+                    <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'login' %}'">Login</button>
                 </div>
                 {% endif %}
             </li> 

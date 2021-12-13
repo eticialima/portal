@@ -1,7 +1,8 @@
 from django.db import models
 from django.utils import timezone 
 from django.contrib.auth import get_user_model
-from stdimage.models import StdImageField
+from stdimage.models import StdImageField 
+from taggit.managers import TaggableManager
 
 class Category(models.Model):
     name = models.CharField('Category',max_length=100)
@@ -12,18 +13,8 @@ class Category(models.Model):
     class Meta:
         verbose_name = "Category"
         verbose_name_plural = verbose_name
-  
-class Tag(models.Model):
-    name = models.CharField('Tags',max_length=100)
     
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        verbose_name = "tag"
-        verbose_name_plural = "tags"
- 
-class Post(models.Model):
+class Post(models.Model): 
     slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
     author = models.ForeignKey(get_user_model(), verbose_name='author', on_delete=models.CASCADE , null=True, blank=True)
     title = models.CharField('Titulo',max_length=200)
@@ -35,7 +26,7 @@ class Post(models.Model):
     published_date = models.DateTimeField(blank=True, null=True) 
     is_activate = models.BooleanField('activate',default=False) 
     category = models.ForeignKey(Category, verbose_name="Category", on_delete=models.CASCADE, null=True, blank=True)
-    tags = models.ManyToManyField(Tag, verbose_name="Tag", null=True, blank=True)
+    tags = TaggableManager()
     views = models.PositiveIntegerField(default=0, editable=False)  
     likes = models.ManyToManyField(get_user_model(), blank=True, related_name='likes')
     dislikes = models.ManyToManyField(get_user_model(), blank=True, related_name='dislikes')
@@ -53,7 +44,7 @@ class Post(models.Model):
             return self.author.imagem.url
         else:
             return "/static/images/default.png"
-
+  
 class SocialComment(models.Model):
     comment = models.TextField()
     created_on = models.DateTimeField(default=timezone.now) 

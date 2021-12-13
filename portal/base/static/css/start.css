@@ -6,6 +6,7 @@ body, html {
     overflow-x: hidden;
     text-decoration: none;
     font-family: 'Open Sans', sans-serif;
+    font-size: 10pt;
 } 
 
 .bg{ 
@@ -42,29 +43,65 @@ body, html {
     box-shadow: 0px 2px 10px rgb(0 0 0 / 8%);
 }
 
+.form-box {
+    width: 100%; 
+    padding: 10px;
+    margin: auto;
+    border-radius: 30px;
+    background-color: #fff;
+    box-shadow: 0px 2px 10px rgb(0 0 0 / 8%);
+}
+ 
+small{
+    font-size: 8pt!important;
+}
+
+
 a {
     text-decoration: none!important;
     color: #6c757d;
 }
   
-.btn-default {  
+.btn-default {   
+    font-size: 10pt;
     border: none;
     justify-content: center;
     align-items: center;
     padding: 10px;  
-    border-radius: 10px;
-    background: #a30808;
+    border-radius: 10px; 
     color: #fff;   
     transition: all 0.4s;
 }
+
+
 .btn-default a { 
     text-decoration: none; 
 }
 
 .btn-default:hover { 
     background: #4d4d4d;
+    color: aliceblue;
 }
-
+ 
+.btn-red{
+    background: #a30808;
+} 
+.btn-yellow{
+    background: #ddc700;
+}
+.btn-blue{
+    background: #0518c0;
+}
+.btn-green{
+    background: #05c525;
+}
+.btn-purple{
+    background: #7708a3;
+}
+.btn-orange{
+    background: #ff6600;
+}
+ 
 .form-control:focus {
     border-color: #ac1d1d !important;
     box-shadow: 0 0 5px rgb(228, 98, 98) !important;

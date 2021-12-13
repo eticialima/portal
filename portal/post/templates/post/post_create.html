@@ -2,19 +2,22 @@
 {% block title %}Post{% endblock %}
 {% block body_title %}Post{% endblock %}
 {% load widget_tweaks %}
-{% load static %}
-{% block main_content %}
+{% load static %} 
+{% block main_content %} 
+   
 <div class="box text-center">
-    <main class="form-signup">
+    <main class="form-box">
         <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1>
-        <form method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off"
+        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off"
             enctype="multipart/form-data">
             {% csrf_token %}
+            
             <div class="row">
                 <div class="col-sm-6">
                     <div class="custom-file mt-3">
-                        <div class="post-thumb">
-                            <img id="preview" class="img-thumbnail" src="{% static 'images/default.png' %}" alt="logo">
+                        <div class="post-thumb"> 
+                            <small>Recomendavel:1280x720</small>
+                            <img id="preview" class="img-thumbnail" src="{% static 'images/default2.png' %}" alt="logo">
                         </div>
                         <br>
                         <div class="custom-file">
@@ -31,20 +34,12 @@
                     </p>
                     <br>
                     {% render_field form.download_link class="form-control" type="text" placeholder="Link externo download..." %}
-                    <br>
-                    <label>Categoria</label> 
-                    {% render_field form.category class="form-control form-select" id="category" name="category" %}    
-                 
+                   
                 </div>
 
-                <div class="col-sm-6">
-                    {% comment %} 
+                <div class="col-sm-6"> 
                     <br>
-                    <label>Autor da postagem</label>
-                    {% render_field form.author class="form-control" type="text" %} 
-                    {% endcomment %}
-                    <br>
-                    <label>Titulo:</label>
+                    <label>Titulo</label>
                     {% render_field form.title class="form-control" type="text" %}
                     <br>
                     <label>Descrição</label>
@@ -56,31 +51,48 @@
                     <label>Data de Publicação</label>  
                     {% render_field form.published_date class="form-control" id="published_date" type="date" %}
                     <br>
+                    <label>Categoria</label> 
+                    {% render_field form.category class="form-control form-select" id="category" name="category" %}    
+                    <br>
+                 
+                    <label><code class="mx-5">Tags</code></label>
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
+                     <!-- <label><code class="mx-5">Tags</code></label>  -->
+                    <!-- <a class="btn btn-warning" data-bs-toggle="modal" href="#tagsadd"> + </a> --> 
+                    <br>  
                     <label><code>Publicação Ativa ?</code></label> 
                     {% render_field form.is_activate class="form-check-input" id="is_activate" name="is_activate" %}    
                 </div> 
-            </div> 
-            <br>
-            <div class="row">
-                <div class="col-md-6">
-                   
-                    <label><code>Tags</code></label> 
-                    {% render_field form.tags class="form-select" size="10" aria-label="size 10 select example" id="tags" name="tags" %}    
-                </div>
+            </div>  
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+            <button type="submit" class="btn-default btn-yellow" name="btn_adicionar">Criar</button>
+            <button class="btn-default btn-red" onclick="location.href='{% url 'post' %}'">Voltar</button>
             </div>
-            <div class="d-grid gap-2 d-md-flex justify-content-md-end">
-
-            <button type="submit" class="btn-default" name="btn_adicionar">Salvar</button>
-            <button class="btn-default" onclick="location.href='{% url 'post' %}'">Voltar</button>
-            </div>
-        </form>
+        </form>  
     </main>
-</div>
+</div>  
+
+<!-- <div class="modal fade" id="tagsadd" tabindex="-1" aria-labelledby="tagsadd1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center"> 
+                <form id="form2" method="POST" action="{% url 'post-create' %}" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    {{ form2 }} 
+                    <button type="submit" class="btn-default btn-yellow" >Criar</button>
+                </form>   
+            </div> 
+        </div>
+    </div>
+</div> -->
+
 <script>
     $("#image").change(function (event) {
         readURL(this);
-    });
-
+    }); 
     function readURL(input) {
         if (input.files && input.files[0]) {
             var reader = new FileReader();
@@ -95,6 +107,6 @@
             }
             reader.readAsDataURL(input.files[0]);
         }
-    } 
-</script>
+    }  
+</script>  
 {% endblock %}

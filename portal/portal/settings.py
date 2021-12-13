@@ -68,15 +68,13 @@ INSTALLED_APPS = [
     'django_filters',
     'corsheaders',
     'widget_tweaks',  
-    
+    'taggit',
     # --- My Apps ---#
-    'base',
-    'core',
+    'base', 
     'painel',
     'administrador',
     'colaborador',
-    'usuarios',
-
+    'usuarios', 
     'post',
     'home',
 ]
@@ -194,8 +192,8 @@ AUTH_USER_MODEL = 'accounts.CustomUser'
 # LOGIN_REDIRECT_URL = 'index'
 # LOGOUT_REDIRECT_URL = 'index'
 LOGIN_URL = 'login'
-LOGIN_REDIRECT_URL = 'index-manager'
-LOGOUT_REDIRECT_URL = 'index'
+LOGIN_REDIRECT_URL = 'painel'
+LOGOUT_REDIRECT_URL = '/'
 
 
 # --------------#

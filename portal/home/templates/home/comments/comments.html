@@ -18,7 +18,7 @@
     <div class="p-2 text-center bg-light shadow-sm rounded">
         <div class="h4">Olá,</div>
         <p>Você precisa fazer login no sistema para comentar.</p>
-        <button class="btn-default" onclick="location.href='{% url 'index-manager' %}'">
+        <button class="btn-default btn-red" onclick="location.href='{% url 'login' %}'">
             <i class="fas fa-sign-in-alt"></i> Registrar/Login
         </button>
     </div>
@@ -97,11 +97,11 @@
                     <div class="py-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center"> 
-                            <button type="submit" class="btn-default"><span>Enviar</span></button> 
+                            <button type="submit" class="btn-default btn-red"><span>Enviar</span></button> 
                             </div>
                             <small>
                                 <button 
-                                    class="p-2 btn-default" type="button" 
+                                    class="p-2 btn-default btn-red" type="button" 
                                     data-bs-toggle="collapse"
                                     data-bs-target="#collapse_{{comment.id}}" 
                                     aria-expanded="false" 

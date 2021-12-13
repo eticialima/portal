@@ -1,44 +1,55 @@
-{% extends 'base/_base_index.html' %}
+{% include 'base/_head.html' %} 
 {% load static %} 
-{% block body_content %} 
-{% if form.non_field_errors %}
-<div class="alert alert-danger" role="alert">
-{{ form.non_field_errors }}
-</div>
-{% endif %}  
-<div class="box text-center">
-    <main class="form-signin"> 
-        <img class="img-fluid rounded-circle" src="{% static 'images/default.png' %}" alt="logo" width="250" height="250">
-        <h1 class="h3 mb-3 fw-normal">Entrar</h1>
-        <form method="POST" autocomplete="off" id="form-login">
-            {% csrf_token %}
-            <div class="col">
-                <div class="form-group mt-3">
-                    <label for="username">Email</label>
-                    <input type="email" id="username" name="username" class="form-control item"
-                        value="{{ request.POST.username }}" required autofocus>
+{% block body_content %}   
+<div class="container-fluid" style="padding-left: 0;">
+    <div class="row h-100">
+        <div class="col-8">
+            <div class="bg"></div>
+        </div>
+        <div id="size" class="col-4 col">  
+            <div class="text-center box lead">
+                <div class="h2">Portal EditorYZ</div>
+                <h5>Sistema ainda em desenvolvimento.</h5> 
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                {{ form.non_field_errors }}
                 </div>
-                <div class="form-group mt-3">
-                    <label for="password">Senha</label>
-                    <input type="password" id="password" name="password" class="form-control item" required>
+                {% endif %}  
+                <div class="box">
+                    <main class="form-signin"> 
+                        <img class="img-fluid rounded-circle" src="{% static 'images/default.png' %}" alt="logo" width="150" height="150">
+                        <h1 class="h3 mb-3 fw-normal">Entrar</h1>
+                        <form method="POST" autocomplete="off" id="form-login">
+                        {% csrf_token %} 
+                            <div class="form-group mt-3 mx-5">
+                                <label for="username">Email</label>
+                                <input type="email" id="username" name="username" class="form-control item"
+                                    value="{{ request.POST.username }}" required autofocus>
+                            </div>
+                            <div class="form-group mt-3 mx-5">
+                                <label for="password">Senha</label>
+                                <input type="password" id="password" name="password" class="form-control item" required>
+                            </div>
+                            <div class="form-group mt-3 mx-5"> 
+                                <button class="btn-default btn-red" type="submit">Conecte-se</button>
+                                </div>
+                            <div class="form-group mt-3 fs-6 text-muted font-italic py-3">
+                                <a class="link-secondary " href="{% url 'user-new' %}">Ainda não tem conta? Cadastre-se</a><br>
+                                <a class="link-secondary " role="button" href="{% url 'password-reset' %}">Esqueceu sua senha?</a>
+                            </div> 
+                        </form>
+                    </main>    
                 </div>
-                <div class="form-group mt-3"> 
-                    <button class="btn-default" type="submit">Conecte-se</button>
-                    <button class="btn-default"  onclick="location.href='{% url 'password-reset' %}'"  ><a></a>Esqueceu a senha?</button> 
+                <div class="text-center fs-6 text-muted font-italic py-4">
+                    <small>© 2021</small>
                 </div>
-                <div class="form-group mt-3"> 
-                    <a class="link-secondary " href="{% url 'user-new' %}">Registrar-se</a>
-                    <a class="link-secondary " role="button" href="{% url 'index' %}">cancelar</a>
-                </div>
-            </div>
-        </form>
-        <p class="mt-5 mb-3 text-muted">© DMC 2021</p>
-    </main>
-</div> 
-<div class="text-center row mt-5 pt-5 ">
-    <div class="col mb-md-0 mb-4">
-        <span class="text-secondary" style="display: block;">Release 1.0.1</span>
-        <span class="text-secondary" style="display: block;">Patch 023</span>
-    </div> 
+            </div> 
+        </div> 
     </div>
+</div>
+<script>
+    $(window).on('resize', function () {
+        $('.col').toggleClass('col-4', $(window).width() > 768);
+    }).trigger('resize')
+</script>
 {% endblock %}

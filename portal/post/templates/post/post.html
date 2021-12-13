@@ -3,12 +3,12 @@
 {% block body_title %}Post{% endblock %}
 {% block main_content %}  
 <div class="g-4 py-3"> 
-    <button class="btn-default"  onclick="location.href='{% url 'post-create' %}'"><a></a>Criar Post</button>  
-    <button class="btn-default"  onclick="location.href='#'"><a></a>Comentarios</button>  
-    <button class="btn-default"  onclick="location.href='#'"><a></a>Relatorios</button>  
+    <button class="btn-default btn-red"  onclick="location.href='{% url 'post-create' %}'"><a></a>Criar Post</button>  
+    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Comentarios</button>  
+    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Relatorios</button>  
 
     <!-- Somente adiministrador -->
-    <button class="btn-default"  onclick="location.href='#'"><a></a>Todas Postagens</button>  
+    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Todas Postagens</button>  
      <!-- Somente adiministrador -->
 </div> 
  

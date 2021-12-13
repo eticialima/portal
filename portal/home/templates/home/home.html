@@ -17,13 +17,13 @@
                     {% render_field filter.form.author class="form-control" %}
                 </div>
                 <div class="form-group col mb-2 py-3 text-center"> 
-                    <button type="submit" class="btn-default"><span class="fa fa-search"></span> Pesquisar</button>
+                    <button type="submit" class="btn-default btn-red"><span class="fa fa-search"></span> Pesquisar</button>
                 </div>
                 <div class="col mb-2">
                     <span class="fw-bold py-3">Categorias: </span>
                     {% if has_filter %}
                     <a href="{%  url 'home:home' %}">
-                        <button class="btn-default" type="button">Reset</button>
+                        <button class="btn-default btn-red" type="button">Reset</button>
                     </a>
                     {% endif %}
                     <br>
