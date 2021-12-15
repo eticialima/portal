@@ -12,20 +12,18 @@ from django.shortcuts import redirect, render, get_object_or_404
 
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
-
-
+ 
 class IndexPostView(BaseAdminUsersall, TemplateView):
     template_name = 'post/index-post.html'
  
 class PostView(BaseAdminUsersall, ListView):
     model = Post
-    template_name = 'post/post.html'
-    paginate_by = 2   
-    
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post_list'] = self.model.objects.all()  
-        return context
+    template_name = 'post/post.html'  
+  
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['post_list'] = self.model.objects.all()  
+    #     return context
  
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post 
@@ -67,18 +65,18 @@ class PostUpdate(BaseAdminUsersall, UpdateView):
     success_message = 'O post foi Atualizado com sucesso'
        
         
-class TagCreate(BaseAdminUsersall, TemplateView): 
-    template_name = 'home/home.html' 
+# class TagCreate(BaseAdminUsersall, TemplateView): 
+#     template_name = 'home/home.html' 
   
-    def get_context_data(self, pk): 
-        tag = get_object_or_404(Tag, pk=pk)
-        common_tags = Post.tags.most_common()[:4]
-        posts = Post.objects.filter(tags=tag)
-        context = {
-            'tag':tag,
-            'common_tags':common_tags,
-            'posts':posts,
-        }
-        return context 
+    # def get_context_data(self, pk): 
+    #     tag = get_object_or_404(Tag, pk=pk)
+    #     common_tags = Post.tags.most_common()[:4]
+    #     posts = Post.objects.filter(tags=tag)
+    #     context = {
+    #         'tag':tag,
+    #         'common_tags':common_tags,
+    #         'posts':posts,
+    #     }
+    #     return context 
  
  

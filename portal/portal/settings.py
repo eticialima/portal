@@ -55,20 +55,23 @@ if not DEBUG:
 
 # Application definition
 
-INSTALLED_APPS = [
-    # --- Accounts --- #
-    'accounts',
-
+INSTALLED_APPS = [ 
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+ 
+    # --- 3pack --- #
     'django_filters',
     'corsheaders',
     'widget_tweaks',  
     'taggit',
+
+    # --- Accounts --- #
+    'accounts',
+
     # --- My Apps ---#
     'base', 
     'painel',

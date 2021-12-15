@@ -1,5 +1,5 @@
 {% load static %}  
-{% for post in filter.qs %}
+{% for post in post_list %}
 {% if post.is_activate == True %}
 <div class="card-group">
     <div class="card-box"> 
@@ -32,8 +32,12 @@
         </p> 
         </div>
         <div class="card-footer bg-transparent">  
-        <p class="card-text"><small class="badge bg-danger">{{post.category.name}}</small></p>
-        </div>
+            {% for tag in post.tags.all %}
+            <a href="{% url 'home:post_by_tag' tag.slug %}" style="text-decoration: none; color: rgb(46, 46, 46);">
+                <span class="badge bg-warning text-dark">{{tag.name}}</span>
+            </a>
+             {% endfor %} 
+         </div>
     </div> 
 </div> 
 {% endif %}

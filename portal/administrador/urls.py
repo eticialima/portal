@@ -1,7 +1,7 @@
 from django.urls import path
-from administrador.views import (IndexAdministradorView)
+from administrador.views import (IndexAdministradorView) 
 
 
 urlpatterns = [
-	path('', IndexAdministradorView.as_view(), name='index-administrador'), 
+	path('', IndexAdministradorView.as_view(), name='index-administrador'),  
 ] 

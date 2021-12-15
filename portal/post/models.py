@@ -3,6 +3,7 @@ from django.utils import timezone
 from django.contrib.auth import get_user_model
 from stdimage.models import StdImageField 
 from taggit.managers import TaggableManager
+import uuid
 
 class Category(models.Model):
     name = models.CharField('Category',max_length=100)
@@ -15,7 +16,7 @@ class Category(models.Model):
         verbose_name_plural = verbose_name
     
 class Post(models.Model): 
-    slug = models.SlugField('Slug', max_length=100, blank=True, editable=False)
+    slug = models.SlugField('Slug', unique=True, default=uuid.uuid1, editable=False)
     author = models.ForeignKey(get_user_model(), verbose_name='author', on_delete=models.CASCADE , null=True, blank=True)
     title = models.CharField('Titulo',max_length=200)
     desc = models.TextField('Descrição', null=True, blank=True)

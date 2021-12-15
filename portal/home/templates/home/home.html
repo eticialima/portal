@@ -1,11 +1,9 @@
 {% extends 'base/_base_home.html' %}
-{% load widget_tweaks %}
-{% block title %}Home{% endblock %}
-{% block body_title %}Home{% endblock %}
+{% load widget_tweaks %} 
 {% block body_home %}
 {% include 'base/_navbar.html' %} 
 <div class="container py-5">
-    <div class="bg-light rounded-3 p-5 mb-4 ">
+    <!-- <div class="bg-light rounded-3 p-5 mb-4 ">
         <form class="" method="get" action="">
             <div class="row">
                 <div class="form-group col-md-5 mb-2">
@@ -35,11 +33,11 @@
                 </div> 
             </div>
         </form>
-    </div>
+    </div> -->
     <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-4 g-3">
         {% include 'home/posts.html' %}
          <!-- Inclui a paginação  -->
-        {% include 'home/paginacao.html' %}
+        <!-- {% include 'home/paginacao.html' %} -->
     </div>
    
 </div>
