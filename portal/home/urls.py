@@ -1,6 +1,7 @@
 from django.urls import path 
 from home.views import (IndexHomelView, HomeView, DetailView )   
 from home.likes_comments import (AddDislike,AddLike,CommentDeleteView,CommentEditView,CommentReplyView,AddCommentDislike,AddCommentLike)
+from home.views import TagIndexView
   
 app_name="home" 
 urlpatterns = [
@@ -8,7 +9,7 @@ urlpatterns = [
 	path('index-home/', IndexHomelView.as_view(), name='index-home'),   
 	path('post-detail/<int:pk>/', DetailView.as_view(), name='post-detail'),  
 	 
-	# path('tags/<slug:tag_slug>/', TagIndexView.as_view(), name='post_by_tag'),  
+	path('tags/<slug:tag_slug>/', TagIndexView.as_view(), name='tagged'),  
  
 	path('post/<int:pk>/like', AddLike.as_view(), name='like'),
 	path('post/<int:pk>/dislike', AddDislike.as_view(), name='dislike'),   

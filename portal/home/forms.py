@@ -1,7 +1,6 @@
 from django import forms
 from post.models import Post, SocialComment
-
-
+ 
 class SocialPostForm(forms.ModelForm):
     body = forms.CharField(widget=forms.Textarea(attrs={
             'class': 'form-control',

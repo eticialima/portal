@@ -3,15 +3,17 @@
 <div class="container-post">
     <h6>Pesquisar</h6> 
     <form class="d-flex" method="get" action="">
-        {% render_field filter.form.title class="form-control" %}
+        {% csrf_token %}
+        {% render_field form.title class="form-control" id="title" name="title" placeholder="Pesquisar..." %}
     </form> 
 </div>
 <br>
 <div class="container-post">
     <h6>todas as tags</h6>
-    <form class="d-flex" method="get" action="">
+    <!-- <form class="d-flex" method="get" action="">
+        {% csrf_token %}
         <div class="form-group col">
-            {% for tag in filter.form.tags %}
+            {% for tag in tags %}
             <label class="checkbox-inline">
                <button type="submit" id="tag_filter" class="btn">
                     {{tag}}
@@ -19,22 +21,22 @@
             </label>
             {% endfor %}
         </div>
-    </form>
+    </form> -->
 </div>
 <br>
 <div class="container-post">
     <h6>Outras Postagens</h6>
     {% for post in post_list %}
-    {% if post.is_activate == True %}
-    <a href="{% url 'home:post-detail' post.pk %}" class="post-text">{{post.title}}</a>
-    <br>
-    {% endif %}
+        {% if post.is_activate == True %}
+        <a href="{% url 'home:post-detail' post.pk %}" class="post-text">{{post.title}}</a>
+        <br>
+        {% endif %}
     {% endfor %}
 </div>
 <br>
 <div class="container-post">
     <h6>Filtrar por Software</h6>  
-    <a href="{% url 'home:post-detail' post.pk %}?category=2#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
@@ -47,7 +49,7 @@
         </table>
     </a>
     <hr>
-    <a href="{% url 'home:post-detail' post.pk %}?category=3#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th> 
@@ -60,7 +62,7 @@
         </table>
     </a>
     <hr>
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
@@ -73,7 +75,7 @@
         </table>
     </a>
     <hr>
-    <a href="#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>
@@ -86,7 +88,7 @@
         </table>
     </a>
     <hr>
-    <a href="{% url 'home:post-detail' post.pk %}?category=4#" style="text-decoration: none; color: rgb(46, 46, 46);">
+    <a style="text-decoration: none; color: rgb(46, 46, 46);">
         <table>
             <tr>
                 <th>

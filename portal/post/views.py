@@ -9,7 +9,6 @@ from post.models import *
 from post.forms import PostForm 
 from accounts.models import CustomUser 
 from django.shortcuts import redirect, render, get_object_or_404  
-
 from taggit.models import Tag
 from django.template.defaultfilters import slugify
  
@@ -20,10 +19,10 @@ class PostView(BaseAdminUsersall, ListView):
     model = Post
     template_name = 'post/post.html'  
   
-    # def get_context_data(self, **kwargs):
-    #     context = super().get_context_data(**kwargs)
-    #     context['post_list'] = self.model.objects.all()  
-    #     return context
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['post_list'] = self.model.objects.all()  
+        return context
  
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post 
@@ -63,20 +62,5 @@ class PostUpdate(BaseAdminUsersall, UpdateView):
     template_name = 'post/post_update.html'
     success_url = reverse_lazy('post')
     success_message = 'O post foi Atualizado com sucesso'
-       
         
-# class TagCreate(BaseAdminUsersall, TemplateView): 
-#     template_name = 'home/home.html' 
-  
-    # def get_context_data(self, pk): 
-    #     tag = get_object_or_404(Tag, pk=pk)
-    #     common_tags = Post.tags.most_common()[:4]
-    #     posts = Post.objects.filter(tags=tag)
-    #     context = {
-    #         'tag':tag,
-    #         'common_tags':common_tags,
-    #         'posts':posts,
-    #     }
-    #     return context 
- 
  

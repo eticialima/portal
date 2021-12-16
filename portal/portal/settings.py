@@ -63,8 +63,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
  
-    # --- 3pack --- #
-    'django_filters',
+    # --- 3pack --- # 
     'corsheaders',
     'widget_tweaks',  
     'taggit',

@@ -1,32 +1,20 @@
 {% extends 'base/_base_home.html' %}
 {% load static %}
+{% load widget_tweaks %} 
 {% block body_home %}
 {% include 'base/_navbar.html' %} 
 <div class="container">
     <div class="row g-5">
         <div class="col-md-8"> 
             <div class="position-relative">
-                <div class="py-4">  
-                {% if has_filter %} 
-                <div class="container-post">
-                <a href="{%  url 'home:post-detail' post.pk %}">
-                    <button class="btn-default btn-red" type="button">Reset</button>
-                </a>
-                <br>
-                <h4>Pesquisa Ativa:</h4>
-                <div class="row row-cols-lg-2 g-3"> 
-                {% include 'home/posts.html' %}
-                </div>
-                </div>
-                {% else %}
+                <div class="py-4">   
                 <article class="blog-post">
                     {% include 'home/menu-center/center.html' %} 
                 </article>
                 <br>
                 <article class="blog-post">
                     {% include 'home/comments/comments.html' %} 
-                </article>  
-                {% endif %}
+                </article>   
                 </div>
             </div> 
         </div> 
