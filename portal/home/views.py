@@ -1,24 +1,28 @@
+from django.db.models import Q
 from django.shortcuts import render  
+from django.core.paginator import Paginator 
 from django.views.generic.base import TemplateView 
 from django.views.generic import DetailView, ListView 
 from post.models import *
 from post.forms import *
 from home.forms import *  
- 
+from django import template
+
 class IndexHomelView(TemplateView):
     template_name = 'home/index-home.html' 
  
 class HomeView(ListView):
     model = Post 
-    template_name = 'home/home.html'    
+    template_name = 'home/home.html'   
+    paginate_by = 2 
   
-    def get_queryset(self): 
-        title = self.request.GET.get('title') 
-        author = self.request.GET.get('author')
-        if title:
-            post_list = self.model.objects.filter(title__icontains=title)
+    def get_queryset(self):    
+        title = self.request.GET.get('title', None) 
+        author = self.request.GET.get('author', None)
+        if title or author:  
+            post_list = self.model.objects.filter(author__user_name__icontains=author, title__icontains=title) 
         else:
-            post_list = self.model.objects.all()
+            post_list = self.model.objects.filter() 
         return post_list  
 
     def get_context_data(self, **kwargs):
