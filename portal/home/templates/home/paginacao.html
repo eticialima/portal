@@ -1,11 +1,23 @@
 <div>
     {% if page_obj.has_previous %}
-    <a class="pagination-action" href="?page=1">
-        <i class="fa fa-angle-double-left link-danger" aria-hidden="true"></i>
-    </a>
-    <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
-        <i class="fa fa-angle-left link-danger" aria-hidden="true"></i>
-    </a>
+
+        {% if request.GET.author %}
+            <a class="pagination-action" href="?page=1&author={{request.GET.author}}">
+                <i class="fa fa-angle-double-left link-danger" aria-hidden="true"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&author={{request.GET.author}}">
+                <i class="fa fa-angle-left link-danger" aria-hidden="true"></i>
+            </a>
+        {% else %}
+            <a class="pagination-action" href="?page=1">
+                <i class="fa fa-angle-double-left link-danger" aria-hidden="true"></i>
+            </a>
+            <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
+                <i class="fa fa-angle-left link-danger" aria-hidden="true"></i>
+            </a>    
+        {% endif %}
+
+ 
     {% endif %}
     {% for num in page_obj.paginator.page_range %}
         {% if page_obj.number == num %}
@@ -14,12 +26,23 @@
     {% endif %}
     {% endfor %}
     {% if page_obj.has_next %}
-    <a class="pagination-action" href="?page={{ page_obj.next_page_number }}">
-        <i class="fa fa-angle-right link-danger" aria-hidden="true"></i>
-    </a>
-    <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
-        <i class="fa fa-angle-double-right link-danger" aria-hidden="true"></i>
-    </a>
+
+        {% if request.GET.author %}              
+        <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&author={{request.GET.author}}">
+            <i class="fa fa-angle-right link-danger" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&author={{request.GET.author}}">
+            <i class="fa fa-angle-double-right link-danger" aria-hidden="true"></i>
+        </a>
+        {% else %}
+        <a class="pagination-action" href="?page={{ page_obj.next_page_number }}">
+            <i class="fa fa-angle-right link-danger" aria-hidden="true"></i>
+        </a>
+        <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
+            <i class="fa fa-angle-double-right link-danger" aria-hidden="true"></i>
+        </a>
+        {% endif %}
+
     {% endif %}
 </div>
  
@@ -28,8 +51,7 @@
         text-decoration: none!important;
         color: #f7f7f7!important;
     }
-
-
+ 
     .pagination-number {
         padding: 0.5em 0.8em;
         border-radius: 2px;

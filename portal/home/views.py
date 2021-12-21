@@ -5,8 +5,7 @@ from django.views.generic.base import TemplateView
 from django.views.generic import DetailView, ListView 
 from post.models import *
 from post.forms import *
-from home.forms import *  
-from django import template
+from home.forms import *   
 
 class IndexHomelView(TemplateView):
     template_name = 'home/index-home.html' 
@@ -16,11 +15,10 @@ class HomeView(ListView):
     template_name = 'home/home.html'   
     paginate_by = 2 
   
-    def get_queryset(self):    
-        title = self.request.GET.get('title', None) 
-        author = self.request.GET.get('author', None)
-        if title or author:  
-            post_list = self.model.objects.filter(author__user_name__icontains=author, title__icontains=title) 
+    def get_queryset(self):     
+        author = self.request.GET.get('author')
+        if author:  
+            post_list = self.model.objects.filter(author__user_name__icontains=author) 
         else:
             post_list = self.model.objects.filter() 
         return post_list  
