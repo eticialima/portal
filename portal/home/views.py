@@ -15,10 +15,10 @@ class HomeView(ListView):
     template_name = 'home/home.html'   
     paginate_by = 2 
   
-    def get_queryset(self):     
-        author = self.request.GET.get('author')
-        if author:  
-            post_list = self.model.objects.filter(author__user_name__icontains=author) 
+    def get_queryset(self):      
+        title = self.request.GET.get('title')
+        if title:  
+            post_list = self.model.objects.filter(title__icontains=title) 
         else:
             post_list = self.model.objects.filter() 
         return post_list  

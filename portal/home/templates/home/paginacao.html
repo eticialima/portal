@@ -1,11 +1,10 @@
 <div>
-    {% if page_obj.has_previous %}
-
-        {% if request.GET.author %}
-            <a class="pagination-action" href="?page=1&author={{request.GET.author}}">
+    {% if page_obj.has_previous %} 
+        {% if request.GET.title %}
+            <a class="pagination-action link" href="?page=1&title={{request.GET.title}}">
                 <i class="fa fa-angle-double-left link-danger" aria-hidden="true"></i>
             </a>
-            <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&author={{request.GET.author}}">
+            <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}&title={{request.GET.title}}">
                 <i class="fa fa-angle-left link-danger" aria-hidden="true"></i>
             </a>
         {% else %}
@@ -15,23 +14,27 @@
             <a class="pagination-action" href="?page={{ page_obj.previous_page_number }}">
                 <i class="fa fa-angle-left link-danger" aria-hidden="true"></i>
             </a>    
-        {% endif %}
-
- 
+        {% endif %} 
     {% endif %}
     {% for num in page_obj.paginator.page_range %}
-        {% if page_obj.number == num %}
-        <span class="pagination-number pagination-current">{{ num }}</span>
-        {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}<a class="pagination-number" href="?page={{ num }}">{{ num }}</a>
-    {% endif %}
-    {% endfor %}
-    {% if page_obj.has_next %}
-
-        {% if request.GET.author %}              
-        <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&author={{request.GET.author}}">
+        {% if request.GET.title %}   
+            {% if page_obj.number == num %}
+            <span class="pagination-number pagination-current">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}<a class="pagination-number link-light" href="?page={{ num }}&title={{request.GET.title}}">{{ num }}</a>
+            {% endif %} 
+        {% else %}   
+            {% if page_obj.number == num %}
+            <span class="pagination-number pagination-current">{{ num }}</span>
+            {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}<a class="pagination-number link-light" href="?page={{ num }}">{{ num }}</a>
+            {% endif %}
+        {% endif %} 
+    {% endfor %} 
+    {% if page_obj.has_next %} 
+        {% if request.GET.title %}              
+        <a class="pagination-action" href="?page={{ page_obj.next_page_number }}&title={{request.GET.title}}">
             <i class="fa fa-angle-right link-danger" aria-hidden="true"></i>
         </a>
-        <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&author={{request.GET.author}}">
+        <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}&title={{request.GET.title}}">
             <i class="fa fa-angle-double-right link-danger" aria-hidden="true"></i>
         </a>
         {% else %}
@@ -41,17 +44,10 @@
         <a class="pagination-action" href="?page={{ page_obj.paginator.num_pages }}">
             <i class="fa fa-angle-double-right link-danger" aria-hidden="true"></i>
         </a>
-        {% endif %}
-
+        {% endif %} 
     {% endif %}
-</div>
- 
-<style>  
-    a {
-        text-decoration: none!important;
-        color: #f7f7f7!important;
-    }
- 
+</div> 
+<style> 
     .pagination-number {
         padding: 0.5em 0.8em;
         border-radius: 2px;
