@@ -9,18 +9,23 @@
     <section>  
         <div class="bg-light p-5 lead">
             <div class="row">  
-                <div class="col-md-4"> 
+                <div class="col-md-4">  
                     {% if user.profile.image %} 
-                    <figure><img src="{{ user.profile.image.url }}" alt="" style="height: 400px;"></figure> 
+                    <div class="circle">
+                        <img src="{{user.profile.image.thumb.url}}" alt="{{user.first_name}}"/> 
+                    </div> 
                     {% else %}
-                    <img class="rounded-circle mx-auto d-block shadow-sm" src="{% static 'images/default.png' %}" alt="foto de perfil" height="200">
+                    <div class="circle">
+                        <img src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
+                    </div> 
                     {% endif %}
                 </div> 
                 <div class="col-md-8"> 
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center">  
-                            <h1>{{a.usermanage.first_name}} {{a.usermanage.last_name}}</h1> 
+                            <h1>{{user.first_name}} {{user.last_name}}</h1> 
                         </div>
+
                         <form method="POST" action="">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{request.path}}">
@@ -28,16 +33,19 @@
                                 <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">23</span>
                             </button>
                         </form> 
+
                     </div>   
-                    <p>Username: @{{a.user}}</p>
+                    <p>Username: @{{user.username}}</p>
                     <div class="title-container">
                         <h4>Sobre:</h4>
-                    </div> 
-                    <p>{{a.description}}</p>  
+                    </div>   
+                    <p>{{ user.profile.description }}</p>     
                     <div class="row">
                         <div class="col-6"> 
-                            <h5><b>Atuo como:</b> {{a.occupation}}</h5> 
+                            <h5><b>Atuo como:</b> {{user.profile.occupation}}</h5>   
+                            <p><b>Cidade:</b> {{user.profile.city}} {{user.profile.country}}</p> 
                         </div>
+
                         <div class="col-6"> 
                             <h5>Redes Sociais:</h5> 
                             <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
@@ -69,6 +77,7 @@
                             </a>
                         </div> 
                     </div> 
+
                 </div>  
             </div> 
         </div>

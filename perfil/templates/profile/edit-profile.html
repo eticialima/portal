@@ -72,10 +72,9 @@
                     </div>
                 </div>
             </div>     
-            <div class="submit-btns">
-                <a class="mr-2" href="{% url 'profile:user-profile'  %}">vv</a> 
-                <!-- <button type="button" class="btn btn-danger" onclick="location.href='{% url 'profile:user-profile' %}'"><span>Cancel</span></button> -->
-                <button type="submit" class="btn btn-primary"><span>Update</span></button>
+            <div class="mb-3">
+                <button type="button" class="mr-2 btn-default btn-red" onclick="location.href='{% url 'profile:user-profile' request.user.username %}'">Voltar</button> 
+                <button type="submit" class="btn-default btn-yellow"><span>Update</span></button>
             </div>
         </form>
     </div> 
