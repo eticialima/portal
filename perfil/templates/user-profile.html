@@ -1,0 +1,135 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Alterar Usuário{% endblock %}
+{% block body_title %}Alterar Usuário{% endblock %}
+{% block main_content %}
+{% load widget_tweaks %}
+{% load static %}
+<div class="text-center">
+    <div class="form-signup"> 
+        <h4 class="mb-3">Ver/Alterar Usuário</h4>  
+       <form id="mainform" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}   
+            <div class="row"> 
+                <div class="col-sm-6"> 
+                    <div class="form-group mt-3">
+                        <label for="username">Email</label>
+                        {% render_field form.username class="form-control" id="username" name="username" %}
+                    </div>  
+                    <div class="form-group mt-3">
+                        <label for="type_user">Tipo Usuario</label> 
+                         <select class="form-select form-control item" id="type_user" name="type_user" disabled="disabled"> 
+                            {% for dp in form.type_user %}
+                            {{ dp }}
+                            {% endfor %}
+                        </select>
+                    </div>  
+                    <div class="form-group mt-3">
+                        <label for="username">Nome</label>
+                        {% render_field form.first_name class="form-control" id="first_name" name="first_name" %}      
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Sobrenome</label>
+                        {% render_field form.last_name class="form-control" id="last_name" name="last_name" %} 
+                    </div> 
+ 
+                    <div class="form-group mt-3">
+                        <label for="username"><code>Usuário ís_active ?</code></label>
+                        {% render_field form.is_active class="form-check-input" id="is_active" name="is_active" disabled="disabled"%}    
+                    </div>   
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-default btn-yellow" name="btn_cadastro_canal">Alterar</button>
+                    <a class="btn-default btn-red" role="button" href="{% url 'painel' %}">Cancelar</a>
+                </div> 
+                {% if object.type_user == 'us'%}
+                <div class="form-group mt-3 py-5">
+                    <p class="text-muted fst-italic">
+                        Entrar em contato <a  data-bs-toggle="modal" href="#ModalCCAD" class="text-reset">Administrador Agora</a>.
+                      </p>
+                 </div> 
+                {% endif %} 
+            </div>  
+        </form>  
+    </div>
+</div>
+ 
+<script> 
+// View imagem alterar
+$("#imagem").change(function (event) {
+    readURL(this);
+});
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var filename = $("#imagem").val();
+    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+    reader.onload = function (e) {
+        debugger;
+        $('#preview').attr('src', e.target.result);
+        $('#preview').hide();
+        $('#preview').fadeIn(500);
+        $('.custom-file-label').text(filename);
+    }
+    reader.readAsDataURL(input.files[0]);
+    } 
+} 
+
+// Formulario não envia campos desabilitados
+$('#mainform').submit(function(e) {
+    $(':disabled').each(function(e) {
+        $(this).removeAttr('disabled');
+    })
+});
+
+</script>
+
+ 
+<!-- Modal -->
+<div class="modal fade" id="ModalCCAD" tabindex="-1" aria-labelledby="ModalCCADLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="ModalCCADLabel">Suporte <i class="fas fa-exclamation-triangle me-2"></i></h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            <h1>Verificar envio de email</h1>
+            <h3>Como Podemos ajudar ?</h3><br> 
+            <form method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+                {% csrf_token %}   
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="form-check-input" id="cctext1" name="cctext">
+                    <label for="cctext1"><code>Quero desativar minha conta.</code></label> 
+                </div> 
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="form-check-input" id="cctext2" name="cctext">
+                    <label for="cctext2"><code>Quero mudar meu tipo de usuario.</code></label>    
+                </div> 
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="form-check-input" id="cctext3" name="cctext">
+                    <label for="cctext3"><code>Preciso de ajuda com minha conta.</code></label>    
+                </div> 
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="form-check-input" id="cctext4" name="cctext">
+                    <label for="cctext4"><code>Quero denunciar alguem.</code></label>    
+                </div> 
+                <div class="form-group mt-3">
+                    <input type="checkbox" class="form-check-input" id="cctext5" name="cctext">
+                    <label for="cctext5"><code>Quero falar merd# para o ADM.</code></label>    
+                </div> 
+                <div class="form-group mt-3">
+                    <label for="cctext"><code>Mensagem</code></label>   
+                    <input type="text" class="form-control" id="cctext" name="cctext">
+                    
+                </div>  
+            </form>      
+        </div>
+        <div class="modal-footer"> 
+            <button class="btn-default btn-red" onclick="location.href='#'"><a>Enviar Mensagem</a></button>   
+        </div>
+   
+        </div>
+    </div>
+</div>
+
+{% endblock %}

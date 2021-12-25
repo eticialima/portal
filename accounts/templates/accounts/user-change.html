@@ -1,0 +1,43 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Alterar Usuário{% endblock %}
+{% block body_title %}Alterar Usuário{% endblock %}
+{% block main_content %}
+{% load widget_tweaks %}
+{% load static %}
+<div class="text-center">
+    <div class="form-signup"> 
+        <h4 class="mb-3">Ver/Alterar Usuário</h4>  
+       <form method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}   
+            <div class="row"> 
+                <div class="col-sm-6"> 
+                    <div class="form-group mt-3">
+                        <label for="username">Email</label>
+                        {% render_field form.username class="form-control" id="username" name="username" %}
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="type_user">Tipo Usuario</label>
+                        {% render_field form.type_user class="form-select form-control" id="type_user" name="type_user" %}  
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Nome</label>
+                        {% render_field form.first_name class="form-control" id="first_name" name="first_name" %}      
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Sobrenome</label>
+                        {% render_field form.last_name class="form-control" id="last_name" name="last_name" %} 
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username"><code>Usuário ís_active ?</code></label>
+                        {% render_field form.is_active class="form-check-input" id="is_active" name="is_active" %}    
+                    </div> 
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-default btn-yellow" name="btn_cadastro_canal">Alterar</button>
+                    <a class="btn-default btn-red" role="button" href="{% url 'users' %}">Cancelar</a>
+                </div> 
+            </div>  
+        </form> 
+    </div>
+</div>  
+{% endblock %}

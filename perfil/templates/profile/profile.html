@@ -1,0 +1,77 @@
+
+{% extends 'base/_base_home.html' %}
+{% load widget_tweaks %} 
+{% load static %}  
+{% block body_home %}
+{% include 'base/_navbar.html' %}  
+ 
+<div class="container-sm py-5"> 
+    <section>  
+        <div class="bg-light p-5 lead">
+            <div class="row">  
+                <div class="col-md-4"> 
+                    {% if user.profile.image %} 
+                    <figure><img src="{{ user.profile.image.url }}" alt="" style="height: 400px;"></figure> 
+                    {% else %}
+                    <img class="rounded-circle mx-auto d-block shadow-sm" src="{% static 'images/default.png' %}" alt="foto de perfil" height="200">
+                    {% endif %}
+                </div> 
+                <div class="col-md-8"> 
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center">  
+                            <h1>{{a.usermanage.first_name}} {{a.usermanage.last_name}}</h1> 
+                        </div>
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{request.path}}">
+                            <button type="submit" class="btn btn-light link-danger">
+                                <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">23</span>
+                            </button>
+                        </form> 
+                    </div>   
+                    <p>Username: @{{a.user}}</p>
+                    <div class="title-container">
+                        <h4>Sobre:</h4>
+                    </div> 
+                    <p>{{a.description}}</p>  
+                    <div class="row">
+                        <div class="col-6"> 
+                            <h5><b>Atuo como:</b> {{a.occupation}}</h5> 
+                        </div>
+                        <div class="col-6"> 
+                            <h5>Redes Sociais:</h5> 
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-youtube mx-2"></i>
+                            </a>
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                <i class="fab fa-whatsapp mx-2"></i>
+                            </a>        
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                <i class="fab fa-facebook mx-2"></i>
+                            </a>        
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-instagram mx-2"></i> 
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-twitter mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-pinterest mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-snapchat mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-tiktok mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-discord mx-2"></i>
+                            </a>
+                        </div> 
+                    </div> 
+                </div>  
+            </div> 
+        </div>
+    </section> 
+</div>
+{% endblock %} 
