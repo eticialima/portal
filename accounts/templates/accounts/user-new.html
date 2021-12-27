@@ -22,11 +22,9 @@
                                     <input type="email" class="form-control" id="username" name="username" required autofocus>
                                 </div>
                                 <div class="col-sm-6 form-group mt-3">
-                                    <label for="type_user">Tipo Usuario<span style="color: red;">*</span></label> 
-                                    <select class="form-select form-control" id="type_user" name="type_user" selected disabled="disabled">
-                                        {{form.type_user.3}} 
-                                    </select>
-                                </div>  
+                                    <label for="user_name"><b>Username</b><span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" required autofocus>
+                                </div> 
                             </div>
                             <div class="row">
                                 <div class="col-sm-6 form-group mt-3">
@@ -54,6 +52,12 @@
                                     </div>
                                 </div> 
                             </div> 
+                            <div class="invisible col-sm-6 form-group mt-3">
+                                <label for="type_user">Tipo Usuario<span style="color: red;">*</span></label> 
+                                <select class="form-select form-control" id="type_user" name="type_user" selected disabled="disabled">
+                                    {{form.type_user.3}} 
+                                </select>
+                            </div>  
                             <div class="form-group mt-3">
                                 <button type="submit" class="btn-default btn-red">Cadastrar</button> 
                                 <div id="msgSubmit" class="h3 text-center hidden"></div>

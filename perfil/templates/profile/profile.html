@@ -3,12 +3,16 @@
 {% load widget_tweaks %} 
 {% load static %}  
 {% block body_home %}
-{% include 'base/_navbar.html' %}  
- 
-<div class="container-sm py-5"> 
-    <section>  
+{% include 'base/_navbar.html' %}   
+<div class="container-sm"> 
+    <section class="py-5">  
         <div class="bg-light p-5 lead">
             <div class="row">  
+                {% if user.is_authenticated %}
+                <a href="" style="text-decoration: none; color: rgb(155, 8, 8);">
+                    <i class="fas fa-cog fa-2x"></i>
+                </a>  
+                {% endif %}
                 <div class="col-md-4">  
                     {% if user.profile.image %} 
                     <div class="circle">
@@ -32,8 +36,7 @@
                             <button type="submit" class="btn btn-light link-danger">
                                 <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">23</span>
                             </button>
-                        </form> 
-
+                        </form>  
                     </div>   
                     <p>Username: @{{user.username}}</p>
                     <div class="title-container">
@@ -82,5 +85,11 @@
             </div> 
         </div>
     </section> 
+
+    <section class="py-5"> 
+  
+        {% include 'profile/mypost.html' %}   
+    
+    </section>    
 </div>
 {% endblock %} 

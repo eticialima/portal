@@ -1,8 +1,8 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser, BaseUserManager  
-from django.utils.translation import gettext_lazy as _
 from django.core import validators
-import re 
+from django.utils.translation import ugettext_lazy as _
+import re
 
 class UserManager(BaseUserManager):
         use_in_migrations = True
@@ -38,19 +38,18 @@ class UserManager(BaseUserManager):
                 return self._create_user(email, password, **extra_fields)
 
 
-class CustomUser(AbstractUser):   
-        TYPE_USER_CHOICES = [('ad', 'Administrador'),('co', 'Colaborador'),('us', 'Usuario Padrão')]  
-        
-        username = models.CharField(_('user_name'), max_length=15, unique=True, help_text=_('Required. 15 characters or fewer. Letters, numbers and @/./+/-/_ characters'), validators=[ validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), _('invalid'))]) 
-        
-        email = models.EmailField('Email', unique=True, error_messages={'unique': "A user with that email already exists."}) 
-        type_user = models.CharField('type_user',max_length=2,choices=TYPE_USER_CHOICES)  
+class CustomUser(AbstractUser): 
+
+        TYPE_USER_CHOICES = [('ad', 'Administrador'),('co', 'Colaborador'),('us', 'Usuario Padrão')] 
+        user_name = models.CharField(_('user_name'), max_length=15, unique=True,help_text=_('Required. 15 characters or fewer. Letters, numbers and @/./+/-/_ characters'),validators=[ validators.RegexValidator(re.compile('^[\w.@+-]+$'), _('Enter a valid username.'), _('invalid'))])
+        email = models.EmailField('Email', unique=True) 
+        type_user = models.CharField('type_user',max_length=2,choices=TYPE_USER_CHOICES) 
         is_staff = models.BooleanField('Team member', default=True)
         is_active = models.BooleanField('active', default=False)
         date_joined = models.DateTimeField('date joined', auto_now_add=True) 
-       
+
         USERNAME_FIELD = 'email'
-        REQUIRED_FIELDS = ['username', 'first_name', 'last_name', 'type_user', 'is_active']
+        REQUIRED_FIELDS = ['user_name','first_name', 'last_name', 'type_user', 'is_active']
 
         class Meta:
                 verbose_name = 'Usuário'
@@ -58,9 +57,6 @@ class CustomUser(AbstractUser):
                 ordering = ['first_name']
 
         def __str__(self):
-                return self.email
-
-        def __unicode__(self):
                 return self.email
 
         objects = UserManager() 

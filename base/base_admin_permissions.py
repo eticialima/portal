@@ -1,9 +1,3 @@
-"""
-	Base classes for test if user is authenticathed and
-	the department have authorized access to admin functions.
-	And display sucess messages.
-"""
-
 from django.shortcuts import redirect, render, reverse
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.contrib.messages.views import SuccessMessageMixin
@@ -17,7 +11,7 @@ class BaseAdminUsers(
 	admin functions.
 	And display sucess messages
 	"""
-	authorized_admin_access = []  # list for admin access
+	authorized_admin_access = []
 
 	def test_func(self):
 		"""
@@ -42,14 +36,14 @@ class BaseAdminUsersAd(BaseAdminUsers):
 	type_user authorized to access admin functions.
 	- Administração 
 	"""
-	authorized_admin_access = ['ad', 'co']  # list for admin access
+	authorized_admin_access = ['ad', 'co']
 
 class BaseAdminUsersall(BaseAdminUsers):
 	"""
 	type_user authorized to access admin functions.
 	- Usuarios
 	"""
-	authorized_admin_access = ['ad', 'co', 'us']  # list for admin access
+	authorized_admin_access = ['ad', 'co', 'us']
 
 
 if __name__ == '__main__':

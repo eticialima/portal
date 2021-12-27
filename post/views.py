@@ -1,20 +1,14 @@
-from django.db.models.fields import SlugField
 from django.urls import reverse_lazy
 from django.contrib import messages 
 from base.base_admin_permissions import BaseAdminUsersall 
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.base import TemplateView
+from django.views.generic.edit import CreateView, UpdateView
 from django.views.generic import ListView 
-from post.models import *
+from post.models import Post
 from post.forms import PostForm 
 from accounts.models import CustomUser 
-from django.shortcuts import redirect, render, get_object_or_404  
-from taggit.models import Tag
+from django.shortcuts import render 
 from django.template.defaultfilters import slugify
- 
-class IndexPostView(BaseAdminUsersall, TemplateView):
-    template_name = 'post/index-post.html'
- 
+
 class PostView(BaseAdminUsersall, ListView):
     model = Post
     template_name = 'post/post.html'  
@@ -38,13 +32,14 @@ class PostCreate(BaseAdminUsersall, CreateView):
       
     def post(self, request, *args, **kwargs):  
         user_pk = request.user
-        user = CustomUser.objects.filter(username=user_pk) 
+        user = CustomUser.objects.filter(username=user_pk)
+        print(user)
         form = PostForm(request.POST, request.FILES)  
 
         if 'btn_adicionar':
             if form.is_valid(): 
                 form_model = form.save(commit=False)
-                form_model.slug = slugify(form_model.title) 
+                form_model.slug = slugify(form_model.title)
                 form_model.author = user[0]  
                 form_model.save()
                 form.save_m2m()

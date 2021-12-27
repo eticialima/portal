@@ -7,7 +7,7 @@
 <div class="container-sm py-5">  
     <div class="bg-light p-5 lead">
         <h2>Editar Informações Basicas</h2> 
-        <form method="post" action="">
+        <form method="post" action="{% url 'profile:edit-profile' %}">
             {% csrf_token %}
             <div class="row">
                 <div class="col">
@@ -73,7 +73,7 @@
                 </div>
             </div>     
             <div class="mb-3">
-                <button type="button" class="mr-2 btn-default btn-red" onclick="location.href='{% url 'profile:user-profile' request.user.username %}'">Voltar</button> 
+                <button type="button" class="mr-2 btn-default btn-red" onclick="location.href='{% url 'profile:user-profile' request.user.user_name %}'">Voltar</button> 
                 <button type="submit" class="btn-default btn-yellow"><span>Update</span></button>
             </div>
         </form>

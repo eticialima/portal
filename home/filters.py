@@ -10,4 +10,3 @@ class PostFilter(django_filters.FilterSet):
     class Meta:
         model = Post
         fields = ['author', 'title', 'category']
-        #fields = {'title':['exact', 'contains']}

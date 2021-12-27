@@ -17,7 +17,7 @@ class ProfileView(DetailView):
     object = None
 
     def get_object(self, queryset=None):
-        return self.model.objects.select_related('profile').get(username=self.kwargs.get(self.slug_url_kwarg))
+        return self.model.objects.select_related('profile').prefetch_related("posts").get(user_name=self.kwargs.get(self.slug_url_kwarg)) 
 
     def get(self, request, *args, **kwargs):
         self.object = self.get_object()

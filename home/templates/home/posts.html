@@ -11,37 +11,34 @@
         <th scope="row">None</th>
         {% endif %} 
         <div class="card-body">
-        <h6 class="card-title"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text text-center">{{post.title}}</a></h6> 
-        <p class=" ">
-            <a href="#" style="font-size:9px; text-decoration: none; color: rgb(155, 8, 8);">
-                <table>
-                    <tr>  
-                        <th> 
-                            {% if post.author.imagem %}  
-                                <img src="{{  post.author.imagem.url }}" alt="{{ post.author.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
-                            {% else %}  
-                                <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
-                            {% endif %}
-                        </th> 
-                        <th>
+            <h6 class="card-title"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text text-center">{{post.title}}</a></h6>  
+            <table>
+                <tr>
+                    <th> 
+                        <a href="http://127.0.0.1:8000/perfil/{{post.author.user_name}}" 
+                            style="text-decoration: none; color: rgb(155, 8, 8);">
+                        {% if post.author.profile.image %}   
+                            <img src="{{  post.author.profile.image.thumb.url }}" alt="{{ post.author.first_name }}"
+                                    class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
+                        {% else %}  
+                            <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" 
+                                alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
+                        {% endif %}
+                        </a>
+                    </th> 
+                    <th>
+                        <a href="http://127.0.0.1:8000/perfil/{{post.author.user_name}}" 
+                            style="text-decoration: none; color: rgb(155, 8, 8);"> 
                             <span class="fw-light">{{ post.author.user_name}}</span>
-                        </th>   
-                    </tr> 
-                </table> 
-            </a>   
-        </p> 
+                        </a>
+                    </th>   
+                </tr> 
+            </table>   
         </div>
         <div class="card-footer bg-transparent">    
             <a href="" style="text-decoration: none; color: rgb(46, 46, 46);">
                 <span class="badge bg-warning text-dark">{{post.category}}</span>
-            </a>
-          
-
-            <!-- {% for tag in post.tags.all %}
-            <a href="{% url 'home:tagged' tag.slug %}" style="text-decoration: none; color: rgb(46, 46, 46);">
-                <span class="badge bg-warning text-dark">{{tag.name}}</span>
-            </a>
-             {% endfor %}  -->
+            </a> 
          </div>
     </div> 
 </div> 

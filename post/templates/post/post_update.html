@@ -45,20 +45,25 @@
                     {% render_field form.title class="form-control" type="text" %}
                     <br>
                     <label>Descrição</label>
-                    {% render_field form.desc class="form-control" type="text" %}
-                    <br>    
-                    <label>Data de Criação</label>
-                    {% render_field form.created_date class="form-control" type="text" disabled="disabled" %} 
-                    <br>  
-                    <label>Data de Publicação</label>
-                    {% render_field form.published_date class="form-control" type="text" disabled="disabled" %}
+                    {% render_field form.desc class="form-control" type="text" rows="3" %}
                     <br> 
                     <label>Categoria</label> 
                     {% render_field form.category class="form-control form-select" id="category" name="category" %}     
                     <br>
                     <label><code class="mx-5">Tags</code></label>
                     <input type="text" name="tags" data-role="tagsinput" class="form-control" id="tags" name="tags" value="{% for tag in post.tags.all %}{{ tag }},{% endfor %}">
-                    
+                    <br>
+                    <div class="row">
+                        <div class="col"> 
+                            <label>Data de Criação</label>
+                            {% render_field form.created_date class="form-control" type="text" disabled="disabled" %}
+                        </div> 
+                        <br>
+                        <div class="col"> 
+                            <label>Data de Publicação</label>  
+                            {% render_field form.published_date class="form-control" type="text" disabled="disabled" %}
+                        </div> 
+                    </div>
                     <br>
                     <label><code>Publicação Ativa ?</code></label> 
                     {% render_field form.is_activate class="form-check-input" id="is_activate" name="is_activate" %}    

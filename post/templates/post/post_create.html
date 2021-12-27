@@ -35,30 +35,34 @@
                     <br>
                     {% render_field form.download_link class="form-control" type="text" placeholder="Link externo download..." %}
                    
-                </div>
-
+                </div> 
                 <div class="col-sm-6"> 
                     <br>
                     <label>Titulo</label>
                     {% render_field form.title class="form-control" type="text" %}
                     <br>
                     <label>Descrição</label>
-                    {% render_field form.desc class="form-control" type="text" %}
-                    <br>
-                    <label>Data de Criação</label>
-                    {% render_field form.created_date class="form-control" type="text" %}
-                    <br>
-                    <label>Data de Publicação</label>  
-                    {% render_field form.published_date class="form-control" id="published_date" type="date" %}
+                    {% render_field form.desc class="form-control" type="text" rows="3" %}
+                
                     <br>
                     <label>Categoria</label> 
                     {% render_field form.category class="form-control form-select" id="category" name="category" %}    
                     <br>
-                 
+                    
                     <label><code class="mx-5">Tags</code></label>
-                    <input type="text" data-role="tagsinput" class="form-control" name="tags">
-                     <!-- <label><code class="mx-5">Tags</code></label>  -->
-                    <!-- <a class="btn btn-warning" data-bs-toggle="modal" href="#tagsadd"> + </a> --> 
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags"> 
+                    <br>   
+                    <div class="row">
+                        <div class="col"> 
+                            <label>Data de Criação</label>
+                            {% render_field form.created_date class="form-control" type="text" disabled="disabled" %}
+                        </div> 
+                        <br>
+                        <div class="col"> 
+                            <label>Data de Publicação</label>  
+                            {% render_field form.published_date class="form-control" id="published_date" type="date" %}
+                        </div> 
+                    </div> 
                     <br>  
                     <label><code>Publicação Ativa ?</code></label> 
                     {% render_field form.is_activate class="form-check-input" id="is_activate" name="is_activate" %}    
@@ -108,5 +112,13 @@
             reader.readAsDataURL(input.files[0]);
         }
     }  
+
+    // Formulario não envia campos desabilitados
+    $('#post-form').submit(function(e) {
+        $(':disabled').each(function(e) {
+            $(this).removeAttr('disabled');
+        })
+    });
+    
 </script>  
 {% endblock %}

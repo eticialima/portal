@@ -5,10 +5,11 @@
         <label for="check" class="checkbtn">
             <i class="fas fa-bars"></i>
         </label>
-        <a class="logo" href="">
+        <a class="logo" href="{% url 'home:home' %}">
             <h3>EditorYZ</h3>
         </a>
-        <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0"> 
+        <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item"><a href="{% url 'home:home' %}">Home</a></li>
             <li class="nav-item"><a href="#">AE Assets</a></li>
             <li class="nav-item"><a href="#">PR Assets</a></li>
             <li class="nav-item"><a href="#">3D Assets</a></li>
@@ -17,9 +18,9 @@
                 {% if user.is_authenticated %}
                 <div class="action">
                     <div class="profile" onclick="menuToggle();">
-                        {% if user.imagem %}
+                        {% if user.profile.image %}
                         <div class="circle-home">
-                            <img src="{{ user.imagem.url }}" class="img-fluid" alt="{{ user.first_name }}" />
+                            <img src="{{ user.profile.image.url }}" class="img-fluid" alt="{{ user.first_name }}" />
                         </div>
                         {% else %}
                         <div class="circle-home">
@@ -29,8 +30,8 @@
                     </div>
                     <div class="menu text-start lh-lg">
                         <div>
-                            <a href="" class="nav__link">Meu Perfil</a>
-                            <a href="{% url 'index-painel' %}" class="nav__link">Configurações</a>
+                            <a href="{% url 'profile:user-profile' request.user.user_name %}" class="nav__link">Meu Perfil</a>
+                            <a href="{% url 'painel' %}" class="nav__link">Configurações</a>
                             <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
                         </d>
                     </div>

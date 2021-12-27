@@ -1,8 +1,6 @@
 from django.urls import path
-from painel.views import (IndexPainelView, PainelView)
+from painel.views import PainelView
 
-
-urlpatterns = [
-	path('', IndexPainelView.as_view(), name='index-painel'),
+urlpatterns = [ 
 	path('painel/', PainelView.as_view(), name='painel'), 
 ] 

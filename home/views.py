@@ -1,15 +1,10 @@
-from django.db.models import Q
-from django.shortcuts import render  
-from django.core.paginator import Paginator 
+from django.shortcuts import render
 from django.views.generic.base import TemplateView 
 from django.views.generic import DetailView, ListView 
-from post.models import *
-from post.forms import *
-from home.forms import *   
+from post.models import Post, Category, SocialComment
+from post.forms import PostForm
+from home.forms import SocialCommentForm  
 
-class IndexHomelView(TemplateView):
-    template_name = 'home/index-home.html' 
- 
 class HomeView(ListView):
     model = Post 
     template_name = 'home/home.html'   
@@ -28,8 +23,7 @@ class HomeView(ListView):
         context['form'] = PostForm()  
         context['category'] = Category.objects.all() 
         return context
-    
-  
+
 class DetailView(DetailView):
     model = Post 
     template_name = 'home/post_detail.html' 
@@ -67,8 +61,7 @@ class DetailView(DetailView):
         }
 
         return render(request, 'home/post_detail.html', context)
-  
- 
+
 class TagIndexView(ListView):
     model = Post
     template_name = 'home/home.html'   

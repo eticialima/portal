@@ -5,7 +5,7 @@ class CustomUserCreateForm(UserCreationForm):
  
 	class Meta():
 		model = CustomUser
-		fields = ('first_name', 'last_name', 'username', 'type_user', 'is_active')
+		fields = ('user_name','first_name', 'last_name', 'username', 'type_user', 'is_active')
 		labels = {'username': 'Username/Email'}
 
 	def save(self, commit=True):
@@ -21,7 +21,7 @@ class CustomUserChangeForm(UserChangeForm):
 
 	class Meta():
 		model = CustomUser
-		fields = ('first_name', 'last_name', 'username', 'type_user', 'is_active')
+		fields = ('user_name', 'first_name', 'last_name', 'username', 'type_user', 'is_active')
 		labels = {'username': 'Username/Email'}
  
 	def save(self, commit=True):

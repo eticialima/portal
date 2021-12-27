@@ -73,10 +73,10 @@ INSTALLED_APPS = [
 
     # --- My Apps ---#
     'base', 
-    'painel',
-    'administrador',
-    'colaborador',
-    'usuarios',  
+    'painel',  
+    'usuarios', 
+    'post',
+    'home',
     'perfil',
 ]
 

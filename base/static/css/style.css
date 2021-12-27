@@ -1,5 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
 
+/* Site Configuration */
+
 body html {
   overflow-x: hidden;
   text-decoration: none; 
@@ -7,6 +9,7 @@ body html {
   font-size: 10pt;
 
 }  
+/* Dashboard and Menu Configuration */
 
 #wrapper {
   overflow-x: hidden;
@@ -22,7 +25,7 @@ body html {
 
 #sidebar-wrapper {
   min-height: 100vh;
-  margin-left: -18rem;
+  margin-left: -15rem;
   -webkit-transition: margin 0.25s ease-out;
   -moz-transition: margin 0.25s ease-out;
   -o-transition: margin 0.25s ease-out;
@@ -116,12 +119,13 @@ body html {
   color: rgb(255, 255, 255);
 }
 
+/* Image Configuration */
+
 .img-responsive {
   display: block;
   width: 100%;
   max-width: 100%;
-  border-radius: 20px;
-  /* height: 200px; */
+  border-radius: 20px; 
 }
 
 .image{
@@ -130,6 +134,8 @@ body html {
   margin-right: 10px;
 }
 
+/* Cards Configuration */
+
 .card-box {
   box-shadow: 0px 0px 0px 1px #41464b !important;
   transition: 0.5s;
@@ -137,6 +143,7 @@ body html {
   margin-right: auto;
   background-color: rgb(255, 255, 255);
   border-radius: 20px;
+  text-align: center;
 }
 
 .card-box:hover {
@@ -163,6 +170,55 @@ a {
   color: #393939;
   text-decoration: none;
 } 
+
+
+/* Buttons Configuration */
+
+.btn-default {   
+  font-size: 10pt;
+  border: none;
+  justify-content: center;
+  align-items: center;
+  padding: 10px;  
+  border-radius: 10px; 
+  color: #fff;   
+  transition: all 0.4s;
+}
+
+
+.btn-default a { 
+  text-decoration: none; 
+}
+
+.btn-default:hover { 
+  background: #4d4d4d;
+  color: aliceblue;
+}
+
+.btn-red{
+  background: #a30808;
+} 
+.btn-yellow{
+  background: #ddc700;
+}
+.btn-blue{
+  background: #0518c0;
+}
+.btn-green{
+  background: #05c525;
+}
+.btn-purple{
+  background: #7708a3;
+}
+.btn-orange{
+  background: #ff6600;
+}
+
+.form-control:focus {
+  border-color: #ac1d1d !important;
+  box-shadow: 0 0 5px rgb(228, 98, 98) !important;
+}
+
 
 
 @media (min-width: 768px) {

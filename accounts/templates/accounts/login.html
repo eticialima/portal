@@ -1,6 +1,6 @@
 {% include 'base/_head.html' %} 
 {% load static %} 
-{% block body_content %}    
+{% block body_content %}   
 <div class="container-fluid" style="padding-left: 0;">
     <div class="row h-100">
         <div class="col-8">
@@ -10,7 +10,11 @@
             <div class="text-center box lead">
                 <div class="h2">Portal EditorYZ</div>
                 <h5>Sistema ainda em desenvolvimento.</h5> 
-                {% include 'base/_messages.html' %}
+                {% if form.non_field_errors %}
+                <div class="alert alert-danger" role="alert">
+                {{ form.non_field_errors }}
+                </div>
+                {% endif %}  
                 <div class="box">
                     <main class="form-signin"> 
                         <img class="img-fluid rounded-circle" src="{% static 'images/default.png' %}" alt="logo" width="150" height="150">
