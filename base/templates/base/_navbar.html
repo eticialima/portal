@@ -30,7 +30,7 @@
                     </div>
                     <div class="menu text-start lh-lg">
                         <div>
-                            <a href="{% url 'profile:user-profile' request.user.user_name %}" class="nav__link">Meu Perfil</a>
+                            <a href="{% url 'profile:user-profile' user.user_name %}" class="nav__link">Meu Perfil</a>
                             <a href="{% url 'painel' %}" class="nav__link">Configurações</a>
                             <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
                         </d>

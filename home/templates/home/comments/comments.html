@@ -30,12 +30,16 @@
         <div class="bg-light mt-3 p-3">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="d-flex flex-row align-items-center">
-                    {% if comment.author.imagem %}
-                    <img src="{{ comment.author.imagem.url }}" width="30" class="rounded-circle mr-2" />
+                    {% if comment.author.profile.image %}  
+                    <a href="http://127.0.0.1:8000/perfil/{{comment.author.user_name}}" style="text-decoration: none;">
+                    <img src="{{ comment.author.profile.image.url }}" width="30" class="rounded-circle mr-2" />
                     {% else %}
                     <img src="{% static 'images/default.png' %}" width="30" class="rounded-circle mr-2" />
                     {% endif %}
+                    </a>
+                    <a href="http://127.0.0.1:8000/perfil/{{comment.author.user_name}}" style="text-decoration: none;">
                     <span><small class="text-dark px-3"><b>{{comment.author.user_name}}</b></small></span>
+                    </a>
                 </div>
                 <small class="fst-italic">{{comment.created_on}}</small>
             </div>

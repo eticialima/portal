@@ -13,7 +13,7 @@ class ProfileView(DetailView):
     template_name = "profile/profile.html"
     slug_field = "username"
     slug_url_kwarg = "username"
-    context_object_name = "user"
+    context_object_name = "perfil"
     object = None
 
     def get_object(self, queryset=None):

@@ -11,14 +11,14 @@
         <th scope="row">None</th>
         {% endif %} 
         <div class="card-body">
-            <h6 class="card-title"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark card-text text-center">{{post.title}}</a></h6>  
+            <h6 class="card-text text-center"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark">{{post.title}}</a></h6>  
             <table>
                 <tr>
                     <th> 
                         <a href="http://127.0.0.1:8000/perfil/{{post.author.user_name}}" 
                             style="text-decoration: none; color: rgb(155, 8, 8);">
                         {% if post.author.profile.image %}   
-                            <img src="{{  post.author.profile.image.thumb.url }}" alt="{{ post.author.first_name }}"
+                            <img src="{{  post.author.profile.image.url }}" alt="{{ post.author.first_name }}"
                                     class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
                         {% else %}  
                             <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" 

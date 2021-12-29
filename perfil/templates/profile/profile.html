@@ -6,28 +6,23 @@
 {% include 'base/_navbar.html' %}   
 <div class="container-sm"> 
     <section class="py-5">  
-        <div class="bg-light p-5 lead">
-            <div class="row">  
-                {% if user.is_authenticated %}
-                <a href="" style="text-decoration: none; color: rgb(155, 8, 8);">
-                    <i class="fas fa-cog fa-2x"></i>
-                </a>  
-                {% endif %}
+        <div class="bg-light p-4 lead">
+            <div class="row">   
                 <div class="col-md-4">  
-                    {% if user.profile.image %} 
+                    {% if perfil.profile.image %} 
                     <div class="circle">
-                        <img src="{{user.profile.image.thumb.url}}" alt="{{user.first_name}}"/> 
+                        <img src="{{perfil.profile.image.thumb.url}}" alt="{{perfil.first_name}}"/> 
                     </div> 
                     {% else %}
                     <div class="circle">
                         <img src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
                     </div> 
-                    {% endif %}
+                    {% endif %} 
                 </div> 
                 <div class="col-md-8"> 
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center">  
-                            <h1>{{user.first_name}} {{user.last_name}}</h1> 
+                            <h1>{{perfil.first_name}} {{perfil.last_name}}</h1> 
                         </div>
 
                         <form method="POST" action="">
@@ -38,15 +33,15 @@
                             </button>
                         </form>  
                     </div>   
-                    <p>Username: @{{user.username}}</p>
+                    <p>Username: {{perfil.user_name}}</p>
                     <div class="title-container">
                         <h4>Sobre:</h4>
                     </div>   
-                    <p>{{ user.profile.description }}</p>     
+                    <p>{{ perfil.profile.description }}</p>     
                     <div class="row">
                         <div class="col-6"> 
-                            <h5><b>Atuo como:</b> {{user.profile.occupation}}</h5>   
-                            <p><b>Cidade:</b> {{user.profile.city}} {{user.profile.country}}</p> 
+                            <h5><b>Atuo como:</b> {{perfil.profile.occupation}}</h5>   
+                            <p><b>Cidade:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
                         </div>
 
                         <div class="col-6"> 
@@ -80,7 +75,17 @@
                             </a>
                         </div> 
                     </div> 
-
+                    <div class="row"> 
+                        <div class="col py-2"> 
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center">   
+                                </div>
+                                {% if perfil == request.user and request.user.is_authenticated %}
+                                <button class="btn-default btn-red"  onclick="location.href='http://127.0.0.1:8000/perfil/edit-profile'"> <i class="fas fa-cog mx-2"></i>Editar Perfil</button> 
+                                {% endif %}
+                            </div>   
+                        </div>
+                    </div> 
                 </div>  
             </div> 
         </div>

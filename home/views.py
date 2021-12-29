@@ -1,5 +1,4 @@
-from django.shortcuts import render
-from django.views.generic.base import TemplateView 
+from django.shortcuts import render 
 from django.views.generic import DetailView, ListView 
 from post.models import Post, Category, SocialComment
 from post.forms import PostForm
@@ -8,7 +7,7 @@ from home.forms import SocialCommentForm
 class HomeView(ListView):
     model = Post 
     template_name = 'home/home.html'   
-    paginate_by = 2 
+    paginate_by = 8
   
     def get_queryset(self):      
         title = self.request.GET.get('title')
