@@ -1,0 +1,63 @@
+{% load static %} 
+<!DOCTYPE html>
+<html lang="en" dir="ltr"> 
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    {% include 'base/_head.html' %}
+</head> 
+<body>
+    <div class="d-flex" id="wrapper">
+        <div class="bg-white" id="sidebar-wrapper">
+            <div class="sidebar-header text-center py-4">
+                <div class="sidebar-image">
+                    {% if user.profile.image %}
+                    <div class="circle">
+                         <img src="{{ user.profile.image.thumb.url }}" class="img-fluid" alt="{{ user.first_name }}"/> 
+                    </div>
+                    {% else %}
+                    <div class="circle">
+                        <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" /> 
+                    </div> 
+                    {% endif %} 
+                </div>
+                <br>  
+                {% if user.type_user == 'us' %}
+                <h5>Perfil: Padrão</h5>  
+                {% elif user.type_user == 'ad' %}
+                <h5>Perfil: Administrador</h5>  
+                {% elif user.type_user == 'co' %}
+                <h5>Perfil: Colaborador</h5>  
+                {% endif %}  
+                <h5>Usuário: {{ user.first_name}} {{ user.last_name }}</h5>
+            </div>
+            <div class="list-group list-group-flush my-3">
+                {% include 'base/_sidebar_'|add:user.type_user|add:'.html' %}
+            </div> 
+            <div style="width: 100%; align-items: center;"> 
+                <span style="margin-left: auto; align-self: center; font-size: 12px; text-align: center; color: rgb(178, 178, 178);">
+                    <span style="display: block;">Release 1.0.1</span>
+                    <span style="display: block;">Patch 023</span>
+                </span> 
+            </div>
+        </div>
+        <div id="page-content-wrapper">
+            <nav class="navbar navbar-expand-lg navbar-light bg-transparent py-4 px-4">
+                <div class="d-flex align-items-center" id="menu-toggle"> 
+                    <i class="fas fa-stream primary-text fs-4 me-3" id="menu-toggle"></i>
+                    <h2 class="fs-2 m-0">Menu</h2>
+                </div>
+            </nav>
+            <div class="row p-3">
+                {% include 'base/_messages.html' %}
+                {% block main_content %} 
+                {% endblock %}
+            </div>
+        </div>
+    </div> 
+    <script>
+        var el = document.getElementById("wrapper");
+        var toggleButton = document.getElementById("menu-toggle"); 
+        toggleButton.onclick = function () {el.classList.toggle("toggled");};
+    </script> 
+ </body> 
+</html>

@@ -1,0 +1,17 @@
+{% extends 'base/_dashboard_base.html' %} 
+{% block main_content %}
+<div class="box text-center">
+    <div class="form-signin"> 
+        <h2>{{ object.first_name }} {{ object.last_name }}</h2>
+        <p>Tem a certeza que deseja apagar este usuário?<br>
+            Todos os dados serão removidos. </p> 
+        <form method="POST" class="form" name="form_canal">
+            {% csrf_token %}
+            <div class="form-group">
+                <button type="submit" class="btn-default btn-red" name="btn_cadastro_canal">Sim</button>   
+                <a class="btn-default btn-red" role="button" href="{% url 'users'%}">Cancelar</a>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,100 @@
+
+{% extends 'base/_base_home.html' %}
+{% load widget_tweaks %} 
+{% load static %}  
+{% block body_home %}
+{% include 'base/_navbar.html' %}   
+<div class="container-sm"> 
+    <section class="py-5">  
+        <div class="bg-light p-4 lead">
+            <div class="row">   
+                <div class="col-md-4">  
+                    {% if perfil.profile.image %} 
+                    <div class="circle">
+                        <img src="{{perfil.profile.image.thumb.url}}" alt="{{perfil.first_name}}"/> 
+                    </div> 
+                    {% else %}
+                    <div class="circle">
+                        <img src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
+                    </div> 
+                    {% endif %} 
+                </div> 
+                <div class="col-md-8"> 
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="d-flex flex-row align-items-center">  
+                            <h1>{{perfil.first_name}} {{perfil.last_name}}</h1> 
+                        </div>
+
+                        <form method="POST" action="">
+                            {% csrf_token %}
+                            <input type="hidden" name="next" value="{{request.path}}">
+                            <button type="submit" class="btn btn-light link-danger">
+                                <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">23</span>
+                            </button>
+                        </form>  
+                    </div>   
+                    <p>Username: {{perfil.user_name}}</p>
+                    <div class="title-container">
+                        <h4>Sobre:</h4>
+                    </div>   
+                    <p>{{ perfil.profile.description }}</p>     
+                    <div class="row">
+                        <div class="col-6"> 
+                            <h5><b>Atuo como:</b> {{perfil.profile.occupation}}</h5>   
+                            <p><b>Cidade:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
+                        </div>
+
+                        <div class="col-6"> 
+                            <h5>Redes Sociais:</h5> 
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-youtube mx-2"></i>
+                            </a>
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                <i class="fab fa-whatsapp mx-2"></i>
+                            </a>        
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                <i class="fab fa-facebook mx-2"></i>
+                            </a>        
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-instagram mx-2"></i> 
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-twitter mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-pinterest mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-snapchat mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-tiktok mx-2"></i>
+                            </a>    
+                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                <i class="fab fa-discord mx-2"></i>
+                            </a>
+                        </div> 
+                    </div> 
+                    <div class="row"> 
+                        <div class="col py-2"> 
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="d-flex flex-row align-items-center">   
+                                </div>
+                                {% if perfil == request.user and request.user.is_authenticated %}
+                                <button class="btn-default btn-red"  onclick="location.href='http://127.0.0.1:8000/perfil/edit-profile'"> <i class="fas fa-cog mx-2"></i>Editar Perfil</button> 
+                                {% endif %}
+                            </div>   
+                        </div>
+                    </div> 
+                </div>  
+            </div> 
+        </div>
+    </section> 
+
+    <section class="py-5"> 
+  
+        {% include 'profile/mypost.html' %}   
+    
+    </section>    
+</div>
+{% endblock %} 

@@ -1,0 +1,87 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Alterar Usuário{% endblock %}  
+{% load widget_tweaks %}
+{% load static %}
+{% block main_content %}
+<div class="text-center">
+    <div class="form-signup"> 
+        <h4 class="mb-3">Ver/Alterar Usuário</h4>  
+       <form method="post" class="form" autocomplete="off" enctype="multipart/form-data">
+            {% csrf_token %}   
+            <div class="row">
+                <div class="col-sm-6"> 
+                    <div class="form-group mt-3">   
+                        {% if object.imagem %}
+                        <div class="circle">
+                            <img id="preview" src="{{ object.imagem.url }}" class="img-fluid" alt="{{ object.first_name }}"/> 
+                        </div>
+                        {% else %}
+                        <div class="circle">
+                            <img id="preview" src="{% static 'images/default.png' %}" class="img-fluid" alt="default" /> 
+                        </div> 
+                        {% endif %}  
+                        <br>
+                        <div class="custom-file">
+                            <label class="label-input custom-file-label" for="imagem">Atualizar Avatar...</label>
+                            {% render_field form.imagem type="file" class="custom-file-input form-control" id="imagem" name="imagem" aria-describedby="imagemadd" %}
+                        </div> 
+                    </div>   
+                </div>
+                <div class="col-sm-6">
+                    <div class="form-group mt-3">
+                        <label for="username">Username</label>
+                        {% render_field form.user_name class="form-control" id="user_name" name="user_name" %}
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Email</label>
+                        {% render_field form.username class="form-control" id="username" name="username" %}
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="type_user">Tipo Usuario</label>
+                        {% render_field form.type_user class="form-select form-control" id="type_user" name="type_user" %}  
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Nome</label>
+                        {% render_field form.first_name class="form-control" id="first_name" name="first_name" %}      
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username">Sobrenome</label>
+                        {% render_field form.last_name class="form-control" id="last_name" name="last_name" %} 
+                    </div> 
+                    <div class="form-group mt-3">
+                        <label for="username"><code>Usuário ís_active ?</code></label>
+                        {% render_field form.is_active class="form-check-input" id="is_active" name="is_active" %}    
+                    </div> 
+                </div>
+                <div class="form-group mt-3">
+                    <button type="submit" class="btn-default btn-yellow" name="btn_cadastro_canal">Alterar</button>
+                    <a class="btn-default btn-red" role="button" href="{% url 'users' %}">Cancelar</a>
+                </div> 
+            </div>  
+        </form> 
+    </div>
+</div>
+ 
+<script> 
+$("#imagem").change(function (event) {
+    
+    readURL(this);
+});
+
+function readURL(input) {
+    if (input.files && input.files[0]) {
+    var reader = new FileReader();
+    var filename = $("#imagem").val();
+    filename = filename.substring(filename.lastIndexOf('\\') + 1);
+    reader.onload = function (e) {
+        debugger;
+        $('#preview').attr('src', e.target.result);
+        $('#preview').hide();
+        $('#preview').fadeIn(500);
+        $('.custom-file-label').text(filename);
+    }
+    reader.readAsDataURL(input.files[0]);
+    } 
+} 
+</script>
+{% endblock %}

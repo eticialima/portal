@@ -1,0 +1,30 @@
+{% extends 'base/_base_home.html' %}
+{% load static %}
+{% load widget_tweaks %} 
+{% block body_home %}
+{% include 'base/_navbar.html' %} 
+<div class="container">
+    <div class="row g-5">
+        <div class="col-md-8"> 
+            <div class="position-relative">
+                <div class="py-4">   
+                <article class="blog-post">
+                    {% include 'home/menu-center/center.html' %} 
+                </article>
+                <br>
+                <article class="blog-post">
+                    {% include 'home/comments/comments.html' %} 
+                </article>   
+                </div>
+            </div> 
+        </div> 
+        <div class="col-md-4">
+            <div class="position-sticky"> 
+                <div class="py-4">
+                    {% include 'home/menu-right/right.html' %} 
+                </div>
+            </div>
+        </div>
+    </div>
+</div> 
+{% endblock %}

@@ -1,0 +1,177 @@
+{% load static %}
+<div class="container-post">
+    {% if user.is_active %}
+    <div class="text-center">
+        <h3><< Comentar Alguma coisa >></h3>
+        <div class="mt-2">
+            <p>Compartilhe alguma coisa sobre o post!</p>
+        </div>
+    </div> 
+    <form method="POST">
+        {% csrf_token %}
+        {{form.comment}} 
+        <div class="mt-2">
+            <button type="submit" class="btn-default btn-red">Postar</button>
+        </div> 
+    </form> 
+    {% else %}
+    <div class="p-2 text-center bg-light shadow-sm rounded">
+        <div class="h4">Olá,</div>
+        <p>Você precisa fazer login no sistema para comentar.</p>
+        <button class="btn-default btn-red" onclick="location.href='{% url 'login' %}'">
+            <i class="fas fa-sign-in-alt"></i> Registrar/Login
+        </button>
+    </div>
+    {% endif %} 
+    <div class="py-4 px-4">
+        <h4>Comentários</h4>
+        {% for comment in comments %}
+        {% if comment.is_parent %} 
+        <div class="bg-light mt-3 p-3">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="d-flex flex-row align-items-center">
+                    {% if comment.author.profile.image %}  
+                    <a href="http://127.0.0.1:8000/perfil/{{comment.author.user_name}}" style="text-decoration: none;">
+                    <img src="{{ comment.author.profile.image.url }}" width="30" class="rounded-circle mr-2" />
+                    {% else %}
+                    <img src="{% static 'images/default.png' %}" width="30" class="rounded-circle mr-2" />
+                    {% endif %}
+                    </a>
+                    <a href="http://127.0.0.1:8000/perfil/{{comment.author.user_name}}" style="text-decoration: none;">
+                    <span><small class="text-dark px-3"><b>{{comment.author.user_name}}</b></small></span>
+                    </a>
+                </div>
+                <small class="fst-italic">{{comment.created_on}}</small>
+            </div>
+            <div class="justify-content-between mt-2 align-items-center px-4">
+                <p class="text-dark text-break lh-sm px-4">{{comment.comment}}</p>
+            </div>
+            <div class="d-flex justify-content-between align-items-center"> 
+                <div class="d-flex flex-row align-items-center mt-2 px-4">
+                    {% if request.user == comment.author %}
+                    <a href="{% url 'home:comment-edit' post.pk comment.pk %}" class="link-secondary"> <i
+                            class="fas fa-edit"></i></a>
+                    <a href="{% url 'home:comment-delete' post.pk comment.pk %}" class="link-secondary"> <i
+                            class="fas fa-trash"></i> </a>
+                    {% endif %}
+                    {% if user.is_active %}
+                    <span><small class="text-dark px-2">
+                            <button 
+                                class="btn btn-light link-danger p-2 rounded-lg" type="button" 
+                                data-bs-toggle="collapse"
+                                data-bs-target="#collapse_{{comment.id}}" 
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                                <i class="fa fa-reply"></i><span> Responder</span>
+                            </button>
+                        </small></span>
+                    {% endif %}
+                </div>
+                <small>
+                    <table>
+                        <tr>
+                            <th>
+                                <form method="POST" action="{% url 'home:comment-like' post.pk comment.pk %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{request.path}}">
+                                    <button type="submit" class="btn btn-light link-danger">
+                                        <i class='fas fa-heart'></i><span>{{comment.likes.all.count}}</span>
+                                    </button>
+                                </form>
+                            </th>
+                            <th>
+                                <form method="POST" action="{% url 'home:comment-dislike' post.pk comment.pk %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" name="next" value="{{request.path}}">
+                                    <button type="submit" class="btn btn-light link-danger">
+                                        <i class='fas fa-heart-broken'></i><span>{{comment.dislikes.all.count}}</span>
+                                    </button>
+                                </form>
+                            </th>
+                        </tr>
+                    </table>
+                </small>
+            </div>
+        </div> 
+        <div class="collapse" id="collapse_{{comment.id}}">
+            <div class="bg-light mt-1"> 
+                <form method="POST" action="{% url 'home:comment-reply' post.pk comment.pk %}">
+                    {% csrf_token %}
+                    {{form.comment}}
+                    <div class="py-2">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="d-flex flex-row align-items-center"> 
+                            <button type="submit" class="btn-default btn-red"><span>Enviar</span></button> 
+                            </div>
+                            <small>
+                                <button 
+                                    class="p-2 btn-default btn-red" type="button" 
+                                    data-bs-toggle="collapse"
+                                    data-bs-target="#collapse_{{comment.id}}" 
+                                    aria-expanded="false" 
+                                    aria-controls="collapseExample">
+                                    <i class="fas fa-times"></i>
+                                </button>  
+                            </small>
+                        </div> 
+                    </div>
+                </form>  
+            </div> 
+        </div> 
+        
+        <!-- REPLY COMMENT -->
+        <div class="ms-5">
+        {% for child_comment in comment.children %}  
+            <div class="bg-light mt-3 p-3"> 
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="d-flex flex-row align-items-center">
+                        {% if child_comment.author.imagem %}
+                        <img src="{{ child_comment.author.imagem.url }}" width="30" class="rounded-circle mr-2"/>
+                        {% else %}
+                        <img src="{% static 'images/default.png' %}" width="30" class="rounded-circle mr-2"/>
+                        {% endif %}
+                        <span><small class="text-dark px-3"><b>{{child_comment.author.user_name}}</b></small></span>
+                    </div>
+                    <small class="fst-italic">{{child_comment.created_on}}</small>
+                </div>
+                <div class="justify-content-between mt-2 align-items-center px-4">
+                    <p class="text-dark text-break lh-sm px-4">{{child_comment.comment}}</p> 
+                </div> 
+                <div class="d-flex justify-content-between align-items-center"> 
+                    <div class="d-flex flex-row align-items-center mt-2 px-4">
+                        {% if request.user == child_comment.author %}
+                        <a href="{% url 'home:comment-edit' post.pk child_comment.pk %}" class="link-secondary"> <i class="fas fa-edit"></i></a>
+                        <a href="{% url 'home:comment-delete' post.pk child_comment.pk %}" class="link-secondary"> <i class="fas fa-trash"></i> </a>
+                        {% endif %}
+                    </div>
+                    <small>
+                        <table>
+                            <tr>
+                                <th>
+                                    <form method="POST" action="{% url 'home:comment-like' post.pk child_comment.pk %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{request.path}}">
+                                        <button type="submit" class="btn btn-light link-danger">
+                                            <i class='fas fa-heart'></i><span>{{child_comment.likes.all.count}}</span>
+                                        </button>
+                                    </form>
+                                </th>
+                                <th>
+                                    <form method="POST" action="{% url 'home:comment-dislike' post.pk child_comment.pk %}">
+                                        {% csrf_token %}
+                                        <input type="hidden" name="next" value="{{request.path}}">
+                                        <button type="submit" class="btn btn-light link-danger">
+                                            <i class='fas fa-heart-broken'></i><span>{{child_comment.dislikes.all.count}}</span>
+                                        </button>
+                                    </form>
+                                </th>
+                            </tr>
+                        </table>
+                    </small>
+                </div>
+            </div>
+        {% endfor %}
+        </div>  
+        {% endif %}
+    {% endfor %}
+</div>

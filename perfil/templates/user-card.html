@@ -1,0 +1,40 @@
+{% if not user_list.is_superuser %}
+<tbody>
+    <tr class="table align-middle">
+        <th scope="row">{{user_list.id}}</th> 
+        {% if user_list.imagem %} 
+        <th scope="row">
+            <a data-bs-toggle="modal" href="#imgModal{{user_list.first_name}}">
+                <img src="{{ user_list.imagem.thumb.url }}" class="img-fluid" alt="{{ user_list.first_name }}" width="50" height="50">
+            </a> 
+        </th>
+        {% else %}
+        <th scope="row">None</th>
+        {% endif %} 
+        <th scope="row">{{user_list.first_name}}{{user_list.last_name}}</th>
+        <th scope="row">{{user_list.username}}</th>
+        <th scope="row">{{user_list.get_type_user_display}}</th>
+        <th scope="row">{{user_list.date_joined}}</th>
+        <th scope="row">
+            <a class="link-warning" href="{% url 'user-change' user_list.pk %}"><i class="fas fa-eye fa-2x"></i></a>
+            <a class="ml-2 link-secondary" href="{% url 'user-change' user_list.pk %}"><i class="far fa-file fa-2x"></i></a>
+            <a class="ml-3 link-danger" href="{% url 'user-delete' user_list.pk %}"><i class="fas fa-trash fa-2x"></i></a>
+        </th>
+    </tr>
+</tbody> 
+{% endif %} 
+<div class="modal fade" id="imgModal{{user_list.first_name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Foto de Perfil de {{ user_list.first_name }}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center">
+                {% if user_list.imagem %}  
+                    <img src="{{ user_list.imagem.url }}" class="img-fluid" alt="{{ user_list.first_name }}"> 
+                {% endif %}  
+            </div> 
+        </div>
+    </div>
+</div>

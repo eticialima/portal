@@ -1,0 +1,124 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Post{% endblock %}
+{% block body_title %}Post{% endblock %}
+{% load widget_tweaks %}
+{% load static %} 
+{% block main_content %} 
+   
+<div class="box text-center">
+    <main class="form-box">
+        <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1>
+        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off"
+            enctype="multipart/form-data">
+            {% csrf_token %}
+            
+            <div class="row">
+                <div class="col-sm-6">
+                    <div class="custom-file mt-3">
+                        <div class="post-thumb"> 
+                            <small>Recomendavel:1280x720</small>
+                            <img id="preview" class="img-thumbnail" src="{% static 'images/default2.png' %}" alt="logo">
+                        </div>
+                        <br>
+                        <div class="custom-file">
+                            <label class="label-input custom-file-label" for="image">Selecionar thumbnail...</label>
+                            <input type="file" class="custom-file-input" id="image" name="image" aria-describedby="imageadd" autofocus>
+                        </div>
+                    </div>
+                    <br>
+                    <label for="file">Arquivos até 500M</label>
+                    {% render_field form.download_file class="form-control-input form-control" type="file" id="download_file" name="download_file" accept=".rar, .zip, .jpg, .png, .doc, .docx, .pdf, .txt" %}
+                    <p class="text-muted fst-italic" style="font-size:12px;">
+                        Formato suportado | Winrar | Zip | JPG | PNG | arquivos unicos.
+                        <br><b>Para multiplos arquivos e +500M utilize link externo.</b>
+                    </p>
+                    <br>
+                    {% render_field form.download_link class="form-control" type="text" placeholder="Link externo download..." %}
+                   
+                </div> 
+                <div class="col-sm-6"> 
+                    <br>
+                    <label>Titulo</label>
+                    {% render_field form.title class="form-control" type="text" %}
+                    <br>
+                    <label>Descrição</label>
+                    {% render_field form.desc class="form-control" type="text" rows="3" %}
+                
+                    <br>
+                    <label>Categoria</label> 
+                    {% render_field form.category class="form-control form-select" id="category" name="category" %}    
+                    <br>
+                    
+                    <label><code class="mx-5">Tags</code></label>
+                    <input type="text" data-role="tagsinput" class="form-control" name="tags"> 
+                    <br>   
+                    <div class="row">
+                        <div class="col"> 
+                            <label>Data de Criação</label>
+                            {% render_field form.created_date class="form-control" type="text" disabled="disabled" %}
+                        </div> 
+                        <br>
+                        <div class="col"> 
+                            <label>Data de Publicação</label>  
+                            {% render_field form.published_date class="form-control" id="published_date" type="date" %}
+                        </div> 
+                    </div> 
+                    <br>  
+                    <label><code>Publicação Ativa ?</code></label> 
+                    {% render_field form.is_activate class="form-check-input" id="is_activate" name="is_activate" %}    
+                </div> 
+            </div>  
+            <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
+            <button type="submit" class="btn-default btn-yellow" name="btn_adicionar">Criar</button>
+            <button class="btn-default btn-red" onclick="location.href='{% url 'post' %}'">Voltar</button>
+            </div>
+        </form>  
+    </main>
+</div>  
+
+<!-- <div class="modal fade" id="tagsadd" tabindex="-1" aria-labelledby="tagsadd1" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body text-center"> 
+                <form id="form2" method="POST" action="{% url 'post-create' %}" autocomplete="off" enctype="multipart/form-data">
+                    {% csrf_token %} 
+                    {{ form2 }} 
+                    <button type="submit" class="btn-default btn-yellow" >Criar</button>
+                </form>   
+            </div> 
+        </div>
+    </div>
+</div> -->
+
+<script>
+    $("#image").change(function (event) {
+        readURL(this);
+    }); 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var filename = $("#image").val();
+            filename = filename.substring(filename.lastIndexOf('\\') + 1);
+            reader.onload = function (e) {
+                debugger;
+                $('#preview').attr('src', e.target.result);
+                $('#preview').hide();
+                $('#preview').fadeIn(500);
+                $('.custom-file-label').text(filename);
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }  
+
+    // Formulario não envia campos desabilitados
+    $('#post-form').submit(function(e) {
+        $(':disabled').each(function(e) {
+            $(this).removeAttr('disabled');
+        })
+    });
+    
+</script>  
+{% endblock %}

@@ -1,0 +1,91 @@
+{% include 'base/_head.html' %}
+{% load static %}
+{% block body_content %} 
+<div class="container-fluid" style="padding-left: 0;">
+    <div class="row h-100">
+        <div class="col-8">
+            <div class="bg"></div>
+        </div>
+        <div id="size" class="col-4 col"> 
+            <div class="text-center box lead">
+                <div class="h2">Portal EditorYZ</div>
+                <h5>Sistema ainda em desenvolvimento.</h5>
+                {% include 'base/_messages.html' %}
+                <div class="box">
+                    <main class="form-signup">
+                        <h1 class="h3 mb-3 fw-normal">Criar Conta</h1>
+                        <form id="mainform2" method="post" class="form" action="{% url 'user-new' %}" autocomplete="off" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <div class="row">  
+                                <div class="col-sm-6 form-group mt-3">
+                                    <label for="username">Email<span style="color: red;">*</span></label>
+                                    <input type="email" class="form-control" id="username" name="username" required autofocus>
+                                </div>
+                                <div class="col-sm-6 form-group mt-3">
+                                    <label for="user_name"><b>Username</b><span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="user_name" name="user_name" required autofocus>
+                                </div> 
+                            </div>
+                            <div class="row">
+                                <div class="col-sm-6 form-group mt-3">
+                                    <label for="first_name">Nome<span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="first_name" name="first_name" required>
+                                </div>
+                                <div class="col-sm-6 form-group mt-3">
+                                    <label for="last_name">Sobrenome<span style="color: red;">*</span></label>
+                                    <input type="text" class="form-control" id="last_name" name="last_name" required>
+                                </div>
+                            </div> 
+                            <div class="row">
+                                <div class="col-sm-6">
+                                    <div class="form-group mt-3">
+                                        <label for="password1">Senha<span style="color: red;">*</span></label>
+                                        <input type="password" class="form-control" id="password1" name="password1" required>
+                                        <small id="password-help" class="text-muted">Sua senha deve conter no minimo 8 caracteres.</small><br>
+                                        <small id="password-help" class="text-muted">E pelo menos 1 número e uma letra maiuscula.</small>
+                                    </div>
+                                </div>
+                                <div class="col-sm-6">
+                                    <div class="form-group mt-3">
+                                        <label for="password2">Confirmação da Senha<span style="color: red;">*</span></label>
+                                        <input type="password" class="form-control" id="password2" name="password2" required>
+                                    </div>
+                                </div> 
+                            </div> 
+                            <div class="invisible col-sm-6 form-group mt-3">
+                                <label for="type_user">Tipo Usuario<span style="color: red;">*</span></label> 
+                                <select class="form-select form-control" id="type_user" name="type_user" selected disabled="disabled">
+                                    {{form.type_user.3}} 
+                                </select>
+                            </div>  
+                            <div class="form-group mt-3">
+                                <button type="submit" class="btn-default btn-red">Cadastrar</button> 
+                                <div id="msgSubmit" class="h3 text-center hidden"></div>
+                            </div>
+                            <div class="form-group py-3">
+                                <a class="link-secondary" href="{% url 'login' %}">Conectar-se</a>
+                            </div>
+                        </form>
+                    </main> 
+                </div>    
+                <div class="text-center fs-6 text-muted font-italic py-4">
+                    <small>© 2021</small>
+                </div>
+            </div> 
+        </div>
+    </div>
+</div>   
+<script>  
+    $(window).on('resize', function () {
+        $('.col').toggleClass('col-4', $(window).width() > 768);
+    }).trigger('resize')
+
+    // Formulario não envia campos desabilitados
+    $('#mainform2').submit(function(e) {
+        $(':disabled').each(function(e) {
+            $(this).removeAttr('disabled');
+        })
+    });
+
+</script> 
+{% endblock %}

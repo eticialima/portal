@@ -1,0 +1,55 @@
+{% load static %}
+<div class="row">
+    <div class="col-md-3"> 
+        <div class="p-3 bg-light"> 
+            <h2>Postagens</h2> 
+        </div> 
+    </div> 
+    <div class="col-md-9">
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-3"> 
+        {% for post in perfil.posts.all %} 
+            {% if post.is_activate == True %}
+            <div class="card-group">
+                <div class="card-box"> 
+                    {% if post.image %} 
+                    <a href="{% url 'home:post-detail' post.pk %}">
+                        <img class="img-responsive" src="{{ post.image.thumb.url }}" alt="card-img-top">
+                    </a>
+                    {% else %}
+                    <th scope="row">None</th>
+                    {% endif %} 
+                    <div class="card-body">
+                    <h6 class="card-text text-center"><a href="{% url 'home:post-detail' post.pk %}" class="text-dark">{{post.title}}</a></h6> 
+                    <p class=" ">
+                        <a href="#" style="font-size:9px; text-decoration: none; color: rgb(155, 8, 8);">
+                            <table>
+                                <tr>  
+                                    <th> 
+                                        {% if post.author.profile.image %} 
+                                            <img src="{{  post.author.profile.image.url }}" alt="{{ post.user.first_name }}" class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
+                                        {% else %}  
+                                            <img src="{% static 'images/default.png' %}" class="img-fluid rounded-circle" alt="default" style="width: 40px; height: 40px;margin-right: 10px;"/>   
+                                        {% endif %}
+                                    </th> 
+                                    <th>
+                                        <span class="fw-light">{{ post.author.user_name}}</span>
+                                    </th>   
+                                </tr> 
+                            </table> 
+                        </a>   
+                    </p> 
+                    </div>
+                    <div class="card-footer bg-transparent">    
+                        <a href="" style="text-decoration: none; color: rgb(46, 46, 46);">
+                            <span class="badge bg-warning text-dark">{{post.category}}</span>
+                        </a> 
+                    </div>
+                </div> 
+            </div>   
+            {% endif %}
+        {% endfor %}
+        </div> 
+    </div>
+</div>
+
+ 
