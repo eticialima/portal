@@ -10,7 +10,7 @@
        <form id="mainform" method="post" class="form" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}   
             <div class="row"> 
-                <div class="col-sm-6"> 
+                <div class="col-sm-6">  
                     <div class="form-group mt-3">
                         <label for="username">Email</label>
                         {% render_field form.username class="form-control" id="username" name="username" %}

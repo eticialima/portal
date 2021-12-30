@@ -46,35 +46,72 @@
 
                         <div class="col-6"> 
                             <h5>Redes Sociais:</h5> 
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
-                                <i class="fab fa-youtube mx-2"></i>
-                            </a>
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
-                                <i class="fab fa-whatsapp mx-2"></i>
-                            </a>        
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
-                                <i class="fab fa-facebook mx-2"></i>
-                            </a>        
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            {% for n in perfil.network.all %} 
+                            <!--ICONE YOUTUBE -->
+                            {% if n.name == 'YOUTUBE' and n.url != '' %} 
+                                <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
+                                    <i class="fab fa-youtube mx-2"></i>
+                                </a> 
+                            {% endif %}
+
+                            <!--ICONE WHATSAPP -->
+                            {% if n.name == 'WHATSAPP' and n.url != '' %} 
+                                <a href="https://api.whatsapp.com/send?phone={{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                    <i class="fab fa-whatsapp mx-2"></i>
+                                </a>   
+                            {% endif %}  
+
+                            <!--ICONE FACEBOOK -->
+                            {% if n.name == 'FACEBOOK' and n.url != '' %} 
+                                <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                                    <i class="fab fa-facebook mx-2"></i>
+                                </a>   
+                            {% endif %}  
+                            
+                            <!--ICONE INSTAGRAM -->
+                            {% if n.name == 'INSTAGRAM' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-instagram mx-2"></i> 
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>
+                            {% endif %}  
+
+                            <!--ICONE TWITTER -->
+                            {% if n.name == 'TWITTER' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-twitter mx-2"></i>
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>
+                            {% endif %}  
+
+                            <!--ICONE PINTEREST -->
+                            {% if n.name == 'PINTEREST' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-pinterest mx-2"></i>
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>  
+                            {% endif %} 
+                            
+                            <!--ICONE SNAPCHAT -->
+                            {% if n.name == 'SNAPCHAT' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-snapchat mx-2"></i>
                             </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            {% endif %} 
+                            
+                            <!--ICONE TIKTOK -->
+                            {% if n.name == 'TIKTOK' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-tiktok mx-2"></i>
                             </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            {% endif %} 
+                            
+                            <!--ICONE DISCORD -->
+                            {% if n.name == 'DISCORD' and n.url != '' %} 
+                            <a href="{{n.url}}" target="_blank" style="text-decoration: none; color: rgb(155, 8, 8);">
                                 <i class="fab fa-discord mx-2"></i>
-                            </a>
+                            </a>  
+                            {% endif %}  
+                            {% endfor %} 
                         </div> 
-                    </div> 
+                    </div>   
                     <div class="row"> 
                         <div class="col py-2"> 
                             <div class="d-flex justify-content-between align-items-center">
@@ -89,12 +126,9 @@
                 </div>  
             </div> 
         </div>
-    </section> 
-
-    <section class="py-5"> 
-  
-        {% include 'profile/mypost.html' %}   
-    
+    </section>  
+    <section class="py-5">  
+        {% include 'profile/mypost.html' %}    
     </section>    
 </div>
 {% endblock %} 

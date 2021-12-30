@@ -7,14 +7,13 @@ from perfil.choices import SocialNetwork
 
 class Profile(models.Model):   
     user = models.OneToOneField(CustomUser,  on_delete=models.DO_NOTHING, related_name='profile') 
-    image = StdImageField('Image', upload_to='profile', variations={'thumb': (500, 500, True)}, delete_orphans = True, blank=True) 
-    
+    image = StdImageField('Image', upload_to='profile', variations={'thumb': (500, 500, True)}, delete_orphans = True, blank=True)  
     occupation = models.CharField(max_length=120)
     description = models.TextField()  
     gender = models.CharField(max_length=20, blank=True)
     phone = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=20, blank=True)
-    country = models.CharField(max_length=20, blank=True) 
+    country = models.CharField(max_length=20, blank=True)
 
     def __str__(self):
         return f' Profile: {self.user.username}'
@@ -29,25 +28,21 @@ class Profile(models.Model):
             Profile.objects.create(user=kwargs['instance'])
 
 class Network(models.Model):
-    profile = models.ForeignKey(Profile, on_delete=models.CASCADE, verbose_name="network", blank=True, null=True) 
+    user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='network', blank=True, null=True) 
     name = models.CharField(max_length=10, choices=SocialNetwork.choices, blank=True, null=True) 
-    url = models.URLField()
+    url = models.URLField(blank=True, null=True)
 
     def __str__(self):
-        return self.name
-
+            return f'{self.user or ""}, {self.name}'
+ 
     class Meta:
         verbose_name = "Network"
         verbose_name_plural = "Networks"
+        ordering = ['user']
 
-
-    @receiver(post_save, sender=Profile)
-    def create_network(sender, **kwargs): 
-        profile = kwargs['instance']
-        if kwargs.get('created', False):  
-            # for v in SocialNetwork:
-            #     print(v)  
-            #     Network.objects.create(profile=kwargs['instance'])  
+    @receiver(post_save, sender=CustomUser)
+    def create_network(sender, **kwargs):  
+        if kwargs.get('created', False):   
            for i in SocialNetwork:
-                Network.objects.create(name=i, profile=kwargs['instance']) 
+                Network.objects.create(name=i, user=kwargs['instance']) 
          

@@ -17,9 +17,18 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
+from rest_framework import routers
 
+from perfil.views import NetworkViewSet, ProfileViewSet
 
-urlpatterns = [
+router = routers.DefaultRouter()
+router.register(r'users', ProfileViewSet)
+router.register(r'net', NetworkViewSet)
+
+urlpatterns = [ 
+    path('api/', include(router.urls)),
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
+
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), 
     path('', include('home.urls')),   
