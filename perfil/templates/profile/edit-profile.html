@@ -8,8 +8,7 @@
     <div class="bg-light p-5 lead">
         <h2>Editar Informações Basicas</h2> 
         <form method="post" action="{% url 'profile:edit-profile' %}" enctype="multipart/form-data">
-            {% csrf_token %}
-      
+            {% csrf_token %} 
                     <div class="row"> 
                         <div class="col-md-6">
                             <div class="mb-3">

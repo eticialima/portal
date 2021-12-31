@@ -48,7 +48,7 @@ small{
 
 a {
     text-decoration: none!important;
-    color: #6c757d;
+    color: rgb(140,147,170);
 } 
 
 @media (max-width: 768px) { 

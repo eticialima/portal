@@ -14,6 +14,7 @@ class Profile(models.Model):
     phone = models.CharField(max_length=20, blank=True)
     city = models.CharField(max_length=20, blank=True)
     country = models.CharField(max_length=20, blank=True)
+    likes = models.ManyToManyField(CustomUser, blank=True, related_name='profile_likes')
 
     def __str__(self):
         return f' Profile: {self.user.username}'

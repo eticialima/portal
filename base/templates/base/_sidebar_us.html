@@ -1,7 +1,7 @@
 <a href="{% url 'profile:user-profile' request.user.user_name %}" class="menu-item p-3"><i class="fas fa-users me-2"></i>Meu Perfil</a>  
 <a href="{% url 'painel' %}" class="menu-item p-3"><i class="fas fa-tachometer-alt me-2"></i>Painel</a>  
 <a href="{% url 'post' %}" class="menu-item p-3"><i class="far fa-file-pdf me-2"></i>Gerenciar Postagens</a>       
-<a class="list-group-item-danger text-danger fw-bold p-3 " data-bs-toggle="modal" href="#exampleModal" ><i class="fas fa-power-off me-2"></i>Sair</a> 
+<a class="menu-item-out fw-bold p-3 link-light " data-bs-toggle="modal" href="#exampleModal" ><i class="fas fa-power-off me-2"></i>Sair</a> 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
 <div class="modal-dialog modal-dialog-centered">

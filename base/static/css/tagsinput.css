@@ -20,7 +20,7 @@
   box-shadow: none;
 }
 .badge-tag {
-  background-color: #de3f23c2;
+  background-color: rgb(208,85,79);
   color: white;
 }
 .bootstrap-tagsinput.form-control input::-moz-placeholder {

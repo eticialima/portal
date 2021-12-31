@@ -16,7 +16,7 @@
                 <tr>
                     <th> 
                         <a href="http://127.0.0.1:8000/perfil/{{post.author.user_name}}" 
-                            style="text-decoration: none; color: rgb(155, 8, 8);">
+                            style="text-decoration: none; color: rgb(208,85,79);">
                         {% if post.author.profile.image %}   
                             <img src="{{  post.author.profile.image.url }}" alt="{{ post.author.first_name }}"
                                     class="img-fluid rounded-circle" style="width: 40px; height: 40px;margin-right: 10px;">  
@@ -28,7 +28,7 @@
                     </th> 
                     <th>
                         <a href="http://127.0.0.1:8000/perfil/{{post.author.user_name}}" 
-                            style="text-decoration: none; color: rgb(155, 8, 8);"> 
+                            style="text-decoration: none; color: rgb(208,85,79);"> 
                             <span class="fw-light">{{ post.author.user_name}}</span>
                         </a>
                     </th>   
@@ -37,7 +37,7 @@
         </div>
         <div class="card-footer bg-transparent">    
             <a href="" style="text-decoration: none; color: rgb(46, 46, 46);">
-                <span class="badge bg-warning text-dark">{{post.category}}</span>
+                <span class="badge btn-red">{{post.category}}</span>
             </a> 
          </div>
     </div> 

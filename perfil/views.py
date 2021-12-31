@@ -76,4 +76,20 @@ class ProfileEditView(UpdateView):
             network.save()
         
         messages.success(self.request, 'Alterações salva com sucesso!!!')
-        return redirect(reverse_lazy('profile:edit-profile'))   
+        return redirect(reverse_lazy('profile:edit-profile'))
+
+
+class EditPhotoProfile(UpdateView):
+    model = Profile
+    template_name = "profile/profile.html"
+    template_name_suffix = '_update_form'  
+    fields = ['image'] 
+  
+    
+    def form_valid(self, form):
+        form.instance.user = self.request.user
+        return super().form_valid(form)
+
+    def get_success_url(self):  
+        messages.success(self.request, 'Imagem de perfil atualizada com sucesso!!!')
+        return reverse_lazy('profile:user-profile', args=[self.request.user.user_name])
