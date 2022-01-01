@@ -27,8 +27,7 @@ router.register(r'net', NetworkViewSet)
 
 urlpatterns = [ 
     path('api/', include(router.urls)),
-    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')),
-
+    path('api-auth/', include('rest_framework.urls', namespace='rest_framework')), 
     path('admin/', admin.site.urls),
     path('accounts/', include('accounts.urls')), 
     path('', include('home.urls')),   

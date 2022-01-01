@@ -51,18 +51,9 @@ body html {
 #menu-toggle {
   cursor: pointer;
 }
+ 
+/* Page Configuration */
 
-.list-group-item {
-  border: none;
-  padding: 20px 30px;
-}
-
-.list-group-item.active {
-  background-color: transparent;
-  color: #393939;
-  border: none;
-}
-  
 .fundo {
   background-color: #e6e6e6;
   box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 19%);
@@ -89,6 +80,8 @@ body html {
   height: auto;
 }
 
+/* ImageView Configuration */
+
 .custom-file input[type="file"] {
   display: none;
 }
@@ -106,6 +99,9 @@ body html {
 .label-input:hover {
   background-color: rgb(239,141,111);
 }
+
+/* Dashboard Menu Configuration */
+
 .menu-item {
   background-color: #ffffff;
   color: rgb(29, 29, 29);
@@ -114,7 +110,7 @@ body html {
 .menu-item a {
   text-decoration: none;
 }
-.menu-item:hover {
+.menu-item:hover,.menu-item-out:hover {
   background-color: rgb(239,141,111);
   color: rgb(255, 255, 255);
 }
@@ -123,11 +119,6 @@ body html {
   background-color: rgb(208,85,79);
   color: rgb(255, 255, 255);
   transition:all .3s ease-in-out; 
-} 
-
-.menu-item-out:hover {
-  background-color: rgb(239,141,111);
-  color: rgb(255, 255, 255);
 }
 
 /* Image Configuration */
@@ -178,8 +169,9 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #dbdbdb;
 }
+
 a {
   color: #393939;
   text-decoration: none;
@@ -246,6 +238,7 @@ a {
 .s-label:hover {
   color:rgb(239,141,111);
 }
+
 .form-control:focus {
   border-color: rgb(208,85,79)!important;
   box-shadow: 0 0 5px rgb(239,141,111)!important;

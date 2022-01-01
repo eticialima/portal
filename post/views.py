@@ -16,7 +16,15 @@ class PostView(BaseAdminUsersall, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context['post_list'] = self.model.objects.all()  
-        return context
+        return context 
+        
+    def get_queryset(self):      
+        title = self.request.GET.get('title')
+        if title:  
+            profile_list = Post.objects.filter(title__icontains=title) 
+        else:
+            profile_list = Post.objects.filter() 
+        return profile_list         
  
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post 

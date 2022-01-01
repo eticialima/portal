@@ -9,82 +9,78 @@
         <h2>Editar Informações Basicas</h2> 
         <form method="post" action="{% url 'profile:edit-profile' %}" enctype="multipart/form-data">
             {% csrf_token %} 
-                    <div class="row"> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="input">First Name</label>
-                                <input type="text" id="input" name="first_name" class="form-control" required="required" value="{{ request.user.first_name }}"/>
-                            </div>
-                        </div> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="input">Last Name</label>
-                                <input type="text" name="last_name" class="form-control" required="required" value="{{ request.user.last_name }}"/>
-                            </div> 
-                        </div> 
-                        <div class="col-md-12">
-                            <div class="mb-3">
-                                <label for="textarea">About Me</label>
-                                <textarea rows="4" id="textarea" class="form-control" required="required" name="description">{{ profile.description }}</textarea> 
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="input">Country</label>
-                                <input type="text" name="country" class="form-control" required="required" value="{{ profile.country }}"/>
-                            </div>
-                        </div> 
-                        <div class="col-md-6">
-                            <div class="mb-3">
-                                <label for="input">City</label>
-                                <input type="text" name="city" class="form-control" required="required" value="{{ profile.city }}"/>  
-                            </div>  
-                        </div> 
-                        <div class="col-md-4">
-                            <div class="mb-3">
-                                <label for="input">occupation </label>
-                                <input type="text" name="occupation" class="form-control" required="required" value="{{ profile.occupation }}"/> 
-                            </div>
-                        </div>     
-                        <div class="col-md-4">
-
-                            <div class="mb-3">
-                                <br>
-                                <div class="form-check-inline">
-                                    <label>
-                                        <input type="radio" class="form-check-input" {% if profile.gender == "Homem" %} checked="checked" {% endif %} name="gender" value="Homem">
-                                        Homem
-                                    </label>
-                                </div>
-                                <div class="form-check-inline">
-                                    <label>
-                                        <input type="radio" class="form-check-input" {% if profile.gender == "Mulher" %} checked="checked" {% endif %} name="gender" value="Mulher">
-                                        Mulher
-                                    </label>
-                                </div>
-                            </div>
-                        </div>    
-                        <div class="col-md-4">
-
-                            <div class="mb-3">
-                                <label for="input">Telefone</label>
-                                <input type="text" name="phone" class="form-control" required="required" value="{{ profile.phone }}"/>
-                            </div>
-                     
-                        </div>  
-                        <div class="col-md-12"> 
-                            <div class="row mb-3">  
-                                <h3>Refes Sociais</h3>
-                                {% for n in network.all %} 
-                                <label for="input" class="col-sm-2 col-form-label">{{n.name|title}}</label> 
-                                <div class="col-sm-10">
-                                    <input type="text" name="url" id="url" class="form-control" value="{{n.url}}"/> 
-                                </div> 
-                                {% endfor %} 
-                            </div> 
-                        </div>  
+            <div class="row"> 
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="input">First Name</label>
+                        <input type="text" id="input" name="first_name" class="form-control" required="required" value="{{ request.user.first_name }}"/>
+                    </div>
+                </div> 
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="input">Last Name</label>
+                        <input type="text" name="last_name" class="form-control" required="required" value="{{ request.user.last_name }}"/>
                     </div> 
-            
+                </div> 
+                <div class="col-md-12">
+                    <div class="mb-3">
+                        <label for="textarea">About Me</label>
+                        <textarea rows="4" id="textarea" class="form-control" required="required" name="description">{{ profile.description }}</textarea> 
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="input">Country</label>
+                        <input type="text" name="country" class="form-control" required="required" value="{{ profile.country }}"/>
+                    </div>
+                </div> 
+                <div class="col-md-6">
+                    <div class="mb-3">
+                        <label for="input">City</label>
+                        <input type="text" name="city" class="form-control" required="required" value="{{ profile.city }}"/>  
+                    </div>  
+                </div> 
+                <div class="col-md-4">
+                    <div class="mb-3">
+                        <label for="input">occupation </label>
+                        <input type="text" name="occupation" class="form-control" required="required" value="{{ profile.occupation }}"/> 
+                    </div>
+                </div>     
+                <div class="col-md-4"> 
+                    <div class="mb-3">
+                        <br>
+                        <div class="form-check-inline">
+                            <label>
+                                <input type="radio" class="form-check-input" {% if profile.gender == "Homem" %} checked="checked" {% endif %} name="gender" value="Homem">
+                                Homem
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label>
+                                <input type="radio" class="form-check-input" {% if profile.gender == "Mulher" %} checked="checked" {% endif %} name="gender" value="Mulher">
+                                Mulher
+                            </label>
+                        </div>
+                    </div>
+                </div>    
+                <div class="col-md-4"> 
+                    <div class="mb-3">
+                        <label for="input">Telefone</label>
+                        <input type="text" name="phone" class="form-control" required="required" value="{{ profile.phone }}"/>
+                    </div> 
+                </div>  
+                <div class="col-md-12"> 
+                    <div class="row mb-3">  
+                        <h3>Refes Sociais</h3>
+                        {% for n in network.all %} 
+                        <label for="input" class="col-sm-2 col-form-label">{{n.name|title}}</label> 
+                        <div class="col-sm-10">
+                            <input type="text" name="url" id="url" class="form-control" value="{{n.url}}"/> 
+                        </div> 
+                        {% endfor %} 
+                    </div> 
+                </div>  
+            </div>  
             <div class="mb-3">
                 <button type="button" class="mr-2 btn-default btn-red" onclick="location.href='{% url 'profile:user-profile' request.user.user_name %}'">Voltar</button> 
                 <button type="submit" class="btn-default btn-yellow"><span>Update</span></button>

@@ -1,4 +1,3 @@
-
 {% extends 'base/_base_home.html' %}
 {% load widget_tweaks %} 
 {% load static %}  
@@ -15,7 +14,6 @@
                         {% else %} 
                             <img id="preview" src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
                         {% endif %}   
-                        
                         <div class="sale-div position-absolute">
                             {% if perfil == request.user and request.user.is_authenticated %} 
                             <form method="post" action="{% url 'profile:photo-profile' perfil.pk %}" enctype="multipart/form-data">
@@ -138,8 +136,11 @@
         </div>
     </section>  
     {% include 'base/_messages.html' %}
-    <section class="py-5">  
-        {% include 'profile/mypost.html' %}    
+    <section class="py-5">   
+
+        {% include 'profile/post-profile.html' %} 
+         
+      
     </section>    
 </div>
 <style> 
@@ -159,8 +160,7 @@
     .label-input-photo:hover {
         background-color: rgb(239,141,111);
         transition: 0.1;
-    }
-
+    } 
     .s-label {
         color:rgb(208,85,79); 
     }
@@ -173,8 +173,7 @@
 <script> 
     $("#image").change(function (event) {
         readURL(this);
-    });
-    
+    }); 
     function readURL(input) {
         if (input.files && input.files[0]) {
         var reader = new FileReader();

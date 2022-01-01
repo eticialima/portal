@@ -2,12 +2,23 @@
 <div class="row">
     <div class="col-md-3"> 
         <div class="p-3 bg-light"> 
-            <h2>Postagens</h2> 
+            <h2>Postagens</h2>  
+            <div class="form-group mb-2">
+                <span class="fw-bold py-3">Titulo: </span>   
+                <form action="{% url 'profile:user-profile' perfil.profile.user.user_name %}" method="get">   
+                    <input name="title" type="text" value="{{request.GET.title}}" class="form-control" placeholder="Pesquisar..."> 
+                </form> 
+            </div>  
+            {% if request.GET.title %}                    
+            <a href="{%  url 'profile:user-profile' perfil.profile.user.user_name %}">
+                <button class="btn-default btn-red" type="button">Reset</button>
+            </a>  
+            {% endif %}  
         </div> 
     </div> 
     <div class="col-md-9">
-        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-3"> 
-        {% for post in perfil.posts.all %} 
+        <div class="row row-cols-1 row-cols-xs-2 row-cols-sm-2 row-cols-lg-3 g-3">  
+            {% for post in page_obj %}     
             {% if post.is_activate == True %}
             <div class="card-group">
                 <div class="card-box"> 
@@ -45,10 +56,34 @@
                         </a> 
                     </div>
                 </div> 
-            </div>   
+            </div>  
             {% endif %}
-        {% endfor %}
+        {% endfor %} 
         </div> 
+             
+        <div class="p-4"> 
+            {% if page_obj.paginator.num_pages > 1 %}
+            {% include 'profile/paginacao.html' %}
+            {% endif %}
+            <!-- <div class="pagination">
+                <span class="step-links">
+                    {% if page_obj.has_previous %}
+                        <a href="?page=1">&laquo; first</a>
+                        <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+                    {% endif %}
+            
+                    <span class="current">
+                        Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+                    </span>
+            
+                    {% if tennats.has_next %}
+                        <a href="?page={{ page_obj.next_page_number }}">next</a>
+                        <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+                    {% endif %}
+                </span>
+            </div>  -->
+        </div>  
+      
     </div>
 </div>
 
