@@ -4,13 +4,23 @@
 {% block main_content %}  
 <div class="g-4 py-3"> 
     <button class="btn-default btn-red"  onclick="location.href='{% url 'post-create' %}'"><a></a>Criar Post</button>  
-    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Comentarios</button>  
-    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Relatorios</button>  
-
-    <!-- Somente adiministrador -->
-    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Todas Postagens</button>  
-     <!-- Somente adiministrador -->
+    <!-- <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Comentarios</button>  
+    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Relatorios</button>   
+    <button class="btn-default btn-orange"  onclick="location.href='#'"><a></a>Todas Postagens</button>    -->
 </div> 
- 
+ <!-- pesquisar -->
+<div class="row d-flex">
+    {% if request.GET.title %}   
+    <div class="col-md-1 mb-2 py-3"> 
+        <button class="btn-default btn-red"  onclick="location.href='{% url 'post' %}'"><a></a>Reset</button>   
+    </div> 
+    {% endif %}
+    <div class="form-group col-md-4 mb-2 py-3">   
+       <form action="{% url 'post' %}" method="get">       
+             <input name="title" type="text" value="{{request.GET.title}}" class="form-control me-2" placeholder="Pesquisar Post...">  
+             <spam class="form-text text-muted">Exemplo: pesquise por "postagem"</spam>
+       </form> 
+    </div>   
+</div>  
 {% include 'post/post-card.html' %}    
 {% endblock %}

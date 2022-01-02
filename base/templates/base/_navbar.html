@@ -10,10 +10,9 @@
         </a>
         <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"><a href="{% url 'home:home' %}">Home</a></li>
-            <li class="nav-item"><a href="#">AE Assets</a></li>
-            <li class="nav-item"><a href="#">PR Assets</a></li>
-            <li class="nav-item"><a href="#">3D Assets</a></li>
-            <li class="nav-item"><a href="#">Plugins</a></li> 
+            <li class="nav-item"><a href="#">Sobre</a></li>
+            <li class="nav-item"><a href="#">Como usar o site?</a></li> 
+            <li class="nav-item"><a href="#">Contato</a></li> 
             <li class="nav__perfil nav__item dropdown">
                 {% if user.is_authenticated %}
                 <div class="action">
@@ -32,13 +31,13 @@
                         <div>
                             <a href="{% url 'profile:user-profile' user.user_name %}" class="nav__link">Meu Perfil</a>
                             <a href="{% url 'painel' %}" class="nav__link">Configurações</a>
-                            <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'logout' %}'">Logout</button>
+                            <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'accounts:logout' %}'">Logout</button>
                         </d>
                     </div>
                 </div>
                 {% else %}
                 <div class="action">
-                    <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'login' %}'">Login</button>
+                    <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'accounts:login' %}'">Login</button>
                 </div>
                 {% endif %}
             </li> 

@@ -4,6 +4,22 @@
 {% block body_home %}
 {% include 'base/_navbar.html' %}   
 <div class="container-sm"> 
+    
+    {% if not perfil.profile.user.is_active %} 
+    <section class="container-sm py-5">  
+        <div class="bg-light p-4 lead">
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="link-danger"><i class="fas fa-times fa-5x"></i></span> 
+                </div> 
+                <div class="col">
+                    <br>
+                    <h1>Perfil Desativado ou Deletado do sistema !!!</h1> 
+                </div> 
+            </div>
+        </div>
+    </section>
+    {% else %}
     <section class="py-5">  
         <div class="bg-light p-4 lead">
             <div class="row">   
@@ -52,67 +68,67 @@
                             <p><b>Cidade:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
                         </div>
 
-                        <div class="col-6"> 
-                            <h5>Redes Sociais:</h5> 
+                        <div class="col-6">  
+                            <h5>Redes Sociais:</h5>  
                             {% for n in perfil.network.all %} 
                             <!--ICONE YOUTUBE -->
-                            {% if n.name == 'YOUTUBE' and n.url != '' %} 
+                            {% if n.name == 'YOUTUBE' and n.url != '' and n.url != 'None' %} 
                                 <a href="{{n.url}}" target="_blank" class="s-label">
                                     <i class="fab fa-youtube mx-2"></i>
                                 </a> 
                             {% endif %}
 
                             <!--ICONE WHATSAPP -->
-                            {% if n.name == 'WHATSAPP' and n.url != '' %} 
+                            {% if n.name == 'WHATSAPP' and n.url != '' and n.url != 'None' %} 
                                 <a href="https://api.whatsapp.com/send?phone={{n.url}}" target="_blank" class="s-label"> 
                                     <i class="fab fa-whatsapp mx-2"></i>
                                 </a>   
                             {% endif %}  
 
                             <!--ICONE FACEBOOK --> 
-                            {% if n.name == 'FACEBOOK' and n.url != '' %} 
+                            {% if n.name == 'FACEBOOK' and n.url != '' and n.url != 'None' %} 
                                 <a href="{{n.url}}" target="_blank" class="s-label"> 
                                     <i class="fab fa-facebook mx-2"></i>
                                 </a>   
                             {% endif %}  
                             
                             <!--ICONE INSTAGRAM -->
-                            {% if n.name == 'INSTAGRAM' and n.url != '' %} 
+                            {% if n.name == 'INSTAGRAM' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-instagram mx-2"></i> 
                             </a>
                             {% endif %}  
 
                             <!--ICONE TWITTER -->
-                            {% if n.name == 'TWITTER' and n.url != '' %} 
+                            {% if n.name == 'TWITTER' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-twitter mx-2"></i>
                             </a>
                             {% endif %}  
 
                             <!--ICONE PINTEREST -->
-                            {% if n.name == 'PINTEREST' and n.url != '' %} 
+                            {% if n.name == 'PINTEREST' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-pinterest mx-2"></i>
                             </a>  
                             {% endif %} 
                             
                             <!--ICONE SNAPCHAT -->
-                            {% if n.name == 'SNAPCHAT' and n.url != '' %} 
+                            {% if n.name == 'SNAPCHAT' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-snapchat mx-2"></i>
                             </a>    
                             {% endif %} 
                             
                             <!--ICONE TIKTOK -->
-                            {% if n.name == 'TIKTOK' and n.url != '' %} 
+                            {% if n.name == 'TIKTOK' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-tiktok mx-2"></i>
                             </a>    
                             {% endif %} 
                             
                             <!--ICONE DISCORD -->
-                            {% if n.name == 'DISCORD' and n.url != '' %} 
+                            {% if n.name == 'DISCORD' and n.url != '' and n.url != 'None' %} 
                             <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-discord mx-2"></i>
                             </a>  
@@ -141,7 +157,8 @@
         {% include 'profile/post-profile.html' %} 
          
       
-    </section>    
+    </section> 
+    {% endif %}   
 </div>
 <style> 
     .sale-div {

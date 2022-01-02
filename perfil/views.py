@@ -2,7 +2,9 @@ from django.core.paginator import Paginator
 from django.shortcuts import redirect
 from django.urls import reverse_lazy 
 from django.contrib import messages
+from django.views.generic.edit import CreateView
 from django.views.generic.list import MultipleObjectMixin
+from accounts.forms import CustomUserCreateForm
 from base.base_admin_permissions import BaseAdminUsersAd
 from django.views.generic import DetailView, UpdateView, ListView 
 from perfil.models import Network, Profile   
@@ -118,8 +120,8 @@ class EditPhotoProfile(UpdateView):
 class UserListView(BaseAdminUsersAd,ListView):
     model = Profile
     template_name = 'profile/usuarios.html'  
-    context_object_name = 'profile_list'
- 
+    context_object_name = 'profile_list' 
+    
     def get_queryset(self):      
         user_name = self.request.GET.get('user_name') 
         if user_name:  
@@ -127,3 +129,9 @@ class UserListView(BaseAdminUsersAd,ListView):
         else:
             profile_list = Profile.objects.filter() 
         return profile_list   
+    
+class UserCreateView(CreateView):
+    model = CustomUser
+    form_class = CustomUserCreateForm
+    template_name = 'profile/add-user.html'
+    success_url = reverse_lazy('profile:users-profile')

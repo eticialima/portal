@@ -5,6 +5,8 @@ from stdimage.models import StdImageField
 from taggit.managers import TaggableManager
 import uuid
 
+from accounts.models import CustomUser
+
 class Category(models.Model):
     name = models.CharField('Category',max_length=100)
 
@@ -17,7 +19,7 @@ class Category(models.Model):
     
 class Post(models.Model):  
     slug = models.SlugField('Slug', unique=True, default=uuid.uuid1, editable=False)
-    author = models.ForeignKey(get_user_model(), verbose_name='author', related_name="posts", on_delete=models.CASCADE , null=True, blank=True)
+    author = models.ForeignKey(CustomUser, verbose_name='author', related_name="posts", on_delete=models.CASCADE , null=True, blank=True)
     title = models.CharField('Titulo',max_length=70)
     desc = models.TextField('Descrição', null=True, blank=True)
     image = StdImageField('Imagem', upload_to='post/imagem', variations={'thumb': (420, 280, True)}, delete_orphans = True, blank=True)

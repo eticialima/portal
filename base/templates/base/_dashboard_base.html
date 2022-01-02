@@ -12,9 +12,9 @@
                 <div class="sidebar-image">
                     <div class="circle"> 
                         {% if user.profile.image %} 
-                        <img id="preview" src="{{ user.profile.image.thumb.url }}" class="img-fluid" alt="{{ user.first_name }}"/>
+                        <img src="{{ user.profile.image.thumb.url }}" class="img-fluid" alt="{{ user.first_name }}"/>
                         {% else %} 
-                        <img id="preview" src="{% static 'images/default.png' %}" class="img-fluid" alt="default" />
+                        <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" />
                         {% endif %} 
                     </div>  
                 </div>

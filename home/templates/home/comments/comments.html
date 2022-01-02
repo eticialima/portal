@@ -18,7 +18,7 @@
     <div class="p-2 text-center bg-light shadow-sm rounded">
         <div class="h4">Olá,</div>
         <p>Você precisa fazer login no sistema para comentar.</p>
-        <button class="btn-default btn-red" onclick="location.href='{% url 'login' %}'">
+        <button class="btn-default btn-red" onclick="location.href='{% url 'accounts:login' %}'">
             <i class="fas fa-sign-in-alt"></i> Registrar/Login
         </button>
     </div>
@@ -125,8 +125,8 @@
             <div class="bg-light mt-3 p-3"> 
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-row align-items-center">
-                        {% if child_comment.author.imagem %}
-                        <img src="{{ child_comment.author.imagem.url }}" width="30" class="rounded-circle mr-2"/>
+                        {% if child_comment.author.profile.image %}
+                        <img src="{{ child_comment.author.profile.image.url }}" width="30" class="rounded-circle mr-2"/>
                         {% else %}
                         <img src="{% static 'images/default.png' %}" width="30" class="rounded-circle mr-2"/>
                         {% endif %}

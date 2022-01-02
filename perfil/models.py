@@ -6,7 +6,7 @@ from accounts.models import CustomUser
 from perfil.choices import SocialNetwork
 
 class Profile(models.Model):   
-    user = models.OneToOneField(CustomUser,  on_delete=models.DO_NOTHING, related_name='profile') 
+    user = models.OneToOneField(CustomUser,  on_delete=models.CASCADE, related_name='profile') 
     image = StdImageField('Image', upload_to='profile', variations={'thumb': (500, 500, True)}, delete_orphans = True, blank=True)  
     occupation = models.CharField(max_length=120)
     description = models.TextField()  

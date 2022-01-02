@@ -13,7 +13,7 @@
       </a>
    </div>  
    <div class="col-md-4 py-3">
-      <a href="">
+      <a href="{% url 'accounts:user-change' user.pk %}">
       <div class="card-box carde">
          <div class="card-body text-center">  
             <span style="text-decoration: none; color: rgb(208,85,79);">
@@ -23,17 +23,5 @@
          </div>
       </div>
       </a>
-   </div>  
-   <div class="col-md-4 py-3">
-      <a href="">
-      <div class="card-box carde">
-         <div class="card-body text-center">  
-            <span style="text-decoration: none; color: rgb(208,85,79);">
-               <i class="fas fa-folder fa-10x"></i>
-            </span> 
-            <h5 class="card-title">Relatorios</h5>
-         </div>
-      </div>
-      </a>
-   </div>  
+   </div>   
  </div>

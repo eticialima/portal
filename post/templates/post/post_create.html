@@ -8,8 +8,7 @@
 <div class="box text-center">
     <main class="form-box">
         <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1>
-        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off"
-            enctype="multipart/form-data">
+        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             
             <div class="row">

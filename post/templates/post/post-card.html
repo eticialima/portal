@@ -1,18 +1,4 @@
-{% load static %} 
-<div class="col mb-3">
-    <h2>Minhas Postagens</h2>
-</div> 
-<hr>  
-<!-- pesquisar -->
-<div class="row d-flex">
-      <div class="col-6 form-inline">    
-        <form method="GET" id="search-form" action="">    
-               <input class="form-control me-2" type="text" id="search" name="search" placeholder="Pesquisar Post...">  
-               <spam class="form-text text-muted">Exemplo: pesquise por "postagem"</spam>
-         </form> 
-      </div>   
-</div>  
-<!-- table -->
+{% load static %}   
 <div class="table-responsive">
     <table class="text-center table table-bordered rounded mt-3 shadow-sm">
          <thead>
@@ -83,11 +69,13 @@
                            <i class="fas fa-times-circle fa-2x"></i> 
                         </div> 
                         {% endif %} 
-                     </td>   
-
+                     </td>    
                      <td>
-                        <a class="link-secondary" href="{% url 'post-update' objects.pk %}">
+                        <a class="link-warning me-2" href="{% url 'post-update' objects.pk %}">
                            <i class="fas fa-file-invoice fa-2x" aria-hidden="true"></i>
+                        </a>
+                        <a class="link-danger" href="{% url 'post-delete' objects.pk %}">
+                           <i class="fas fa-trash fa-2x" aria-hidden="true"></i>
                         </a>
                      </td> 
                   </tr>

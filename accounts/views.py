@@ -4,11 +4,10 @@ from django.urls.base import reverse
 from django.contrib import messages
 from django.contrib.messages.views import SuccessMessageMixin
 from django.contrib.auth.views import (LoginView, PasswordChangeView, PasswordResetView, PasswordResetConfirmView, PasswordResetCompleteView)
-from base.base_admin_permissions import BaseAdminUsersAd
+from base.base_admin_permissions import BaseAdminUsersAd, BaseAdminUsersall
 from accounts.forms import CustomUserCreateForm, CustomUserChangeForm
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.views.generic.base import TemplateView
-from django.views.generic import ListView 
+from django.views.generic.base import TemplateView 
 from accounts.models import CustomUser
 
 class UserLogin(SuccessMessageMixin, LoginView):
@@ -24,27 +23,27 @@ class UserCreate(SuccessMessageMixin, CreateView):
     model = CustomUser
     form_class = CustomUserCreateForm
     template_name = 'accounts/user-new.html'
-    success_url = reverse_lazy('users')
-    
-class UserChange(BaseAdminUsersAd, UpdateView):
+    success_url = reverse_lazy('accounts:login')
+     
+class UserChange(BaseAdminUsersall, UpdateView):
     model = CustomUser
     form_class = CustomUserChangeForm
     template_name = 'accounts/user-change.html'
-    success_url = reverse_lazy('users')
+    success_url = reverse_lazy('profile:users-profile')
     success_message = 'Sua mudança de perfil foi bem-sucedida' 
-  
+
 class UserDelete(BaseAdminUsersAd, DeleteView):
     model = CustomUser
-    success_url = reverse_lazy('users')
+    success_url = reverse_lazy('profile:users-profile')
     template_name = 'accounts/user-delete.html'
 
     def get_success_url(self):
         messages.success(self.request, self.success_message)
-        return reverse('users')
+        return reverse('profile:users-profile')
 
 class PasswordChange(SuccessMessageMixin, PasswordChangeView):
     template_name = 'accounts/password-change.html'
-    success_url = reverse_lazy('login')
+    success_url = reverse_lazy('accounts:login')
     success_message = 'Sua mudança de senha foi bem sucedida'
 
 class PasswordReset(SuccessMessageMixin, PasswordResetView):
@@ -58,12 +57,7 @@ class PasswordResetComplete(SuccessMessageMixin, PasswordResetCompleteView):
     success_message = 'Sua senha foi redefinida corretamente. Faça login para começar'
 
     def get(self, request, *args, **kwargs):
-
-        return redirect('login')
-
-class UserListView(BaseAdminUsersAd, ListView):
-    model = CustomUser
-    template_name = 'accounts/usuarios.html'
-
+        return redirect('accounts:login') 
+    
 class TimeOutView(TemplateView):
     template_name = 'timeout/timeout.html'

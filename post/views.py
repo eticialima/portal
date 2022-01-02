@@ -1,7 +1,7 @@
 from django.urls import reverse_lazy
 from django.contrib import messages 
 from base.base_admin_permissions import BaseAdminUsersall 
-from django.views.generic.edit import CreateView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from django.views.generic import ListView 
 from post.models import Post
 from post.forms import PostForm 
@@ -11,20 +11,15 @@ from django.template.defaultfilters import slugify
 
 class PostView(BaseAdminUsersall, ListView):
     model = Post
-    template_name = 'post/post.html'  
-  
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['post_list'] = self.model.objects.all()  
-        return context 
-        
-    def get_queryset(self):      
+    template_name = 'post/post.html'   
+    
+    def get_queryset(self):   
         title = self.request.GET.get('title')
         if title:  
-            profile_list = Post.objects.filter(title__icontains=title) 
-        else:
-            profile_list = Post.objects.filter() 
-        return profile_list         
+            post_list = self.model.objects.filter(title__icontains=title) 
+        else: 
+            post_list = self.model.objects.all() 
+        return post_list         
  
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post 
@@ -65,5 +60,15 @@ class PostUpdate(BaseAdminUsersall, UpdateView):
     template_name = 'post/post_update.html'
     success_url = reverse_lazy('post')
     success_message = 'O post foi Atualizado com sucesso'
+    
+    
+class PostDelete(BaseAdminUsersall, DeleteView):
+    model = Post
+    form_class = PostForm
+    template_name = 'post/post_delete.html'
+    success_url = reverse_lazy('post')
+    success_message = 'O post foi deletado com sucesso'
+    
+    
         
  
