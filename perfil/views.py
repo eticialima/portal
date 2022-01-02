@@ -40,11 +40,11 @@ class ProfileView(DetailView):
         page = self.request.GET.get('page')    
         title = request.GET.get('title') 
         if title: 
-            context['page_obj'] = Paginator(Post.objects.all().filter(title__icontains=title,author=self.object), 9).get_page(page) 
+            context['page_obj'] = Paginator(Post.objects.all().filter(title__icontains=title,author=self.object), 6).get_page(page) 
             print("resultado filtro !!!") 
             print(context['page_obj'])
         else: 
-            context['page_obj'] = Paginator(Post.objects.all().filter(author=self.object), 9).get_page(page)
+            context['page_obj'] = Paginator(Post.objects.all().filter(author=self.object), 6).get_page(page)
             print("Todos os filtros !!!") 
         return self.render_to_response(context)
     
