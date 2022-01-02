@@ -1,39 +1,63 @@
-
 {% extends 'base/_base_home.html' %}
 {% load widget_tweaks %} 
 {% load static %}  
 {% block body_home %}
 {% include 'base/_navbar.html' %}   
 <div class="container-sm"> 
+    
+    {% if not perfil.profile.user.is_active %} 
+    <section class="container-sm py-5">  
+        <div class="bg-light p-4 lead">
+            <div class="row">
+                <div class="col-md-1">
+                    <span class="link-danger"><i class="fas fa-times fa-5x"></i></span> 
+                </div> 
+                <div class="col">
+                    <br>
+                    <h1>Perfil Desativado ou Deletado do sistema !!!</h1> 
+                </div> 
+            </div>
+        </div>
+    </section>
+    {% else %}
     <section class="py-5">  
         <div class="bg-light p-4 lead">
             <div class="row">   
-                <div class="col-md-4">  
-                    {% if perfil.profile.image %} 
-                    <div class="circle">
-                        <img src="{{perfil.profile.image.thumb.url}}" alt="{{perfil.first_name}}"/> 
+                <div class="col-md-4">   
+                    <div class="circle d-flex position-relative"> 
+                        {% if perfil.profile.image %}  
+                            <img id="preview" src="{{perfil.profile.image.thumb.url}}" alt="{{perfil.first_name}}"/>  
+                        {% else %} 
+                            <img id="preview" src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
+                        {% endif %}   
+                        <div class="sale-div position-absolute">
+                            {% if perfil == request.user and request.user.is_authenticated %} 
+                            <form method="post" action="{% url 'profile:photo-profile' perfil.pk %}" enctype="multipart/form-data">
+                                {% csrf_token %} 
+                                <div class="custom-file form-group">
+                                    <label class="label-input-photo custom-file-label" for="image"><i class="fas fa-edit"></i></label>
+                                    <input type="file" onchange="this.form.submit()" value="Update" class="custom-file-input form-control" id="image" name="image"> 
+                                </div> 
+                            </form>   
+                            {% endif %} 
+                        </div> 
                     </div> 
-                    {% else %}
-                    <div class="circle">
-                        <img src="{% static 'images/default.png' %}" alt="default" alt="foto de perfil" height="200"/> 
-                    </div> 
-                    {% endif %} 
-                </div> 
+                </div>   
                 <div class="col-md-8"> 
                     <div class="d-flex justify-content-between align-items-center">
                         <div class="d-flex flex-row align-items-center">  
                             <h1>{{perfil.first_name}} {{perfil.last_name}}</h1> 
-                        </div>
-
-                        <form method="POST" action="">
+                        </div> 
+                        <form method="POST" action="{% url 'profile:like-profile' perfil.pk %}">
                             {% csrf_token %}
                             <input type="hidden" name="next" value="{{request.path}}">
-                            <button type="submit" class="btn btn-light link-danger">
-                                <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">23</span>
+                            <button type="submit" class="btn btn-light s-label">
+                                <i class='fas fa-heart fa-2x'></i><span class="h3 mx-2">{{perfil.profile.likes.all.count}}</span> 
                             </button>
                         </form>  
                     </div>   
-                    <p>Username: {{perfil.user_name}}</p>
+                    <spam>Username: {{perfil.user_name}}</spam> 
+                    <p>{{perfil.date_joined}}</p>
                     <div class="title-container">
                         <h4>Sobre:</h4>
                     </div>   
@@ -44,37 +68,74 @@
                             <p><b>Cidade:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
                         </div>
 
-                        <div class="col-6"> 
-                            <h5>Redes Sociais:</h5> 
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
-                                <i class="fab fa-youtube mx-2"></i>
-                            </a>
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
-                                <i class="fab fa-whatsapp mx-2"></i>
-                            </a>        
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);"> 
-                                <i class="fab fa-facebook mx-2"></i>
-                            </a>        
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                        <div class="col-6">  
+                            <h5>Redes Sociais:</h5>  
+                            {% for n in perfil.network.all %} 
+                            <!--ICONE YOUTUBE -->
+                            {% if n.name == 'YOUTUBE' and n.url != '' and n.url != 'None' %} 
+                                <a href="{{n.url}}" target="_blank" class="s-label">
+                                    <i class="fab fa-youtube mx-2"></i>
+                                </a> 
+                            {% endif %}
+
+                            <!--ICONE WHATSAPP -->
+                            {% if n.name == 'WHATSAPP' and n.url != '' and n.url != 'None' %} 
+                                <a href="https://api.whatsapp.com/send?phone={{n.url}}" target="_blank" class="s-label"> 
+                                    <i class="fab fa-whatsapp mx-2"></i>
+                                </a>   
+                            {% endif %}  
+
+                            <!--ICONE FACEBOOK --> 
+                            {% if n.name == 'FACEBOOK' and n.url != '' and n.url != 'None' %} 
+                                <a href="{{n.url}}" target="_blank" class="s-label"> 
+                                    <i class="fab fa-facebook mx-2"></i>
+                                </a>   
+                            {% endif %}  
+                            
+                            <!--ICONE INSTAGRAM -->
+                            {% if n.name == 'INSTAGRAM' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-instagram mx-2"></i> 
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>
+                            {% endif %}  
+
+                            <!--ICONE TWITTER -->
+                            {% if n.name == 'TWITTER' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-twitter mx-2"></i>
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>
+                            {% endif %}  
+
+                            <!--ICONE PINTEREST -->
+                            {% if n.name == 'PINTEREST' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-pinterest mx-2"></i>
-                            </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            </a>  
+                            {% endif %} 
+                            
+                            <!--ICONE SNAPCHAT -->
+                            {% if n.name == 'SNAPCHAT' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-snapchat mx-2"></i>
                             </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            {% endif %} 
+                            
+                            <!--ICONE TIKTOK -->
+                            {% if n.name == 'TIKTOK' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-tiktok mx-2"></i>
                             </a>    
-                            <a href="#" style="text-decoration: none; color: rgb(155, 8, 8);">
+                            {% endif %} 
+                            
+                            <!--ICONE DISCORD -->
+                            {% if n.name == 'DISCORD' and n.url != '' and n.url != 'None' %} 
+                            <a href="{{n.url}}" target="_blank" class="s-label">
                                 <i class="fab fa-discord mx-2"></i>
-                            </a>
+                            </a>  
+                            {% endif %}  
+                            {% endfor %} 
                         </div> 
-                    </div> 
+                    </div>   
                     <div class="row"> 
                         <div class="col py-2"> 
                             <div class="d-flex justify-content-between align-items-center">
@@ -89,12 +150,61 @@
                 </div>  
             </div> 
         </div>
-    </section> 
+    </section>  
+    {% include 'base/_messages.html' %}
+    <section class="py-5">   
 
-    <section class="py-5"> 
-  
-        {% include 'profile/mypost.html' %}   
-    
-    </section>    
+        {% include 'profile/post-profile.html' %} 
+         
+      
+    </section> 
+    {% endif %}   
 </div>
+<style> 
+    .sale-div {
+        top: 12rem;
+        left: 0;
+    }
+    .label-input-photo {
+        padding: 15px 20px;
+        background-color: rgb(208,85,79);
+        color: #fff; 
+        cursor: pointer;
+        border-radius: 10rem;
+        transition:all .3s ease-in-out; 
+    }
+ 
+    .label-input-photo:hover {
+        background-color: rgb(239,141,111);
+        transition: 0.1;
+    } 
+    .s-label {
+        color:rgb(208,85,79); 
+    }
+
+    .s-label:hover {
+        color:rgb(239,141,111);
+    }
+
+</style>
+<script> 
+    $("#image").change(function (event) {
+        readURL(this);
+    }); 
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        var filename = $("#image").val();
+        filename = filename.substring(filename.lastIndexOf('\\') + 1);
+        reader.onload = function (e) {
+            debugger;
+            $('#preview').attr('src', e.target.result);
+            $('#preview').hide();
+            $('#preview').fadeIn(500);
+            $('.custom-file-label').text(filename);
+        }
+        reader.readAsDataURL(input.files[0]);
+        } 
+    } 
+</script> 
 {% endblock %} 

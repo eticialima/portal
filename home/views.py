@@ -1,3 +1,4 @@
+from typing import ContextManager
 from django.shortcuts import render 
 from django.views.generic import DetailView, ListView 
 from post.models import Post, Category, SocialComment
@@ -12,9 +13,9 @@ class HomeView(ListView):
     def get_queryset(self):      
         title = self.request.GET.get('title')
         if title:  
-            post_list = self.model.objects.filter(title__icontains=title) 
+            post_list = self.model.objects.filter(title__icontains=title, author__is_active__exact=True) 
         else:
-            post_list = self.model.objects.filter() 
+            post_list = self.model.objects.filter(author__is_active__exact=True) 
         return post_list  
 
     def get_context_data(self, **kwargs):
@@ -31,16 +32,18 @@ class DetailView(DetailView):
         post = Post.objects.get(pk=pk)
         form = SocialCommentForm() 
         comments = SocialComment.objects.filter(post=post).order_by('-created_on')
-        post_list = self.model.objects.all()[:5] 
+        post_list = self.model.objects.filter(author__is_active__exact=True)[:5]
+        cat = Category.objects.all()
         
         context = {
             'post': post,
             'form': form,
             'comments':comments,  
             'post_list': post_list,
+            'cat':cat,
          }  
-        return render(request, 'home/post_detail.html', context)
-
+        return render(request, 'home/post_detail.html', context) 
+    
     def post(self, request, pk, *args, **kwargs):
         post = Post.objects.get(pk=pk)
         form = SocialCommentForm(request.POST)
@@ -59,8 +62,8 @@ class DetailView(DetailView):
             'comments':comments
         }
 
-        return render(request, 'home/post_detail.html', context)
-
+        return render(request, 'home/post_detail.html', context) 
+    
 class TagIndexView(ListView):
     model = Post
     template_name = 'home/home.html'   
@@ -68,4 +71,11 @@ class TagIndexView(ListView):
     
     def get_queryset(self):
         return Post.objects.filter(tags__slug=self.kwargs['tag_slug'])
-
+    
+    
+class CategoryFilterView(ListView):
+    model = Post
+    template_name = 'home/home.html'    
+    
+    def get_queryset(self):
+        return Post.objects.filter(category__pk=self.kwargs['cat_slug'], author__is_active__exact=True)

@@ -1,0 +1,80 @@
+{% extends 'base/_dashboard_base.html' %}
+{% block title %}Usuários{% endblock %} 
+{% load static %}
+{% block main_content %} 
+    <div class="form-group col mb-2 py-3"> 
+        <button class="btn-default btn-orange"  onclick="location.href='{% url 'profile:usernew' %}'"><a></a>Cadastrar Usuários</button>  
+    </div>  
+    <div class="col-md-1 mb-2 py-3">
+        {% if request.GET.user_name %}   
+        <button class="btn-default btn-red"  onclick="location.href='{% url 'profile:users-profile' %}'"><a></a>Reset</button>  
+        {% endif %}
+    </div> 
+   
+    <div class="form-group col mb-2 py-3">   
+        <form action="{% url 'profile:users-profile' %}" method="get">   
+            <input name="user_name" type="text" value="{{request.GET.user_name}}" class="form-control bg-light" placeholder="Pesquisar..."> 
+        </form> 
+        <small id="password-help" class="text-muted">Pesquisar pelo nome de usuario</small><br>
+    </div>   
+ 
+<div class="table-responsive">
+    <table class="text-center table table-bordered rounded mt-2 shadow-sm">
+        <thead>
+            <tr>
+                <th scope="col">#</th> 
+                <th scope="col">Foto</th>
+                <th scope="col">Nome</th>
+                <th scope="col">Email</th>
+                <th scope="col">Tipo de Usuários</th>
+                <th scope="col">Data de Registro</th>
+                <th scope="col">Ações</th>
+            </tr>
+        </thead>
+        {% for user_list in profile_list %} 
+            {% if not user_list.is_superuser %}
+            <tbody>
+                <tr class="table align-middle">
+                    <th scope="row">{{user_list.user.id}}</th>  
+                    <th scope="row">
+                        {% if user_list.image %} 
+                        <a data-bs-toggle="modal" href="#imgModal{{user_list.first_name}}">
+                            <img src="{{user_list.image.thumb.url}}" class="img-fluid" alt="{{ user_list.first_name }}" width="50" height="50">
+                        </a> 
+                        {% else %}
+                            <img src="{% static 'images/default.png' %}" class="img-fluid" alt="{{ user_list.first_name }}" width="50" height="50">
+                        {% endif %} 
+                    </th>
+                
+                    <th scope="row">{{user_list.user.first_name}} {{user_list.user.last_name}}</th>
+                    <th scope="row">{{user_list.user.username}}</th>
+                    <th scope="row">{{user_list.user.get_type_user_display}}</th>
+                    <th scope="row">{{user_list.user.date_joined}}</th>
+                    <th scope="row">
+                        <a class="link-warning" href="{% url 'accounts:user-change' user_list.pk %}"><i class="fas fa-eye fa-2x"></i></a>
+                        <a class="ml-2 link-secondary" href="{% url 'accounts:user-change' user_list.pk %}"><i class="far fa-file fa-2x"></i></a>
+                        <a class="ml-3 link-danger" href="{% url 'accounts:user-delete' user_list.pk %}"><i class="fas fa-trash fa-2x"></i></a> 
+
+                    </th>
+                </tr>
+            </tbody> 
+            {% endif %} 
+            <div class="modal fade" id="imgModal{{user_list.first_name}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Foto de Perfil de {{ user_list.first_name }}</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body text-center">
+                            {% if  user_list.image %}  
+                                <img src="{{user_list.image.url}}" class="img-fluid" alt="{{ user_list.first_name }}"> 
+                            {% endif %}  
+                        </div> 
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </table> 
+</div>
+{% endblock %}

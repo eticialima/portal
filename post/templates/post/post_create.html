@@ -8,8 +8,7 @@
 <div class="box text-center">
     <main class="form-box">
         <h1 class="h3 mb-3 fw-normal">Criar Postagem</h1>
-        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off"
-            enctype="multipart/form-data">
+        <form id="post-form" method="POST" class="form" action="{% url 'post-create' %}" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}
             
             <div class="row">
@@ -70,7 +69,7 @@
             </div>  
             <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
             <button type="submit" class="btn-default btn-yellow" name="btn_adicionar">Criar</button>
-            <button class="btn-default btn-red" onclick="location.href='{% url 'post' %}'">Voltar</button>
+            <a class="btn-default btn-red" href="{% url 'post' %}">Voltar</a>
             </div>
         </form>  
     </main>

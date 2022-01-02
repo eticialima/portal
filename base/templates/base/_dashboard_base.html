@@ -4,21 +4,19 @@
 <head>
     <title>{% block title %}{% endblock %}</title>
     {% include 'base/_head.html' %}
-</head> 
+</head>
 <body>
     <div class="d-flex" id="wrapper">
         <div class="bg-white" id="sidebar-wrapper">
             <div class="sidebar-header text-center py-4">
                 <div class="sidebar-image">
-                    {% if user.profile.image %}
-                    <div class="circle">
-                         <img src="{{ user.profile.image.thumb.url }}" class="img-fluid" alt="{{ user.first_name }}"/> 
-                    </div>
-                    {% else %}
-                    <div class="circle">
-                        <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" /> 
-                    </div> 
-                    {% endif %} 
+                    <div class="circle"> 
+                        {% if user.profile.image %} 
+                        <img src="{{ user.profile.image.thumb.url }}" class="img-fluid" alt="{{ user.first_name }}"/>
+                        {% else %} 
+                        <img src="{% static 'images/default.png' %}" class="img-fluid" alt="default" />
+                        {% endif %} 
+                    </div>  
                 </div>
                 <br>  
                 {% if user.type_user == 'us' %}
@@ -53,11 +51,57 @@
                 {% endblock %}
             </div>
         </div>
-    </div> 
+    </div>
+    <style> 
+        .sale-div {
+            top: 12rem;
+            left: 0;
+        }
+        .label-input-photo {
+            padding: 15px 20px;
+            background-color: rgb(208,85,79);
+            color: #fff; 
+            cursor: pointer;
+            border-radius: 10rem;
+            transition:all .3s ease-in-out; 
+        }
+     
+        .label-input-photo:hover {
+            background-color: rgb(239,141,111);
+            transition: 0.1;
+        } 
+        .s-label {
+            color:rgb(208,85,79); 
+        }
+    
+        .s-label:hover {
+            color:rgb(239,141,111);
+        }
+    
+    </style> 
     <script>
         var el = document.getElementById("wrapper");
         var toggleButton = document.getElementById("menu-toggle"); 
         toggleButton.onclick = function () {el.classList.toggle("toggled");};
+
+        $("#image").change(function (event) {
+        readURL(this);
+        }); 
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+            var reader = new FileReader();
+            var filename = $("#image").val();
+            filename = filename.substring(filename.lastIndexOf('\\') + 1);
+            reader.onload = function (e) {
+                debugger;
+                $('#preview').attr('src', e.target.result);
+                $('#preview').hide();
+                $('#preview').fadeIn(500);
+                $('.custom-file-label').text(filename);
+            }
+            reader.readAsDataURL(input.files[0]);
+            }
+        }
     </script> 
  </body> 
 </html>

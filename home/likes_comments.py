@@ -1,15 +1,13 @@
-from django.shortcuts import get_object_or_404, render, redirect
+from django.shortcuts import redirect
 from django.urls.base import reverse_lazy
 from django.http import HttpResponseRedirect 
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin 
 from django.views.generic.edit import UpdateView, DeleteView
-from django.views.generic.base import TemplateView,View 
-from django.views.generic import DetailView, ListView
+from django.views.generic.base import View  
 from taggit.models import Tag 
 from post.models import *
 from post.forms import *
-from home.forms import *
-from .filters import PostFilter 
+from home.forms import * 
 
  
 class AddLike(LoginRequiredMixin,View):

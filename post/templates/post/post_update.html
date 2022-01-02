@@ -1,6 +1,5 @@
 {% extends 'base/_dashboard_base.html' %}
-{% block title %}Post{% endblock %}
-{% block body_title %}Post{% endblock %}
+{% block title %}Post{% endblock %} 
 {% load widget_tweaks %}
 {% load static %} 
 {% block main_content %} 
@@ -72,16 +71,14 @@
             <div class="d-grid gap-2 d-md-flex justify-content-md-end"> 
                 <button type="submit" class="btn-default btn-yellow">Atualizar</button>  
                 <a href="{% url 'post' %}" class="btn-default btn-red">Voltar</a>
-            </div>    
-        </form>
+            </div>   
+        </form> 
     </main>
 </div>   
 <script> 
     $("#image").change(function (event) {
-       
       readURL(this);
     });
-  
     function readURL(input) {
       if (input.files && input.files[0]) {
         var reader = new FileReader();
@@ -96,14 +93,12 @@
         }
         reader.readAsDataURL(input.files[0]);
       } 
-    } 
-
+    }
     // Formulario não envia campos desabilitados
-$('#mainform').submit(function(e) {
-    $(':disabled').each(function(e) {
-        $(this).removeAttr('disabled');
-    })
-});
-
-  </script>
+    $('#mainform').submit(function(e) {
+        $(':disabled').each(function(e) {
+            $(this).removeAttr('disabled');
+        })
+    });
+</script>
 {% endblock %}

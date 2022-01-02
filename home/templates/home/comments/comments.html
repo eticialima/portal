@@ -18,7 +18,7 @@
     <div class="p-2 text-center bg-light shadow-sm rounded">
         <div class="h4">Olá,</div>
         <p>Você precisa fazer login no sistema para comentar.</p>
-        <button class="btn-default btn-red" onclick="location.href='{% url 'login' %}'">
+        <button class="btn-default btn-red" onclick="location.href='{% url 'accounts:login' %}'">
             <i class="fas fa-sign-in-alt"></i> Registrar/Login
         </button>
     </div>
@@ -57,11 +57,11 @@
                     {% if user.is_active %}
                     <span><small class="text-dark px-2">
                             <button 
-                                class="btn btn-light link-danger p-2 rounded-lg" type="button" 
+                                class="btn btn-light p-2 rounded-lg" type="button" 
                                 data-bs-toggle="collapse"
                                 data-bs-target="#collapse_{{comment.id}}" 
                                 aria-expanded="false"
-                                aria-controls="collapseExample">
+                                aria-controls="collapseExample" style="color:rgb(208,85,79);">
                                 <i class="fa fa-reply"></i><span> Responder</span>
                             </button>
                         </small></span>
@@ -74,7 +74,7 @@
                                 <form method="POST" action="{% url 'home:comment-like' post.pk comment.pk %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="next" value="{{request.path}}">
-                                    <button type="submit" class="btn btn-light link-danger">
+                                    <button type="submit" class="btn btn-light" style="color:rgb(208,85,79);">
                                         <i class='fas fa-heart'></i><span>{{comment.likes.all.count}}</span>
                                     </button>
                                 </form>
@@ -125,8 +125,8 @@
             <div class="bg-light mt-3 p-3"> 
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex flex-row align-items-center">
-                        {% if child_comment.author.imagem %}
-                        <img src="{{ child_comment.author.imagem.url }}" width="30" class="rounded-circle mr-2"/>
+                        {% if child_comment.author.profile.image %}
+                        <img src="{{ child_comment.author.profile.image.url }}" width="30" class="rounded-circle mr-2"/>
                         {% else %}
                         <img src="{% static 'images/default.png' %}" width="30" class="rounded-circle mr-2"/>
                         {% endif %}
@@ -151,7 +151,7 @@
                                     <form method="POST" action="{% url 'home:comment-like' post.pk child_comment.pk %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="next" value="{{request.path}}">
-                                        <button type="submit" class="btn btn-light link-danger">
+                                        <button type="submit" class="btn btn-light" style="color:rgb(208,85,79);">
                                             <i class='fas fa-heart'></i><span>{{child_comment.likes.all.count}}</span>
                                         </button>
                                     </form>
@@ -160,7 +160,7 @@
                                     <form method="POST" action="{% url 'home:comment-dislike' post.pk child_comment.pk %}">
                                         {% csrf_token %}
                                         <input type="hidden" name="next" value="{{request.path}}">
-                                        <button type="submit" class="btn btn-light link-danger">
+                                        <button type="submit" class="btn btn-light" style="color:rgb(208,85,79);">
                                             <i class='fas fa-heart-broken'></i><span>{{child_comment.dislikes.all.count}}</span>
                                         </button>
                                     </form>

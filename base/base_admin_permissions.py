@@ -26,9 +26,9 @@ class BaseAdminUsers(
 		Redirect if authenticated user can not access to this view.
 		"""
 		if self.raise_exception or self.request.user.is_authenticated:
-			return redirect('index-manager')
+			return redirect('painel')
 
-		return redirect('login')
+		return redirect('accounts:login')
 
 
 class BaseAdminUsersAd(BaseAdminUsers):

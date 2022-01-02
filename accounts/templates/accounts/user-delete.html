@@ -9,7 +9,7 @@
             {% csrf_token %}
             <div class="form-group">
                 <button type="submit" class="btn-default btn-red" name="btn_cadastro_canal">Sim</button>   
-                <a class="btn-default btn-red" role="button" href="{% url 'users'%}">Cancelar</a>
+                <a class="btn-default btn-red" role="button" href="{% url 'profile:users-profile'%}">Cancelar</a>
             </div>
         </form>
     </div>

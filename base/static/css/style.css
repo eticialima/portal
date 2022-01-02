@@ -1,11 +1,11 @@
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&family=Open+Sans&family=Roboto:wght@400;500;900&display=swap');
 
 /* Site Configuration */
 
 body html {
   overflow-x: hidden;
-  text-decoration: none; 
-  font-family: 'Open Sans', sans-serif;
+  text-decoration: none;  
+  font-family: 'Roboto', sans-serif;
   font-size: 10pt;
 
 }  
@@ -51,30 +51,19 @@ body html {
 #menu-toggle {
   cursor: pointer;
 }
+ 
+/* Page Configuration */
 
-.list-group-item {
-  border: none;
-  padding: 20px 30px;
-}
-
-.list-group-item.active {
-  background-color: transparent;
-  color: #393939;
-  border: none;
-}
-  
 .fundo {
   background-color: #e6e6e6;
   box-shadow: 2px 2px 2px 1px rgb(0 0 0 / 19%);
 }
 
 .circle {
+  position: relative!important;
   background-color: #ffffff;
   border-radius: 50%;
-  width: 250px;
-  height: 250px;
-  overflow: hidden;
-  position: relative;
+  max-width: 250px!important;
   margin-inline: auto;
 }
 
@@ -91,32 +80,45 @@ body html {
   height: auto;
 }
 
+/* ImageView Configuration */
+
 .custom-file input[type="file"] {
   display: none;
 }
 .label-input {
   padding: 20px 10px;
-  background-color: #a30808;
+  background-color: rgb(208,85,79);
   color: #fff;
   text-align: center;
   display: block;
   margin-top: 10px;
   cursor: pointer;
+  transition:all .3s ease-in-out; 
 }
 
 .label-input:hover {
-  background-color: #212529;
+  background-color: rgb(239,141,111);
 }
+
+/* Dashboard Menu Configuration */
+
 .menu-item {
   background-color: #ffffff;
   color: rgb(29, 29, 29);
+  transition:all .3s ease-in-out; 
 }
 .menu-item a {
   text-decoration: none;
 }
-.menu-item:hover {
-  background-color: #a30808;
+.menu-item:hover,.menu-item-out:hover {
+  background-color: rgb(239,141,111);
   color: rgb(255, 255, 255);
+}
+
+.menu-item-out {
+  background-color: rgb(208,85,79);
+  color: rgb(255, 255, 255);
+  transition:all .3s ease-in-out; 
 }
 
 /* Image Configuration */
@@ -137,12 +139,12 @@ body html {
 /* Cards Configuration */
 
 .card-box {
-  box-shadow: 0px 0px 0px 1px #41464b !important;
-  transition: 0.5s;
+  box-shadow: 0px 0px 1px 2px rgb(140,147,170)!important; 
   width: auto;
   margin-right: auto;
   background-color: rgb(255, 255, 255);
   border-radius: 20px; 
+  transition:all .3s ease-in-out; 
 }
 
 .card-box:hover {
@@ -151,12 +153,11 @@ body html {
 
 a .carde {
   text-decoration: none;
-  color: #571d1d;
+  color: rgb(208,85,79);
 }
 
 .carde:hover {
-  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4);
-  transform: scale(1.01);
+  box-shadow: 0px 6px 10px rgba(0, 0, 0, 0.4); 
 }
 
 .card-text{
@@ -168,8 +169,9 @@ hr {
   margin-top: 20px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #ffffff;
+  border-top: 1px solid #dbdbdb;
 }
+
 a {
   color: #393939;
   text-decoration: none;
@@ -178,53 +180,70 @@ a {
 
 /* Buttons Configuration */
 
-.btn-default {   
-  font-size: 10pt;
-  border: none;
-  justify-content: center;
+.btn-default {
+  display: inline-flex;
   align-items: center;
-  padding: 10px;  
-  border-radius: 10px; 
-  color: #fff;   
-  transition: all 0.4s;
+  box-shadow: 0 3px 12px 0 rgb(0 0 0 / 10%); 
+  border-radius: 15px;
+  border: none;
+  font-weight: 500;
+  height: 45px;
+  padding: 0 30px;
+  color: #fff;  
+  text-decoration: none;
+  transition:all .5s ease-in-out; 
+  will-change: transform;
 }
 
-
+.btn-default:hover {
+  background: rgb(239,141,111); 
+  color: aliceblue;  
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+.btn-default:active {
+ 
+  transform: translate3d(0, 1px, 0);
+}
+ 
 .btn-default a { 
   text-decoration: none; 
 }
-
-.btn-default:hover { 
-  background: #4d4d4d;
-  color: aliceblue;
-}
-
+  
 .btn-red{
-  background: #a30808;
+  background: rgb(208,85,79);
 } 
 .btn-yellow{
-  background: #ddc700;
+  background: rgb(227,220,31);
 }
 .btn-blue{
-  background: #0518c0;
+  background: rgb(81,144,199);
 }
 .btn-green{
-  background: #05c525;
+  background: rgb(62,212,100);
 }
 .btn-purple{
-  background: #7708a3;
+  background: rgb(121,64,159);
 }
 .btn-orange{
-  background: #ff6600;
+  background: rgb(248,158,109);
+} 
+.btn-gray {
+  background: rgb(140,147,170);
+} 
+
+.s-label {
+  color:rgb(208,85,79); 
+}
+
+.s-label:hover {
+  color:rgb(239,141,111);
 }
 
 .form-control:focus {
-  border-color: #ac1d1d !important;
-  box-shadow: 0 0 5px rgb(228, 98, 98) !important;
+  border-color: rgb(208,85,79)!important;
+  box-shadow: 0 0 5px rgb(239,141,111)!important;
 }
-
-
-
+ 
 @media (min-width: 768px) {
   #sidebar-wrapper {
     margin-left: 0;
