@@ -1,0 +1,12 @@
+SECRET_KEY=chaveaqui
+DEBUG=True
+SUPER_USER=ADMIN
+EMAIL= email
+
+NAME_DB=db.sqlite3
+USER_DB=root
+PASSWORD_DB=
+HOST_DB=localhost
+PORT_DB=3306
+
+# renomear arquivo para .env
