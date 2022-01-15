@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Register',
 ]
