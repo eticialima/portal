@@ -35,7 +35,6 @@ ALLOWED_HOSTS = ['*']
 
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-
 CORS_ALLOW_HEADERS = list(default_headers) + [
     'X-Register',
 ]
@@ -212,18 +211,7 @@ LOGOUT_REDIRECT_URL = '/'
 # --- development --- #
 if DEBUG:
 	EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-
-# --- Production --- #
-# if not DEBUG:
-# EMAIL_HOST = 'smtp.office365.com' 
-# EMAIL_HOST_USER = 'noreply@dmcgroup.com.br' 
-# EMAIL_HOST_PASSWORD = 'huB4NHFFrc8EPKgB' 
-# EMAIL_PORT = 587 
-# EMAIL_USE_TLS = True 
-# DEFAULT_FROM_EMAIL = 'noreply@dmcgroup.com.br'
-# SERVER_EMAIL = DEFAULT_FROM_EMAIL
-
-
+ 
 # ----------------------------------------------------------
 # --- Messages --- #
 from django.contrib.messages import constants
