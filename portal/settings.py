@@ -11,9 +11,7 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 import os
 from pathlib import Path
-from decouple import config
-from dotenv import load_dotenv, find_dotenv
-
+from decouple import config 
 from corsheaders.defaults import default_headers
 from django.conf.urls.static import static
 # Build paths inside the project like this: BASE_DIR / 'subdir'.

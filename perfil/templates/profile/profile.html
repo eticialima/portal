@@ -3,8 +3,7 @@
 {% load static %}  
 {% block body_home %}
 {% include 'base/_navbar.html' %}   
-<div class="container-sm"> 
-    
+<div class="container-sm">
     {% if not perfil.profile.user.is_active %} 
     <section class="container-sm py-5">  
         <div class="bg-light p-4 lead">
