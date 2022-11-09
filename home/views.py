@@ -24,6 +24,7 @@ class HomeView(ListView):
         context['category'] = Category.objects.all() 
         return context
 
+
 class DetailView(DetailView):
     model = Post 
     template_name = 'home/post_detail.html' 
@@ -63,6 +64,7 @@ class DetailView(DetailView):
         }
 
         return render(request, 'home/post_detail.html', context) 
+    
     
 class TagIndexView(ListView):
     model = Post

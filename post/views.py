@@ -9,6 +9,7 @@ from accounts.models import CustomUser
 from django.shortcuts import render 
 from django.template.defaultfilters import slugify
 
+
 class PostView(BaseAdminUsersall, ListView):
     model = Post
     template_name = 'post/post.html'   
@@ -21,6 +22,7 @@ class PostView(BaseAdminUsersall, ListView):
             post_list = self.model.objects.all() 
         return post_list         
  
+
 class PostCreate(BaseAdminUsersall, CreateView):
     model = Post 
     form_class = PostForm 
@@ -53,6 +55,7 @@ class PostCreate(BaseAdminUsersall, CreateView):
     def get_success_url(self) -> str:
         messages.success(self.request, 'O post foi Cadastrado com sucesso')
         return reverse_lazy('post')
+
 
 class PostUpdate(BaseAdminUsersall, UpdateView):
     model = Post

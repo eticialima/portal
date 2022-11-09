@@ -1,4 +1,4 @@
-SECRET_KEY=chaveaqui
+SECRET_KEY=l8g05lq8s^8sw7ojmsc6sz$2x+3c^%ax%p(tq$_lp9#i&wqhsw
 DEBUG=True
 SUPER_USER=ADMIN
 EMAIL= email

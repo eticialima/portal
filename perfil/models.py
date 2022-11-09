@@ -28,6 +28,7 @@ class Profile(models.Model):
         if kwargs.get('created', False):
             Profile.objects.create(user=kwargs['instance'])
 
+
 class Network(models.Model):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='network', blank=True, null=True) 
     name = models.CharField(max_length=10, choices=SocialNetwork.choices, blank=True, null=True) 

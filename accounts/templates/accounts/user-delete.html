@@ -3,13 +3,12 @@
 <div class="box text-center">
     <div class="form-signin"> 
         <h2>{{ object.first_name }} {{ object.last_name }}</h2>
-        <p>Tem a certeza que deseja apagar este usuário?<br>
-            Todos os dados serão removidos. </p> 
+        <p>Are you sure you want to delete this user?<br>All data will be removed.</p> 
         <form method="POST" class="form" name="form_canal">
             {% csrf_token %}
             <div class="form-group">
-                <button type="submit" class="btn-default btn-red" name="btn_cadastro_canal">Sim</button>   
-                <a class="btn-default btn-red" role="button" href="{% url 'profile:users-profile'%}">Cancelar</a>
+                <button type="submit" class="btn-default btn-red" name="btn_cadastro_canal">Delete</button>   
+                <a class="btn-default btn-red" role="button" href="{% url 'profile:users-profile'%}">Cancel</a>
             </div>
         </form>
     </div>

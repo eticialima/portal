@@ -55,7 +55,7 @@
         {% if post.download_file or post.download_link %}
         <div>
             {% if post.download_file %}
-            <h4>Download Opção 1</h4>
+            <h4>Download Option 1</h4>
             <th scope="row">
                 <button class="btn-default btn-red"><a class="link-light" href="{{ post.download_file.url }}" target="_blank">Download</a></button>
             </th>
@@ -64,19 +64,19 @@
         <br>
         <div>
             {% if post.download_link %}
-            <h4>Download Opção 1</h4>
+            <h4>Download Option 1</h4>
             <th scope="row">
                 <button class="btn-default btn-red"><a class="link-light" href="{{ post.download_link }}" target="_blank">Download</a></button>
             </th>
             {% endif %}
         </div>
         {% else %}
-        <span>Conteudo Sem Link !!! Entre em contato com Autor do conteudo. Clique Aqui</span>
+        <span>Content Without Link !!! Contact the author of the content. Click here</span>
         {% endif %}
     </div>
     <br>
     <div class="py-3">
-        <h6>tags do post</h6>
+        <h6>post tags</h6>
         {% for tag in post.tags.all %}
         <a href="{% url 'home:tagged' tag.slug %}" style="text-decoration: none; color: rgb(46, 46, 46);">
             <span class="badge btn-gray">{{tag.name}}</span>

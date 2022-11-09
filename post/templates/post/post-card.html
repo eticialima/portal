@@ -5,19 +5,19 @@
                <tr>
                   <th scope="col">#</th>
                   <th scope="col">Thumbnail</th>
-                  <th scope="col">Usuario</th> 
-                  <th scope="col">Titulo</th>
-                  <th scope="col">Arquivo</th>
+                  <th scope="col">User</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">File</th>
                   <th scope="col">Link</th>
-                  <th scope="col">Publicado</th>
-                  <th scope="col">Ações</th>
+                  <th scope="col">Published</th>
+                  <th scope="col">Actions</th>
                </tr>
          </thead>    
          {% for objects in post_list %}  
             {% if request.user == objects.author %} 
             <tbody>
                   <tr> 
-                     <td scope="row">{{ objects.id }}</td>
+                     <td scope="row">{{objects.id}}</td>
                      {% if objects.image %}
                      <th scope="row"> 
                         <a class="link-primary" data-bs-toggle="modal" href="#imgModal{{objects.id}}">

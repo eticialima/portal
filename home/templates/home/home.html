@@ -7,8 +7,8 @@
         <form action="{% url 'home:home' %}" method="get">          
             <div class="row">
                 <div class="form-group col mb-2">
-                    <span class="fw-bold py-3">Titulo: </span>   
-                    <input name="title" type="text" value="{{request.GET.title}}" class="form-control" placeholder="Pesquisar..."> 
+                    <span class="fw-bold py-3">Title: </span>   
+                    <input name="title" type="text" value="{{request.GET.title}}" class="form-control" placeholder="Search..."> 
                 </div> 
                 <div class="col-md-1 mb-2 py-3 text-center">
                     {% if request.GET.title %}                    
@@ -18,7 +18,7 @@
                     {% endif %}  
                 </div> 
                 <div class="form-group col-md-2 mb-2 py-3 text-center"> 
-                    <button type="submit" class="btn-default btn-red"><span class="fa fa-search"></span> Pesquisar</button> 
+                    <button type="submit" class="btn-default btn-red"><span class="fa fa-search"></span> Search</button> 
                 </div> 
             </div>
         </form>

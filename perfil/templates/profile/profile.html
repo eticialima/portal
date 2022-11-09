@@ -13,7 +13,7 @@
                 </div> 
                 <div class="col">
                     <br>
-                    <h1>Perfil Desativado ou Deletado do sistema !!!</h1> 
+                    <h1>Profile Deactivated or Deleted from the system!!!</h1> 
                 </div> 
             </div>
         </div>
@@ -58,17 +58,17 @@
                     <spam>Username: {{perfil.user_name}}</spam> 
                     <p>{{perfil.date_joined}}</p>
                     <div class="title-container">
-                        <h4>Sobre:</h4>
+                        <h4>About:</h4>
                     </div>   
                     <p>{{ perfil.profile.description }}</p>     
                     <div class="row">
                         <div class="col-6"> 
-                            <h5><b>Atuo como:</b> {{perfil.profile.occupation}}</h5>   
-                            <p><b>Cidade:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
+                            <h5><b>Occupation:</b> {{perfil.profile.occupation}}</h5>   
+                            <p><b>City:</b> {{perfil.profile.city}} {{perfil.profile.country}}</p> 
                         </div>
 
                         <div class="col-6">  
-                            <h5>Redes Sociais:</h5>  
+                            <h5>Social networks:</h5>  
                             {% for n in perfil.network.all %} 
                             <!--ICONE YOUTUBE -->
                             {% if n.name == 'YOUTUBE' and n.url != '' and n.url != 'None' %} 
@@ -141,7 +141,7 @@
                                 <div class="d-flex flex-row align-items-center">   
                                 </div>
                                 {% if perfil == request.user and request.user.is_authenticated %}
-                                <button class="btn-default btn-red"  onclick="location.href='http://127.0.0.1:8000/perfil/edit-profile'"> <i class="fas fa-cog mx-2"></i>Editar Perfil</button> 
+                                <button class="btn-default btn-red"  onclick="location.href='http://127.0.0.1:8000/perfil/edit-profile'"> <i class="fas fa-cog mx-2"></i>Edit profile</button> 
                                 {% endif %}
                             </div>   
                         </div>
@@ -151,11 +151,8 @@
         </div>
     </section>  
     {% include 'base/_messages.html' %}
-    <section class="py-5">   
-
-        {% include 'profile/post-profile.html' %} 
-         
-      
+    <section class="py-5">    
+        {% include 'profile/post-profile.html' %}
     </section> 
     {% endif %}   
 </div>

@@ -19,18 +19,21 @@ class UserLogin(SuccessMessageMixin, LoginView):
         else:
             return self.render_to_response(self.get_context_data())
 
+
 class UserCreate(SuccessMessageMixin, CreateView):
     model = CustomUser
     form_class = CustomUserCreateForm
     template_name = 'accounts/user-new.html'
     success_url = reverse_lazy('accounts:login')
-     
+
+
 class UserChange(BaseAdminUsersall, UpdateView):
     model = CustomUser
     form_class = CustomUserChangeForm
     template_name = 'accounts/user-change.html'
     success_url = reverse_lazy('profile:users-profile')
-    success_message = 'Sua mudança de perfil foi bem-sucedida' 
+    success_message = 'Your profile change was successful' 
+
 
 class UserDelete(BaseAdminUsersAd, DeleteView):
     model = CustomUser
@@ -41,23 +44,28 @@ class UserDelete(BaseAdminUsersAd, DeleteView):
         messages.success(self.request, self.success_message)
         return reverse('profile:users-profile')
 
+
 class PasswordChange(SuccessMessageMixin, PasswordChangeView):
     template_name = 'accounts/password-change.html'
     success_url = reverse_lazy('accounts:login')
-    success_message = 'Sua mudança de senha foi bem sucedida'
+    success_message = 'Your password change was successful'
+
 
 class PasswordReset(SuccessMessageMixin, PasswordResetView):
     template_name = 'accounts/password-reset.html'
 
+
 class PasswordResetConfirm(SuccessMessageMixin, PasswordResetConfirmView):
-    success_message = 'Sua senha foi redefinida corretamente. Faça login para começar'
+    success_message = 'Your password has been correctly reset. Login to get started'
+
 
 class PasswordResetComplete(SuccessMessageMixin, PasswordResetCompleteView):
     template_name = 'accounts/password-reset-complete.html'
-    success_message = 'Sua senha foi redefinida corretamente. Faça login para começar'
+    success_message = 'Your password has been correctly reset. Login to get started'
 
     def get(self, request, *args, **kwargs):
         return redirect('accounts:login') 
     
+
 class TimeOutView(TemplateView):
     template_name = 'timeout/timeout.html'

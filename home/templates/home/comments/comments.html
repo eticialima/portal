@@ -2,24 +2,24 @@
 <div class="container-post">
     {% if user.is_active %}
     <div class="text-center">
-        <h3><< Comentar Alguma coisa >></h3>
+        <h3><< comment something >></h3>
         <div class="mt-2">
-            <p>Compartilhe alguma coisa sobre o post!</p>
+            <p>Share something about the post!</p>
         </div>
     </div> 
     <form method="POST">
         {% csrf_token %}
         {{form.comment}} 
         <div class="mt-2">
-            <button type="submit" class="btn-default btn-red">Postar</button>
+            <button type="submit" class="btn-default btn-red">Post</button>
         </div> 
     </form> 
     {% else %}
     <div class="p-2 text-center bg-light shadow-sm rounded">
-        <div class="h4">Olá,</div>
-        <p>Você precisa fazer login no sistema para comentar.</p>
+        <div class="h4">Hello,</div>
+        <p>You need to login to the system to comment.</p>
         <button class="btn-default btn-red" onclick="location.href='{% url 'accounts:login' %}'">
-            <i class="fas fa-sign-in-alt"></i> Registrar/Login
+            <i class="fas fa-sign-in-alt"></i>Register/Login
         </button>
     </div>
     {% endif %} 
@@ -62,7 +62,7 @@
                                 data-bs-target="#collapse_{{comment.id}}" 
                                 aria-expanded="false"
                                 aria-controls="collapseExample" style="color:rgb(208,85,79);">
-                                <i class="fa fa-reply"></i><span> Responder</span>
+                                <i class="fa fa-reply"></i><span> Answer</span>
                             </button>
                         </small></span>
                     {% endif %}
@@ -101,7 +101,7 @@
                     <div class="py-2">
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="d-flex flex-row align-items-center"> 
-                            <button type="submit" class="btn-default btn-red"><span>Enviar</span></button> 
+                            <button type="submit" class="btn-default btn-red"><span>Submit</span></button> 
                             </div>
                             <small>
                                 <button 

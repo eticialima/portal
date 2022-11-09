@@ -6,7 +6,7 @@
 {% include 'base/_messages.html' %}
 <div class="container-sm py-5">  
     <div class="bg-light p-5 lead">
-        <h2>Editar Informações Basicas</h2> 
+        <h2>Edit Basic Information</h2> 
         <form method="post" action="{% url 'profile:edit-profile' %}" enctype="multipart/form-data">
             {% csrf_token %} 
             <div class="row"> 
@@ -52,20 +52,20 @@
                         <div class="form-check-inline">
                             <label>
                                 <input type="radio" class="form-check-input" {% if profile.gender == "Homem" %} checked="checked" {% endif %} name="gender" value="Homem">
-                                Homem
+                                Men
                             </label>
                         </div>
                         <div class="form-check-inline">
                             <label>
                                 <input type="radio" class="form-check-input" {% if profile.gender == "Mulher" %} checked="checked" {% endif %} name="gender" value="Mulher">
-                                Mulher
+                                Women
                             </label>
                         </div>
                     </div>
                 </div>    
                 <div class="col-md-4"> 
                     <div class="mb-3">
-                        <label for="input">Telefone</label>
+                        <label for="input">Phone</label>
                         <input type="text" name="phone" class="form-control" required="required" value="{{ profile.phone }}"/>
                     </div> 
                 </div>  

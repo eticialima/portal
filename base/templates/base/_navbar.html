@@ -6,13 +6,13 @@
             <i class="fas fa-bars"></i>
         </label>
         <a class="logo" href="{% url 'home:home' %}">
-            <h3>EditorYZ</h3>
+            <h5>System PortalX</h5>
         </a>
         <ul class="nav-menu navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item"><a href="{% url 'home:home' %}">Home</a></li>
-            <li class="nav-item"><a href="#">Sobre</a></li>
-            <li class="nav-item"><a href="#">Como usar o site?</a></li> 
-            <li class="nav-item"><a href="#">Contato</a></li> 
+            <li class="nav-item"><a href="#">About</a></li>
+            <li class="nav-item"><a href="#">How to Use?</a></li> 
+            <li class="nav-item"><a href="#">Contact</a></li> 
             <li class="nav__perfil nav__item dropdown">
                 {% if user.is_authenticated %}
                 <div class="action">
@@ -29,8 +29,8 @@
                     </div>
                     <div class="menu text-start lh-lg">
                         <div>
-                            <a href="{% url 'profile:user-profile' user.user_name %}" class="nav__link">Meu Perfil</a>
-                            <a href="{% url 'painel' %}" class="nav__link">Configurações</a>
+                            <a href="{% url 'profile:user-profile' user.user_name %}" class="nav__link">My Profile</a>
+                            <a href="{% url 'painel' %}" class="nav__link">Settings</a>
                             <button class=" btn-default btn-red d-flex" onclick="location.href='{% url 'accounts:logout' %}'">Logout</button>
                         </d>
                     </div>

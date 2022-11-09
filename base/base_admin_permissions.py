@@ -34,14 +34,14 @@ class BaseAdminUsers(
 class BaseAdminUsersAd(BaseAdminUsers):
 	"""
 	type_user authorized to access admin functions.
-	- Administração 
+	- Administrator 
 	"""
 	authorized_admin_access = ['ad', 'co']
 
 class BaseAdminUsersall(BaseAdminUsers):
 	"""
 	type_user authorized to access admin functions.
-	- Usuarios
+	- User
 	"""
 	authorized_admin_access = ['ad', 'co', 'us']
 

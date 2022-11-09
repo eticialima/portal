@@ -6,6 +6,7 @@ class NetworkSerializer(serializers.ModelSerializer):
         model = Network
         fields = ['id','user','name','url']
 
+
 class ProfileSerializer(serializers.ModelSerializer):   
     class Meta:
         model = Profile

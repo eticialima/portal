@@ -3,7 +3,6 @@ from django.shortcuts import redirect
 from django.urls import reverse_lazy 
 from django.contrib import messages
 from django.views.generic.edit import CreateView
-from django.views.generic.list import MultipleObjectMixin
 from accounts.forms import CustomUserCreateForm
 from base.base_admin_permissions import BaseAdminUsersAd
 from django.views.generic import DetailView, UpdateView, ListView 
@@ -14,6 +13,7 @@ from perfil.models import Profile
 from post.models import Post
 from perfil.serializers import NetworkSerializer, ProfileSerializer  
 
+
 class ProfileViewSet(viewsets.ModelViewSet): 
     queryset = Profile.objects.all()
     serializer_class = ProfileSerializer 
@@ -22,6 +22,7 @@ class NetworkViewSet(viewsets.ModelViewSet):
     queryset = Network.objects.all()
     serializer_class = NetworkSerializer 
     
+
 class ProfileView(DetailView):
     model = CustomUser
     template_name = "profile/profile.html"
@@ -58,6 +59,7 @@ class ProfileView(DetailView):
     #             context[context_object_name] = self.object
     #     context.update(kwargs)
     #     return super().get_context_data(**context)
+
 
 class ProfileEditView(UpdateView):
     model = Profile
@@ -99,7 +101,7 @@ class ProfileEditView(UpdateView):
         for network, url in zip(networks, urls):
             network.url = url
             network.save()
-        messages.success(self.request, 'Alterações salva com sucesso!!!')
+        messages.success(self.request, 'Changes saved successfully!!!')
         return redirect(reverse_lazy('profile:edit-profile'))
 
 
@@ -114,8 +116,9 @@ class EditPhotoProfile(UpdateView):
         return super().form_valid(form)
 
     def get_success_url(self):  
-        messages.success(self.request, 'Imagem de perfil atualizada com sucesso!!!')
+        messages.success(self.request, 'Profile image successfully updated!!!')
         return reverse_lazy('profile:user-profile', args=[self.request.user.user_name])
+
 
 class UserListView(BaseAdminUsersAd,ListView):
     model = Profile
@@ -129,6 +132,7 @@ class UserListView(BaseAdminUsersAd,ListView):
         else:
             profile_list = Profile.objects.filter() 
         return profile_list   
+    
     
 class UserCreateView(CreateView):
     model = CustomUser

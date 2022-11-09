@@ -1,19 +1,16 @@
 {% extends 'base/_dashboard_base.html' %}
-{% block title %}Apagar Post{% endblock %} 
+{% block title %}delete post{% endblock %} 
 {% block main_content %} 
 <div class="box text-center">
     <div class="form-signin"> 
-        <h2>Aviso</h2>
-        <p>
-        Tem a certeza que deseja eliminar esta postagem ? 
-        <br>
-        Esta postagens será removida completamente.
-        </p>
+        <h2>Warning</h2>
+        <p>Are you sure you want to delete this post?
+        <br>This posts will be removed completely.</p>
         <form method="POST" class="form" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="form-group">
-                <button type="submit" class="btn-default btn-red">Sim</button>   
-                <a class="btn-default btn-red" role="button" href="{% url 'post'%}">Cancelar</a>
+                <button type="submit" class="btn-default btn-red">Delete</button>   
+                <a class="btn-default btn-red" role="button" href="{% url 'post'%}">Cancel</a>
             </div>
         </form>
     </div>

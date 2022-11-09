@@ -1,13 +1,13 @@
 {% extends 'base/_dashboard_base.html' %}
-{% block title %}Usuários{% endblock %} 
+{% block title %}Users{% endblock %} 
 {% load static %}
 {% block main_content %} 
     <div class="form-group col mb-2 py-3"> 
-        <button class="btn-default btn-orange"  onclick="location.href='{% url 'profile:usernew' %}'"><a></a>Cadastrar Usuários</button>  
+        <button class="btn-default btn-orange"  onclick="location.href='{% url 'profile:usernew' %}'">Register Users</button>  
     </div>  
     <div class="col-md-1 mb-2 py-3">
         {% if request.GET.user_name %}   
-        <button class="btn-default btn-red"  onclick="location.href='{% url 'profile:users-profile' %}'"><a></a>Reset</button>  
+        <button class="btn-default btn-red"  onclick="location.href='{% url 'profile:users-profile' %}'">Reset</button>  
         {% endif %}
     </div> 
    
@@ -15,7 +15,7 @@
         <form action="{% url 'profile:users-profile' %}" method="get">   
             <input name="user_name" type="text" value="{{request.GET.user_name}}" class="form-control bg-light" placeholder="Pesquisar..."> 
         </form> 
-        <small id="password-help" class="text-muted">Pesquisar pelo nome de usuario</small><br>
+        <small id="password-help" class="text-muted">Search by username</small><br>
     </div>   
  
 <div class="table-responsive">
@@ -23,12 +23,12 @@
         <thead>
             <tr>
                 <th scope="col">#</th> 
-                <th scope="col">Foto</th>
-                <th scope="col">Nome</th>
+                <th scope="col">Photo</th>
+                <th scope="col">Name</th>
                 <th scope="col">Email</th>
-                <th scope="col">Tipo de Usuários</th>
-                <th scope="col">Data de Registro</th>
-                <th scope="col">Ações</th>
+                <th scope="col">Type of Users</th>
+                <th scope="col">Date of Registration</th>
+                <th scope="col">Actions</th>
             </tr>
         </thead>
         {% for user_list in profile_list %} 
@@ -53,8 +53,7 @@
                     <th scope="row">
                         <a class="link-warning" href="{% url 'accounts:user-change' user_list.pk %}"><i class="fas fa-eye fa-2x"></i></a>
                         <a class="ml-2 link-secondary" href="{% url 'accounts:user-change' user_list.pk %}"><i class="far fa-file fa-2x"></i></a>
-                        <a class="ml-3 link-danger" href="{% url 'accounts:user-delete' user_list.pk %}"><i class="fas fa-trash fa-2x"></i></a> 
-
+                        <a class="ml-3 link-danger" href="{% url 'accounts:user-delete' user_list.pk %}"><i class="fas fa-trash fa-2x"></i></a>  
                     </th>
                 </tr>
             </tbody> 
@@ -63,7 +62,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title" id="exampleModalLabel">Foto de Perfil de {{ user_list.first_name }}</h5>
+                            <h5 class="modal-title" id="exampleModalLabel">Profile photo of {{ user_list.first_name }}</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body text-center">

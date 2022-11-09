@@ -20,13 +20,13 @@
                 </div>
                 <br>  
                 {% if user.type_user == 'us' %}
-                <h5>Perfil: Padrão</h5>  
+                <h5>Profile: Default</h5>  
                 {% elif user.type_user == 'ad' %}
-                <h5>Perfil: Administrador</h5>  
+                <h5>Profile: Administrator</h5>  
                 {% elif user.type_user == 'co' %}
-                <h5>Perfil: Colaborador</h5>  
+                <h5>Profile: Collaborator</h5>  
                 {% endif %}  
-                <h5>Usuário: {{ user.first_name}} {{ user.last_name }}</h5>
+                <h5>User: {{ user.first_name}} {{ user.last_name }}</h5>
             </div>
             <div class="list-group list-group-flush my-3">
                 {% include 'base/_sidebar_'|add:user.type_user|add:'.html' %}

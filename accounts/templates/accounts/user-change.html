@@ -5,7 +5,7 @@
 {% block main_content %}
 <div class="text-center">
     <div class="form-signup"> 
-        <h4 class="mb-3">Configurações do Usuário</h4>  
+        <h4 class="mb-3">User Settings</h4>  
        <form id="mainchange" method="post" autocomplete="off" enctype="multipart/form-data">
             {% csrf_token %}    
             <div class="row">  
@@ -20,39 +20,39 @@
             </div>
             <div class="row">
                 <div class="col-sm-6 form-group mt-3">
-                    <label for="username">Nome</label>
+                    <label for="username">Name</label>
                     {% render_field form.first_name class="form-control" id="first_name" name="first_name" %}  
                 </div>
                 <div class="col-sm-6 form-group mt-3">
-                    <label for="username">Sobrenome</label>
+                    <label for="username">Last name</label>
                     {% render_field form.last_name class="form-control" id="last_name" name="last_name" %} 
                 </div>
             </div>  
             <div class="row">
                 <div class="col-sm-6">
                     <div class="form-group mt-3">
-                        <label for="type_user">Tipo Usuario</label>
+                        <label for="type_user">User Type</label>
                         {% render_field form.type_user class="form-select form-control" id="type_user" name="type_user" disabled="disabled" %}  
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="form-group mt-3">
-                        <label for="username"><code>Usuário ís_active ?</code></label>
+                        <label for="username"><code>User is_active ?</code></label>
                         {% render_field form.is_active class="form-check-input" id="is_active" name="is_active" %}
                         <br>  
-                        <small id="text-help" class="text-muted">Após desativar conta usuario não terá mais acesso. Suas postagens e comentarios serão desativados.</small> 
+                        <small id="text-help" class="text-muted">After deactivating the user account, you will no longer have access. Your posts and comments will be disabled.</small> 
                     </div>
                 </div> 
             </div>  
             <div class="form-group mt-3">
-                <button type="submit" class="btn-default btn-yellow" name="btn_cadastro_canal">Alterar</button>
-                <a class="btn-default btn-red" role="button" href="{% url 'profile:users-profile' %}">Cancelar</a>
+                <button type="submit" class="btn-default btn-yellow" name="btn_cadastro_canal">Change</button>
+                <a class="btn-default btn-red" role="button" href="{% url 'profile:users-profile' %}">Cancel</a>
             </div>  
         </form> 
         {% if object.type_user == 'us'%}
         <div class="form-group mt-3 py-5">
             <p class="text-muted fst-italic">
-                Entrar em contato <a  data-bs-toggle="modal" href="#ModalCCAD" class="text-reset">Administrador Agora</a>.
+                Get in touch <a  data-bs-toggle="modal" href="#ModalCCAD" class="text-reset">Admin Now</a>.
               </p>
          </div> 
         {% endif %} 
@@ -65,41 +65,41 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
         <div class="modal-header">
-            <h5 class="modal-title" id="ModalCCADLabel">Suporte <i class="fas fa-exclamation-triangle me-2"></i></h5>
+            <h5 class="modal-title" id="ModalCCADLabel">Support <i class="fas fa-exclamation-triangle me-2"></i></h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body"> 
-            <h3>Como Podemos ajudar ?</h3> 
+            <h3>How can we help ?</h3> 
             <form method="post" class="form" autocomplete="off" enctype="multipart/form-data">
                 {% csrf_token %}   
                 <div class="form-group mt-3">
                     <input type="checkbox" class="form-check-input" id="cctext1" name="cctext">
-                    <label for="cctext1"><code>Quero desativar minha conta.</code></label> 
+                    <label for="cctext1"><code>I want to deactivate my account.</code></label> 
                 </div> 
                 <div class="form-group mt-3">
                     <input type="checkbox" class="form-check-input" id="cctext2" name="cctext">
-                    <label for="cctext2"><code>Quero mudar meu tipo de usuario.</code></label>    
+                    <label for="cctext2"><code>I want to change my user type.</code></label>    
                 </div> 
                 <div class="form-group mt-3">
                     <input type="checkbox" class="form-check-input" id="cctext3" name="cctext">
-                    <label for="cctext3"><code>Preciso de ajuda com minha conta.</code></label>    
+                    <label for="cctext3"><code>I need help with my account.</code></label>    
                 </div> 
                 <div class="form-group mt-3">
                     <input type="checkbox" class="form-check-input" id="cctext4" name="cctext">
-                    <label for="cctext4"><code>Quero denunciar alguem.</code></label>    
+                    <label for="cctext4"><code>I want to report someone.</code></label>    
                 </div> 
                 <div class="form-group mt-3">
                     <input type="checkbox" class="form-check-input" id="cctext5" name="cctext">
-                    <label for="cctext5"><code>Quero falar merd# para o ADM.</code></label>    
+                    <label for="cctext5"><code>I want to talk shit# to the ADM.</code></label>    
                 </div> 
                 <div class="form-group mt-3">
-                    <label for="cctext"><code>Mensagem</code></label>   
+                    <label for="cctext"><code>Message</code></label>   
                     <input type="text" class="form-control" id="cctext" name="cctext"> 
                 </div>  
             </form>      
         </div>
         <div class="modal-footer"> 
-            <button class="btn-default btn-red" onclick="location.href='#'"><a>Enviar Mensagem</a></button>   
+            <button class="btn-default btn-red" onclick="location.href='#'">Send Message</button>   
         </div>
    
         </div>

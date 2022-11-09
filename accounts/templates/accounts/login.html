@@ -8,8 +8,8 @@
         </div>
         <div id="size" class="col-4 col">  
             <div class="text-center box lead">
-                <div class="h2">Portal EditorYZ</div>
-                <h5>Sistema ainda em desenvolvimento.</h5> 
+                <div class="h2">System Portal X</div>
+                <h5>System still under development.</h5> 
                 {% if form.non_field_errors %}
                 <div class="alert alert-danger" role="alert">
                 {{ form.non_field_errors }}
@@ -18,30 +18,30 @@
                 <div class="box">
                     <main class="form-signin"> 
                         <img class="img-fluid rounded-circle" src="{% static 'images/default.png' %}" alt="logo" width="150" height="150">
-                        <h1 class="h3 mb-3 fw-normal">Entrar</h1>
+                        <h1 class="h3 mb-3 fw-normal">Log in</h1>
                         <form method="POST" autocomplete="off" id="form-login">
                         {% csrf_token %} 
                             <div class="form-group mt-3 mx-5">
-                                <label for="username">Email</label>
+                                <label for="username">E-mail</label>
                                 <input type="email" id="username" name="username" class="form-control item"
                                     value="{{ request.POST.username }}" required autofocus>
                             </div>
                             <div class="form-group mt-3 mx-5">
-                                <label for="password">Senha</label>
+                                <label for="password">Password</label>
                                 <input type="password" id="password" name="password" class="form-control item" required>
                             </div>
                             <div class="form-group mt-3 mx-5"> 
-                                <button class="btn-default btn-red" type="submit">Conecte-se</button>
+                                <button class="btn-default btn-red" type="submit">Log in</button>
                                 </div>
                             <div class="form-group mt-3 fs-6 text-muted font-italic py-3">
-                                <a class="link-secondary " href="{% url 'accounts:user-new' %}">Ainda não tem conta? Cadastre-se</a><br>
-                                <a class="link-secondary " role="button" href="{% url 'accounts:password-reset' %}">Esqueceu sua senha?</a>
+                                <a class="link-secondary " href="{% url 'accounts:user-new' %}">Don't have an account yet? Register</a><br>
+                                <a class="link-secondary " role="button" href="{% url 'accounts:password-reset' %}">Forgot your password?</a>
                             </div> 
                         </form>
                     </main>    
                 </div>
                 <div class="text-center fs-6 text-muted font-italic py-4">
-                    <small>© 2021</small>
+                    <small>© 2022</small>
                 </div>
             </div> 
         </div> 

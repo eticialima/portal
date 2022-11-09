@@ -17,6 +17,7 @@ class Category(models.Model):
         verbose_name = "Category"
         verbose_name_plural = verbose_name
     
+
 class Post(models.Model):  
     slug = models.SlugField('Slug', unique=True, default=uuid.uuid1, editable=False)
     author = models.ForeignKey(CustomUser, verbose_name='author', related_name="posts", on_delete=models.CASCADE , null=True, blank=True)
@@ -40,6 +41,7 @@ class Post(models.Model):
 
     def __str__(self):
         return self.title
+  
   
 class SocialComment(models.Model):
     comment = models.TextField()
